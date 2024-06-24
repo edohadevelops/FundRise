@@ -1,0 +1,80 @@
+.logo{
+    @apply h-[30px] w-fit
+}
+.register-page{
+    @apply flex w-full h-[100vh] bg-[#187070]
+}
+.welcome-section{
+    @apply py-5;
+    @apply w-[40%] h-full flex flex-col text-white;
+}
+.register-logo img{
+    @apply h-[100px] w-auto
+}
+.register-logo{
+    @apply px-8
+}
+/* .welcome-section img{
+    @apply h-[450px] w-full
+} */
+.welcome-info{
+    @apply px-8 flex flex-col h-full items-center py-20 gap-8 ;
+}
+.welcome-register{
+    @apply font-bold text-5xl text-white;
+}
+.register-description{
+    @apply text-center text-lg text-gray-300 mb-6;
+}
+.back-to-login{
+    @apply py-3 px-16 bg-transparent border border-white rounded-3xl
+}
+
+.register-view{
+    @apply bg-[#fafafa] h-full shadow-xl py-8 px-20 flex flex-col gap-10 justify-center items-center w-[60%] rounded-l-3xl
+}
+.register-header{
+    @apply flex flex-col
+}
+.register-header p{
+    @apply font-bold text-5xl text-[#187070] mb-2;
+}
+.register-header small{
+    @apply text-[15px] font-semibold text-slate-600 text-end w-full
+}
+.register-header a{
+    @apply text-[orangered] underline ml-2
+}
+.form-register{
+    @apply flex flex-col gap-2 w-full max-w-[450px]
+}
+.register-input-group{
+    @apply w-full drop-shadow-sm bg-none flex flex-col gap-1 mb-3
+}
+.register-input-group label{
+    @apply block text-gray-700 text-sm
+}
+.register-input-group input{
+    @apply w-full bg-[#f0f8f8]  h-[50px] rounded-md outline-none px-4 drop-shadow-sm border 
+}
+.register-input-group input::placeholder{
+    @apply text-gray-400
+}
+.forgot-password{
+    @apply flex justify-end w-full
+}
+.forgot-password a{
+    @apply underline text-slate-900
+}
+.register-btn{
+    @apply w-full bg-[#187070] py-3 text-white  my-8 rounded-md
+}
+.register-disabled-btn{
+    @apply cursor-pointer bg-[#bac2c2]
+}
+.create-div{
+    @apply my-6
+}
+.create-div a{
+    @apply underline  text-slate-900
+}
