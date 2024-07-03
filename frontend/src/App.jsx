@@ -5,8 +5,6 @@ import Login from './pages/auth/Login/Login'
 import RouterConfig from './routes/RouterConfig'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Router>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './style.css'
 import FundRise from '../../../assets/fundRiser.svg'
 import Logo from '../../../assets/logo-white.png';
+import LogoGreen from '../../../assets/Logo3.png';
 
 const Register = () => {
     const [btnDisabled,setBtnDisabled] = useState(true);
@@ -32,10 +33,14 @@ const Register = () => {
             
         </div>
             <div className="register-view">
-                <img className='logo' src={Logo} alt='logo'/>
                 <div className="register-header">
-                    <p>Create Account</p>
-                    <small>Already have an account? <Link to="/login">Login</Link></small>
+                    <img className='logo' src={LogoGreen} alt='logo'/>
+                    <div>
+                        <p>Create Account</p>
+                        <small>Already have an account? <Link to="/login">Login</Link></small>  
+                    </div>
+
+                    
                 </div>
                 <form className='form-register'>
                     <div className="register-input-group">

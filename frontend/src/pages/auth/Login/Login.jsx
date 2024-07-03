@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './style.css'
 import FundRise from '../../../assets/fundRiser.svg'
 import Logo from '../../../assets/Logo3.png';
+import axios from 'axios';
 
 
 const Login = () => {
@@ -17,9 +18,20 @@ const Login = () => {
             setBtnDisabled(true)
         }
     },[user,password]);
+
+    const handleLogin = () => {
+        axios.post(`${process.env.BASE_URL}/login`,{
+            user,
+            password
+        }).then((data)=>{
+            console.log(data)
+        }).catch((error)=>{
+            console.error(error)
+        })
+    }
   return (
     <div className='login-page'>
-        <div className='login-div w-[40%] h-full'>
+        <div className='login-div'>
             <div className="login-view">
                 <img className='logo' src={Logo} alt='logo'/>
                 <div className="login-header">

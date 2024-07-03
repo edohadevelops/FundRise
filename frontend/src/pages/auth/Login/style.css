@@ -5,17 +5,16 @@
     @apply flex w-full h-[100vh] bg-[#7ec5c5]
 }
 .left-div{
-    @apply py-20 px-16;
-    @apply w-[90%] h-full flex flex-col justify-center items-center;
+    @apply py-20 px-16 lg:w-[55%] xl:w-[65%] h-full hidden lg:flex flex-col justify-center items-center;
 }
 .left-div img{
     @apply h-[450px] w-full
 }
 .login-div{
-    @apply flex flex-col gap-4 justify-center p-6 pl-14 w-[10%]
+    @apply flex flex-col gap-4 justify-center sm:p-4 lg:p-6 lg:pl-14 w-full lg:w-[45%] xl:w-[35%] items-center
 }
 .login-view{
-    @apply bg-[#fafafa] h-full w-full rounded-3xl shadow-xl p-8 flex flex-col gap-10
+    @apply bg-[#fafafa] h-full sm:h-fit w-full max-w-[500px] sm:rounded-xl lg:rounded-3xl shadow-xl max-md:py-14 p-8 flex flex-col gap-10 justify-center
 }
 .login-header p{
     @apply font-bold text-[25px] text-slate-800
