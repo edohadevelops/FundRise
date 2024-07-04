@@ -30,8 +30,6 @@ const RouterConfig = () => {
           <Route path={routes.NOTIFICATIONS} element={<NotificationPage />} />
           <Route path={routes.HISTORY} element={<HistoryPage />} />
           <Route path={routes.PROFILE} element={<ProfilePage />} />
-          
-          
         </Route>
         <Route path='*' element={<Navigate to={routes.LOGIN} />} />
 

@@ -1,24 +1,30 @@
 .page{
-    @apply bg-white w-[100vw] h-[100vh] flex 
+    @apply w-[100vw] h-[100vh] flex flex-col-reverse sm:flex-row
 }
 .page-sidebar{
-    @apply w-[20%] border-r border-gray-400 px-4 py-8 flex flex-col gap-14
+    @apply w-full sm:w-fit lg:w-[20%] border-r border-gray-400 sm:px-4 sm:py-8 flex md:flex-col gap-8 h-fit
 }
 .page-sidebar img {
-    @apply h-[50px] w-fit
+    @apply h-[20px] lg:h-[40px] w-fit pl-2 lg:pl-6 sm:mt-2 hidden sm:block
 }
 .sidebar-links{
-    @apply flex flex-col
+    @apply flex sm:flex-col w-full justify-between sm:justify-normal
 }
-.sidebar-links a{
-    @apply p-4 text-lg rounded-xl
+.side-link{
+    @apply p-4 text-lg rounded-xl flex gap-2 items-center text-[#0b2929]
 }
-.sidebar-links a:hover{
+.side-link:hover{
     @apply bg-gray-200
 }
+.side-link-text{
+    @apply hidden lg:block
+}
+.side-notify{
+    @apply max-sm:hidden
+}
 .main-content{
-    @apply w-[55%] p-8
+    @apply w-full lg:w-[55%] p-4 sm:p-8 h-full
 }
 .suggestions{
-    @apply w-[25%]
+    @apply w-[25%] hidden lg:block
 }
