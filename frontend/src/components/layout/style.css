@@ -2,19 +2,19 @@
     @apply w-[100vw] h-[100vh] flex flex-col-reverse sm:flex-row
 }
 .page-sidebar{
-    @apply w-full sm:w-fit lg:w-[20%] border-r border-gray-400 sm:px-4 sm:py-8 flex md:flex-col gap-8 h-fit
+    @apply w-full sm:w-fit lg:w-[20%] border-r border-gray-400 sm:px-4 sm:py-8 lg:py-6 flex md:flex-col gap-6 h-fit sm:h-full sm:overflow-y-scroll text-tertiary
 }
-.page-sidebar img {
+.sidebar-logo{
     @apply h-[20px] lg:h-[40px] w-fit pl-2 lg:pl-6 sm:mt-2 hidden sm:block
 }
 .sidebar-links{
-    @apply flex sm:flex-col w-full justify-between sm:justify-normal
+    @apply flex sm:flex-col w-full justify-between sm:justify-normal gap-2
 }
 .side-link{
-    @apply p-4 text-lg rounded-xl flex gap-2 items-center text-[#0b2929]
+    @apply py-3 px-4 text-lg rounded-xl flex gap-2 items-center text-[#0b2929]
 }
 .side-link:hover{
-    @apply bg-gray-200
+    @apply bg-[#fafafa]
 }
 .side-link-text{
     @apply hidden lg:block
@@ -22,9 +22,30 @@
 .side-notify{
     @apply max-sm:hidden
 }
+.add-campaign-side{
+    @apply w-full hidden lg:flex items-center justify-center p-3 bg-[#187070] text-white font-bold rounded-xl text-xl gap-1
+}
+.sidebar-profile-actions{
+    @apply w-full hidden lg:flex items-center px-4 gap-3
+}
+.profile-name{
+    @apply font-semibold
+}
+.profile-user{
+    @apply text-sm text-gray-400
+}
+.side-profile-menu-icon{
+    @apply ml-4
+}
 .main-content{
     @apply w-full lg:w-[55%] p-4 sm:p-8 h-full
 }
 .suggestions{
-    @apply w-[25%] hidden lg:block
+    @apply w-[25%] h-full hidden lg:block p-4 border-l border-l-[#fafafa]
+}
+.search-section{
+    @apply w-full
+}
+.search-section input{
+    @apply w-full bg-[#fafafa] rounded-xl px-4 py-3 outline-none
 }
