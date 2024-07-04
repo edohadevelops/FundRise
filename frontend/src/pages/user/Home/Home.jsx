@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import * as routes from '../../../routes/routes';
@@ -10,9 +10,48 @@ import SportsSoccerOutlinedIcon from '@mui/icons-material/SportsSoccerOutlined';
 import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import './style.css';
+import Card from '../../../components/cards/Card';
 
 const Home = () => {
 
+    const [campaignItems,setCampaignItems] = useState([
+        {
+            title: "Kemi's University Tuition",
+            category: "Education",
+            daysLeft: 2,
+            currentAmmount: "50,000",
+            totalAmount: "100,000",
+            progressPercent: 20,
+            totalDonators: 4,
+            username: "edohaTheDev",
+            totalLikes: 1203
+        },
+        {
+            title: "Dorcas Memorial Fund",
+            category: "Memorial",
+            daysLeft: 5,
+            currentAmmount: "100,000",
+            totalAmount: "150,000",
+            progressPercent: 60,
+            totalDonators: 10,
+            username: "uprisenigeria",
+            totalLikes: 50
+        },
+        {
+            title: "Robotic School For Kids",
+            category: "Education",
+            daysLeft: 20,
+            currentAmmount: "300,000",
+            totalAmount: "400,000",
+            progressPercent: 70,
+            totalDonators: 8,
+            username: "jameson",
+            totalLikes: 400
+        }
+    ])
+    // useEffect(()=>{
+    //     console.log("Campaign items:", Card)
+    // },[])
     return (
         <div className="home">
             <div className="intro-section">
@@ -68,6 +107,22 @@ const Home = () => {
                         
                         <p>See More</p>
                     </div>
+                </div>
+            </div>
+            <div className="trending-section">
+                <p className="trending-title">Trending Donations</p>
+                <div className="trending-results">
+                    {
+                        campaignItems.map((item,index)=>(
+                            <Card details={item} index={index} />
+                        ))
+                    }
+                    {
+                        campaignItems.map((item,index)=>(
+                            <Card details={item} index={index} />
+                        ))
+                    }
+
                 </div>
             </div>
         </div>

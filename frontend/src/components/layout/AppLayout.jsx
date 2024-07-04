@@ -68,6 +68,12 @@ const AppLayout = () => {
           <div className="search-section">
             <input type='text' placeholder="Seach for anything" /> 
           </div>
+          <div className="suggestions-container">
+            <p className="suggestion-title">Suggestions for you</p>
+            <div className="suggestion-cards">
+              
+            </div>
+          </div>
         </div>
     </div>
     </>

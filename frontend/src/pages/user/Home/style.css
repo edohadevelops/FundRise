@@ -1,5 +1,5 @@
 .home{
-    @apply text-tertiary flex flex-col gap-4
+    @apply text-tertiary flex flex-col gap-4 px-4
 }
 .intro-section{
     @apply pt-4 flex justify-between
@@ -48,4 +48,13 @@
 }
 .category-icon-div{
     @apply p-4 rounded-lg bg-[#fafafa]
+}
+.trending-title{
+    @apply text-lg font-semibold
+}
+.trending-section{
+    @apply flex flex-col gap-4
+}
+.trending-results{
+    @apply flex flex-col gap-4
 }

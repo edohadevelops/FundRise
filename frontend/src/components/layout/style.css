@@ -1,8 +1,14 @@
 .page{
-    @apply w-[100vw] h-[100vh] flex flex-col-reverse sm:flex-row
+    @apply w-[100vw] h-[100vh] flex flex-col-reverse sm:flex-row text-tertiary
 }
 .page-sidebar{
-    @apply w-full sm:w-fit lg:w-[20%] border-r border-gray-400 sm:px-4 sm:py-8 lg:py-6 flex md:flex-col gap-6 h-fit sm:h-full sm:overflow-y-scroll text-tertiary
+    @apply w-full sm:w-fit lg:w-[20%] border-r border-gray-400 sm:px-4 sm:py-8 lg:py-6 flex sm:flex-col gap-6 h-fit sm:h-full sm:overflow-y-scroll text-tertiary justify-center
+}
+.page-sidebar::-webkit-scrollbar{
+    @apply w-[5px]
+}
+.page-sidebar::-webkit-scrollbar-track{
+    @apply bg-[#fafafa]
 }
 .sidebar-logo{
     @apply h-[20px] lg:h-[40px] w-fit pl-2 lg:pl-6 sm:mt-2 hidden sm:block
@@ -38,7 +44,16 @@
     @apply ml-4
 }
 .main-content{
-    @apply w-full lg:w-[55%] p-4 sm:p-8 h-full
+    @apply w-full lg:w-[55%] p-4 sm:p-8 h-full overflow-y-scroll
+}
+.main-content::-webkit-scrollbar{
+    @apply w-[5px]
+}
+.main-content::-webkit-scrollbar-track{
+    @apply bg-[#fafafa]
+}
+.main-content::-webkit-scrollbar-thumb{
+    @apply bg-gray-300 rounded-lg
 }
 .suggestions{
     @apply w-[25%] h-full hidden lg:block p-4 border-l border-l-[#fafafa]

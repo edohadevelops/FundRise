@@ -1,0 +1,54 @@
+.campaign-card{
+    @apply flex flex-col lg:flex-row gap-2 lg:gap-4 text-tertiary
+}
+.campaign-card img{
+    @apply w-full lg:max-w-[300px] h-[200px] max-h-full rounded-2xl
+}
+.img{
+    @apply max-h-[200px] lg:max-h-[400px] relative w-full rounded-lg
+}
+.card-badge{
+    @apply absolute top-2 left-2 text-gray-600 py-1 px-2 bg-[#f9f9f9] w-fit rounded-xl flex gap-1 text-sm
+}
+/* .card-category{
+    @apply 
+} */
+.card-interactions{
+    @apply flex flex-col gap-2 mt-2
+}
+.like-comment-share{
+    @apply flex gap-3 font-extrabold
+}
+.likes-count{
+    @apply text-sm
+}
+.card-details{
+    @apply flex flex-col gap-2 text-sm lg:w-full
+}
+.card-title{
+    @apply text-tertiary font-semibold text-[16px]
+}
+.card-username{
+    @apply text-black
+}
+.card-progress{
+    @apply flex flex-col gap-[2px]
+}
+.card-timeline{
+    @apply flex gap-1 text-gray-600 items-center
+}
+.card-progress-bar{
+    @apply bg-[#f9f9f9] h-2 w-full rounded-lg
+}
+.progress-inner-bar{
+    @apply h-full bg-primary rounded-lg
+}
+.progress-rate{
+    @apply flex justify-between
+}
+.progress-value span{
+    @apply font-semibold
+}
+.donators-number span{
+    @apply text-primary
+}
