@@ -1,0 +1,33 @@
+.donation-page{
+    @apply py-2 px-2 flex flex-col gap-6 h-full
+}
+.donation-title{
+    @apply text-center text-[17px] font-[500]
+}
+.donation-header{
+    @apply relative 
+}
+.donation-back-btn{
+    @apply absolute top-1 left-0
+}
+.donation-empty{
+    @apply h-full flex flex-col items-center justify-center gap-6
+}
+.donation-empty-content{
+    @apply flex flex-col items-center gap-6
+}
+.donation-empty-icon{
+    @apply flex items-center justify-center rounded-[50%] h-[185px] w-[189px] bg-subtle
+}
+.donation-empty-text{
+    @apply flex flex-col items-center justify-center gap-2
+}
+.donation-empty-description{
+    @apply text-center text-[#64748B]
+}
+.make-donation-btn{
+    @apply w-full max-w-[338px] py-4 bg-primary text-white rounded-lg
+}
+/* .hello{
+    @apply text-[#98bebe]
+} */

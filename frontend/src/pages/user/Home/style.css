@@ -1,5 +1,5 @@
 .home{
-    @apply text-tertiary flex flex-col gap-4 px-4
+    @apply text-tertiary flex flex-col gap-4 px-2
 }
 .intro-section{
     @apply pt-4 flex justify-between

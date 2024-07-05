@@ -1,0 +1,24 @@
+.campaign-page{
+    @apply flex flex-col gap-4 px-2 py-2
+}
+.campaign-header{
+    @apply flex justify-between items-center
+}
+.campaign-title{
+    @apply text-lg font-semibold
+}
+.campaign-icons{
+    @apply flex gap-4
+}
+.campaign-icon{
+    @apply bg-subtle rounded-full p-2
+}
+.campaign-tabs{
+    @apply flex
+}
+.campaign-tab{
+    @apply flex-1 flex items-center justify-center py-2 rounded-lg
+}
+.active-campaign{
+    @apply bg-subtle text-primary 
+}

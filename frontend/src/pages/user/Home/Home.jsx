@@ -56,7 +56,7 @@ const Home = () => {
         <div className="home">
             <div className="intro-section">
                 <div className="intro-details">
-                    <p className="intro-greeting">Hi, Edoha</p>
+                    <p className="page-title">Hi, Edoha</p>
                     <p className="intro-description">Let's start spreading Greatness</p>
                 </div>
                 <div className="intro-avatar">
@@ -110,7 +110,7 @@ const Home = () => {
                 </div>
             </div>
             <div className="trending-section">
-                <p className="trending-title">Trending Donations</p>
+                <p className="trending-title">Trending Campaigns</p>
                 <div className="trending-results">
                     {
                         campaignItems.map((item,index)=>(

@@ -2,7 +2,7 @@
     @apply flex items-center gap-2 w-full text-sm
 }
 .suggestion-controls{
-    @apply flex justify-between w-full
+    @apply flex justify-between items-center w-full
 }
 .suggestion-card a{
     @apply text-[green]
