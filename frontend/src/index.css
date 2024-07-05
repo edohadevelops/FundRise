@@ -14,4 +14,7 @@
   .page-title{
     @apply text-xl font-semibold
   }
+  .active-tab{
+    @apply bg-subtle text-primary
+  }
 }

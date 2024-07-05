@@ -1,0 +1,71 @@
+.profile-page{
+    @apply flex flex-col gap-4
+}
+.profile-header{
+    @apply flex justify-between items-center
+}
+.profile-menu-icon{
+    @apply bg-subtle px-2 py-4 rounded-lg
+}
+.profile-details{
+    @apply flex max-sm:flex-col items-center gap-8 text-sm py-2 pb-4
+}
+.profile-picture{
+    @apply h-[150px] w-[150px] rounded-[50%] border-4 border-gray-200
+}
+.profile-picture img{
+    @apply rounded-[50%] h-full w-full
+}
+.profile-insights{
+    @apply flex flex-col gap-4 max-sm:items-center
+}
+.profile-actions-container{
+    @apply flex items-center gap-6 max-sm:flex-col
+}
+.profile-username{
+    @apply text-xl
+}
+.profile-actions{
+    @apply flex items-center gap-4 
+}
+.profile-action{
+    @apply flex items-center justify-center px-4 py-2 bg-subtle font-semibold text-sm rounded-lg 
+}
+.profile-insight-details{
+    @apply flex gap-8
+}
+.profile-insight{
+    @apply flex gap-1 items-center text-[16px] max-sm:flex-col
+}
+.profile-insight-number{
+    @apply font-semibold text-lg
+}
+.profile-bio-section{
+    @apply flex flex-col gap-1
+}
+.profile-fullname{
+    @apply font-semibold
+}
+.profile-email{
+    @apply py-1 px-2 flex items-center bg-subtle w-fit rounded-lg
+}
+.profile-bio{
+    @apply w-[70%] max-w-[500px]
+}
+
+.profile-tabs{
+    @apply flex w-full
+}
+.profile-tab{
+    @apply flex-1 py-2 rounded-lg
+}
+
+.profile-results{
+    @apply flex gap-1 pb-6
+}
+.profile-campaign{
+    @apply flex-1
+}
+.profile-campaign img{
+    @apply w-full h-full
+}
