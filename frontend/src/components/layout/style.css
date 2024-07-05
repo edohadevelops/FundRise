@@ -56,11 +56,20 @@
     @apply bg-gray-300 rounded-lg
 }
 .suggestions{
-    @apply w-[25%] h-full hidden lg:block p-4 border-l border-l-[#fafafa]
+    @apply w-[25%] h-full hidden  p-4 border-l border-l-[#fafafa] lg:flex flex-col gap-8 rounded-2xl
 }
 .search-section{
     @apply w-full
 }
 .search-section input{
     @apply w-full bg-[#fafafa] rounded-xl px-4 py-3 outline-none
+}
+.suggestions-container{
+    @apply flex flex-col gap-2 px-4 py-6 border rounded-xl
+}
+.suggestion-title{
+    @apply font-semibold text-sm 
+}
+.suggestion-cards{
+    @apply flex flex-col gap-4
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './style.css';
 import Logo from '../../assets/Logo3.png'
 import { Link, Outlet } from 'react-router-dom';
@@ -12,10 +12,18 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import Avatar from '../../assets/Avatar.png';
+import Suggestion from '../cards/suggestion/Suggestion';
 
 
 
 const AppLayout = () => {
+
+  const [suggestedUsers,setSuggestedUsers] = useState([
+    "ed0ha_",
+    "closeupnigeria",
+    "rccg_worldwide",
+    "covenantuniversityota"
+  ])
 
   return (
     <>
@@ -71,7 +79,11 @@ const AppLayout = () => {
           <div className="suggestions-container">
             <p className="suggestion-title">Suggestions for you</p>
             <div className="suggestion-cards">
-              
+              {
+                suggestedUsers.map((user)=>(
+                  <Suggestion user={user} />
+                ))
+              }
             </div>
           </div>
         </div>
