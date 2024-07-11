@@ -12,13 +12,13 @@ Donation.init(
             primaryKey: true,
             autoIncrement: true
         },
-        backer_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Users',
-                key: 'user_id'
-            }
-        },
+        // backer_id: {
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: 'Users',
+        //         key: 'user_id'
+        //     }
+        // },
         owner_id: {
             type: DataTypes.INTEGER,
             references: {
@@ -27,7 +27,10 @@ Donation.init(
             }
         },
         message: DataTypes.STRING,
-        amount: DataTypes.INTEGER,
+        amount: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         
     },
     {

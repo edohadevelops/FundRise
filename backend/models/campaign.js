@@ -13,18 +13,30 @@ Campaign.init(
             primaryKey: true,
             autoIncrement: true
         },
-        owner_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Users',
-                key: 'user_id'
-            }
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        title: DataTypes.STRING,
-        description: DataTypes.STRING,
-        target_amount: DataTypes.INTEGER,
-        current_amount: DataTypes.INTEGER,
-        status: DataTypes.BOOLEAN
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        campaign_img: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        target_amount: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        current_amount: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        status: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
     },
     {
         sequelize,

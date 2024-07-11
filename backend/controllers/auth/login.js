@@ -16,6 +16,7 @@ const validate = (data) => {
 const loginController = async(req,res) => {
     try{
 
+        console.log(req.body)
         const {error} = validate(req.body);
 
         if(error)

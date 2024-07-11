@@ -3,23 +3,30 @@ import express from 'express';
 import cors from 'cors';
 import {connectToDB} from './config/db.js';
 import { SyncDB } from './services/db/sync.js';
-import { default as associate} from './services/db/association.js';
 import {
     loginRoute,
     registerRoute
 } from './routes/index.js';
 const app = express();
 
-app.use(cors());
-app.use(express.json())
+
 
 connectToDB();
-associate();
 SyncDB();
 
 
+app.use(cors({
+    origin: 'http://localhost:4000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+app.options("*",cors())
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+
 app.get("/", (req,res)=>{
     res.send('Welcome to fundrise app')
+
 });
 
 app.use('/login',loginRoute);

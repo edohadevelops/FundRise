@@ -5,34 +5,39 @@ import {
     Follower
 } from '../../models/index.js';
 
-export default function associateModels(){
     User.hasMany(Campaign,{
         foreignKey: 'owner_id',
         onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
     });
-
     
     Campaign.belongsTo(User,{
-        foreignKey: 'owner_id'
+        foreignKey: 'owner_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
     });
 
     // Donations Relationships
 
     User.hasMany(Donation,{
         foreignKey: 'backer_id',
-        as: 'DonationReciever'
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
     });
     User.hasMany(Donation,{
         foreignKey: 'owner_id',
-        as: 'Donation'
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
     })
     Donation.belongsTo(User,{
         foreignKey: 'backer_id',
-        as: 'Backer'
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
     })
     Donation.belongsTo(User,{
         foreignKey: 'owner_id',
-        as: 'Owner'
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
     })
     // End
     
@@ -40,27 +45,32 @@ export default function associateModels(){
 
     User.hasMany(Follower,{
         foreignKey: 'leader_id',
-        as: 'Leader'
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
     })
     User.hasMany(Follower,{
         foreignKey: 'follower_id',
-        as: 'Follower'
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
     })
 
     Follower.belongsTo(User,{
         foreignKey: 'leader_id',
-        as: 'Leader'
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
     })
     Follower.belongsTo(User,{
         foreignKey: 'follower_id',
-        as: 'Follower'
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
     })
     // END
 
-    // Likes Relationships
-    // User.hasMany(Like,{
-    //     foreignKey: 'user_id',
-    //     as: 'Leader'
-    // })
-
+const models = {
+    User,
+    Follower,
+    Campaign,
+    Donation
 }
+
+export default models;

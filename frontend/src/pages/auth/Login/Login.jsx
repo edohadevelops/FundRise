@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import './style.css'
 import FundRise from '../../../assets/fundRiser.svg'
 import Logo from '../../../assets/Logo3.png';
@@ -10,6 +10,8 @@ const Login = () => {
     const [user,setUser] = useState("");
     const [password,setPassword] = useState("");
     const [btnDisabled,setBtnDisabled] = useState(true);
+    const navigate = useNavigate()
+
 
     useEffect(()=>{
         if(user !== "" && password !== ""){
@@ -19,16 +21,22 @@ const Login = () => {
         }
     },[user,password]);
 
-    const handleLogin = () => {
-        axios.post(`${process.env.BASE_URL}/login`,{
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const url = "http://localhost:5000/login"
+        axios.post(url, {
             user,
             password
-        }).then((data)=>{
+        }).then((result)=>{
+            const {data} = result;
+            localStorage.setItem('token',data.token);
             console.log(data)
-        }).catch((error)=>{
-            console.error(error)
+            navigate("/")
+        }).catch((err)=>{
+            console.error(err)
         })
     }
+    
   return (
     <div className='login-page'>
         <div className='login-div'>
@@ -38,7 +46,7 @@ const Login = () => {
                     <p>Sign in to FundRise</p>
                     <small>Don't have an account? <Link to="/sign-up">Sign up</Link></small>
                 </div>
-                <form className='form-login'>
+                <form className='form-login' onSubmit={handleLogin}>
                     <div className="input-group">
                         <label htmlFor="username">Username or Email Address</label>
                         <input placeholder='example@gmail.com' type='text' onChange={(e)=>setUser(e.target.value)} />
