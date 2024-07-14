@@ -14,7 +14,7 @@
     @apply flex flex-col gap-4 justify-center sm:p-4 lg:p-6 lg:pl-14 w-full lg:w-[45%] xl:w-[35%] items-center
 }
 .login-view{
-    @apply bg-[#fafafa] h-full sm:h-fit w-full max-w-[500px] sm:rounded-xl lg:rounded-3xl shadow-xl max-md:py-14 p-8 flex flex-col gap-10 justify-center
+    @apply bg-[#fafafa] h-full sm:h-fit w-full max-w-[500px] sm:rounded-xl lg:rounded-3xl shadow-xl p-8 max-md:py-14 md:max-h-[600px] flex flex-col gap-10 justify-center
 }
 .login-header p{
     @apply font-bold text-[25px] text-slate-800
@@ -35,7 +35,10 @@
     @apply block text-gray-700
 }
 .input-group input{
-    @apply w-full bg-[#f2fdfd] h-[45px] rounded-md outline-none px-4 drop-shadow-md
+    @apply w-full bg-[#f8fdfd] h-[60px] rounded-md outline-none px-4 border border-gray-200
+}
+.input-group span{
+    @apply w-full text-[14px]
 }
 .input-group input::placeholder{
     @apply text-gray-600
@@ -47,7 +50,7 @@
     @apply underline text-slate-900
 }
 .login-btn{
-    @apply w-full bg-[#187070] py-3 text-white  my-8 rounded-md
+    @apply w-full bg-[#187070] py-3 text-white mt-4 mb-2 rounded-md
 }
 .login-disabled-btn{
     @apply cursor-not-allowed bg-[#bac2c2]

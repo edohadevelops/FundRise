@@ -1,23 +1,49 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Form, Field } from 'react-final-form';
+import { Link, useNavigate } from 'react-router-dom';
 import './style.css'
 import FundRise from '../../../assets/fundRiser.svg'
 import Logo from '../../../assets/logo-white.png';
 import LogoGreen from '../../../assets/Logo3.png';
+import axios from 'axios';
 
 const Register = () => {
-    const [btnDisabled,setBtnDisabled] = useState(true);
-    const [username,setUsername] = useState("");
-    const [email,setEmail] = useState("");
-    const [password,setPassword] = useState("");
 
-    useEffect(()=>{
-        if(username !== "" && email !== "" && password !== ""){
-           setBtnDisabled(false)
-        }else if(!btnDisabled){
-            setBtnDisabled(true)
+    const navigate = useNavigate()
+
+    const handleRegister = async(values,form) => {
+        console.log(values)
+        try{
+            const {data} = await axios.post(`${process.env.BASE_URL}/register`,values)
+            console.log(data);
+            localStorage.setItem("token",data.token)
+            navigate("/")
+        } catch(err){
+            console.error(err)
+            // form.restart()
         }
-    },[username,email,password]);
+    }
+    const registerValidate = async(values) => {
+        const {username, email, password} = values
+        const errors = {}
+
+        if(!username){
+            errors.username = "Username is required*"
+        }else if(username.length < 7){
+            errors.username = "Username should be at least 7 characters long*"
+        }
+        if(!email){
+            errors.email = "Email address is required*"
+        }
+        if(!password){
+            errors.password = "Password is required*"
+        }
+        else if(password.length < 8){
+            errors.password = "Password must be at least 8 characters long*"
+        }
+        return errors
+
+    }
   return (
     <div className='register-page'>
         
@@ -32,32 +58,82 @@ const Register = () => {
             </div>
             
         </div>
-            <div className="register-view">
-                <div className="register-header">
-                    <img className='logo' src={LogoGreen} alt='logo'/>
+        <div className="register-view">
+            <div className="register-header">
+                <img className='logo' src={LogoGreen} alt='logo'/>
                     <div>
-                        <p>Create Account</p>
-                        <small>Already have an account? <Link to="/login">Login</Link></small>  
-                    </div>
-
-                    
-                </div>
-                <form className='form-register'>
-                    <div className="register-input-group">
-                        <label htmlFor="username">Username</label>
-                        <input placeholder='JaneHasIt_09' type='text' onChange={(e)=>setUsername(e.target.value)} />
-                    </div>
-                    <div className="register-input-group">
-                        <label htmlFor="username">Email Address</label>
-                        <input placeholder='example@gmail.com' type='text' onChange={(e)=>setEmail(e.target.value)} />
-                    </div>
-                    <div className="register-input-group">
-                        <label htmlFor="username">Password</label>
-                        <input type='password' onChange={(e)=>setPassword(e.target.value)} />
-                    </div>
-                    <button type='submit' className={`register-btn ${btnDisabled && 'register-disabled-btn cursor-not-allowed'}`} disabled={btnDisabled}>Sign in</button>
-                </form>
+                    <p>Create Account</p>
+                    <small>Already have an account? <Link to="/login">Login</Link></small>  
+                </div>     
             </div>
+            <Form 
+                onSubmit={handleRegister}
+                validate={registerValidate}
+                render={({submitting,hasValidationErrors,handleSubmit})=>(
+                    <form className='form-register' onSubmit={handleSubmit}>
+                        <div className="register-input-group">
+                            <label htmlFor="username">Username</label>
+                            <Field name='username'>
+                                {
+                                    ({input,meta})=>(
+                                        <div>
+                                            <input {...input} type='text' placeholder='Enter your username' />
+                                            {
+                                                meta.error && meta.touched &&
+                                                <span className='text-red-500'>{meta.error}</span>
+                                            }  
+                                        </div>
+                                    )
+                                }
+                            </Field>
+                        </div>
+                        <div className="register-input-group">
+                            <label htmlFor="username">Email Address</label>
+                            <Field name='email'>
+                                {
+                                    ({input,meta})=>(
+                                        <div>
+                                            <input {...input} type='text' placeholder='Enter your username' />
+                                            {
+                                                meta.error && meta.touched &&
+                                                <span className='text-red-500'>{meta.error}</span>
+                                            }  
+                                        </div>
+                                    )
+                                }
+                            </Field>
+                        </div>
+                        <div className="register-input-group">
+                            <label htmlFor="username">Password</label>
+                            <Field name='password'>
+                                {
+                                    ({input,meta})=>(
+                                        <div>
+                                            <input {...input} type='password' placeholder='Enter your username' />
+                                            {
+                                                meta.error && meta.touched &&
+                                                <span className='text-red-500'>{meta.error}</span>
+                                            }  
+                                        </div>
+                                    )
+                                }
+                            </Field>
+                        </div>
+                        <button 
+                            type='submit' 
+                            className={`register-btn 
+                                ${(submitting || hasValidationErrors) && 
+                                'register-disabled-btn cursor-not-allowed'
+                            }`} 
+                            disabled={submitting || hasValidationErrors}
+                        >
+                            Sign in
+                        </button>
+                    </form>
+                )}
+            />
+            
+        </div>
         
       
     </div>

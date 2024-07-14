@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
+import { Form, Field } from 'react-final-form';
 import './style.css'
 import FundRise from '../../../assets/fundRiser.svg'
 import Logo from '../../../assets/Logo3.png';
@@ -7,34 +8,36 @@ import axios from 'axios';
 
 
 const Login = () => {
-    const [user,setUser] = useState("");
-    const [password,setPassword] = useState("");
-    const [btnDisabled,setBtnDisabled] = useState(true);
     const navigate = useNavigate()
 
-
-    useEffect(()=>{
-        if(user !== "" && password !== ""){
-           setBtnDisabled(false)
-        }else if(!btnDisabled){
-            setBtnDisabled(true)
+    const validate = (values) => {
+        console.log("Validating: ",values)
+        const {user,password} = values
+        const errors = {}
+        if(!user){
+            errors.user = "Username is required"
         }
-    },[user,password]);
+        if(!password){
+            errors.password = "Password is required"
+        }
+        else if(password.length < 8){
+            errors.password = "Password must be up to 8 characters"
+        }
+        return errors
+    }
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        const url = "http://localhost:5000/login"
-        axios.post(url, {
-            user,
-            password
-        }).then((result)=>{
-            const {data} = result;
+    const handleLogin = async(values,form) => {
+
+        console.log("Values is: ",values)
+        try{
+            const {data} = await axios.post(`${process.env.BASE_URL}/login`,values)
             localStorage.setItem('token',data.token);
-            console.log(data)
+            // console.log(data);
             navigate("/")
-        }).catch((err)=>{
+        } catch(err){
             console.error(err)
-        })
+            form.change("password",'')
+        }
     }
     
   return (
@@ -46,20 +49,59 @@ const Login = () => {
                     <p>Sign in to FundRise</p>
                     <small>Don't have an account? <Link to="/sign-up">Sign up</Link></small>
                 </div>
-                <form className='form-login' onSubmit={handleLogin}>
-                    <div className="input-group">
-                        <label htmlFor="username">Username or Email Address</label>
-                        <input placeholder='example@gmail.com' type='text' onChange={(e)=>setUser(e.target.value)} />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="username">Password</label>
-                        <input type='password' onChange={(e)=>setPassword(e.target.value)} />
-                    </div>
-                    <div className="forgot-password">
-                        <a href='#'>Forgot Password?</a>
-                    </div>
-                    <button type='submit' className={`login-btn ${btnDisabled && 'login-disabled-btn cursor-not-allowed'}`}>Sign in</button>
-                </form>
+                <Form 
+                    onSubmit={handleLogin}
+                    validate={(values)=>validate(values)}
+                    render={({handleSubmit,form,submitting,hasValidationErrors})=>(
+                        <form className='form-login' onSubmit={handleSubmit}>
+                            <div className="input-group">
+                                <label htmlFor="username">Username or Email Address</label>
+                                <Field name='user'>
+                                    {
+                                        ({input,meta})=>(
+                                            <div className='input-with-error'>
+                                                <input {...input} type='text' placeholder='Enter your username or email address' />
+                                                {
+                                                    meta.error && meta.touched &&
+                                                    <span className='text-red-500'>{meta.error}*</span>
+                                                }
+                                            </div>
+                                        )
+                                    }
+                                </Field>
+                            </div>
+                            <div className="input-group">
+                                <label htmlFor="username">Password</label>
+                                <Field name='password'>
+                                    {
+                                        ({input,meta})=>(
+                                            <div className='input-with-error'>
+                                                <input {...input} type='password' />
+                                                {
+                                                    meta.error && meta.touched &&
+                                                    <span className='text-red-500'>{meta.error}*</span>
+                                                }
+                                            </div>
+                                        )
+                                    }
+                                </Field>
+                            </div>
+                            <div className="forgot-password">
+                                <a href='#'>Forgot Password?</a>
+                            </div>
+                            <button 
+                                type='submit' 
+                                disabled={submitting || hasValidationErrors} 
+                                className={`login-btn 
+                                    ${(submitting || hasValidationErrors) && 
+                                    'login-disabled-btn cursor-not-allowed'}
+                                `}
+                            >
+                                Sign in
+                            </button>
+                        </form>
+                    )}
+                />
             </div>
         </div>
         <div className='left-div'>

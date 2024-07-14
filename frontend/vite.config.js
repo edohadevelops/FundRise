@@ -8,7 +8,7 @@ dotenv.config();
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 4000
+    port: 7000
   },
   define: {
     'process.env': process.env

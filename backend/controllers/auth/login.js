@@ -39,15 +39,14 @@ const loginController = async(req,res) => {
         if(!isValidPassword)
             return res.status(400).send({message: 'Invalid username or password'});
 
+        const {password,...userPayload} = existingUser.toJSON();
         const token = await jwt.sign(
             { 
-                id: existingUser.user_id,
-                role: existingUser.role 
+                ...userPayload
             },
             process.env.JWT_SECRET,
             {expiresIn: '2d'}
         )
-        const {password,...userPayload} = existingUser.toJSON();
         return res.status(200).send({
             message: 'Logged in succesfully!',
             token,
