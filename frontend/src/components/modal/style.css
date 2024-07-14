@@ -1,0 +1,76 @@
+.modal-container {
+    @apply overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-full max-h-full bg-[#0000001A] backdrop-blur-sm py-8;
+  }
+  .modal-header {
+    @apply flex px-2 justify-between rounded-t;
+  }
+  .modal-content {
+    @apply relative py-8 px-6 flex flex-col gap-[20px] w-full max-h-full bg-white rounded-lg shadow-[#10182814];
+  }
+  .modal-content-holder{
+    @apply px-2
+  }
+  .modal-content-holder::-webkit-scrollbar{
+    @apply w-[5px]
+  }
+  .modal-content-holder::-webkit-scrollbar-track{
+    @apply bg-[#fafafa]
+  }
+  .modal-content-holder::-webkit-scrollbar-thumb{
+    @apply bg-[#d3d2d2] rounded-full
+  }
+  .modal-body {
+    @apply space-y-4 ;
+  }
+  .modal-footer {
+    @apply flex flex-col items-center  rounded-b pt-[20px] px-2;
+  }
+  .modal-btn {
+    @apply py-[10px] rounded-[4px];
+  }
+  .btn-close {
+    @apply border-[1px] border-[#E2E8F0];
+  }
+  .modal-title {
+    @apply text-xl font-semibold text-gray-900 m-0;
+  }
+  .modal-description {
+    @apply m-0 text-[#7C7B7B] text-sm;
+  }
+  .modal-close-btn {
+    @apply absolute top-4 right-4;
+  }
+  .modal-progress {
+    @apply absolute w-full top-0 left-0;
+  }
+  .title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 28px;
+  }
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .btn-modal {
+    padding: 10px 18px;
+    width: 100%;
+    border: 1px;
+    border-radius: 4px;
+    color: #fff;
+  }
+  .btn-confirm {
+    background-color: #b47d18;
+  }
+  .btn-submit {
+    background-color: #bd5a00;
+  }
+  .btn-delete {
+    background-color: #d92d20;
+  }
+  .btn-cancel {
+    background-color: #fff;
+    color: black;
+  }
+  

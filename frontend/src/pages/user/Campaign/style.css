@@ -22,3 +22,24 @@
 .active-campaign{
     @apply bg-subtle text-primary 
 }
+.add-campaign-img{
+    @apply h-[150px] w-full max-w-[300px] rounded-lg
+}
+.add-campaign-img button{
+    @apply h-full w-full bg-[#CBD5E180] flex flex-col items-center justify-center text-sm rounded-lg
+}
+.modal-input-group{
+    @apply w-full drop-shadow-sm bg-none flex flex-col gap-1
+}
+.modal-input-group label{
+    @apply block text-gray-700
+}
+.modal-input-group input{
+    @apply w-full bg-[#F8F8FA] h-[60px] rounded-md outline-none px-4 border border-gray-200 text-[#334155]
+}
+.modal-input-group span{
+    @apply w-full text-[14px]
+}
+.modal-input-group input::placeholder{
+    @apply text-[#91959b]
+}

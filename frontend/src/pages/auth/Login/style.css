@@ -32,7 +32,7 @@
     @apply w-full drop-shadow-sm bg-none flex flex-col gap-2 mb-3
 }
 .input-group label{
-    @apply block text-gray-700
+    @apply block text-gray-700 text-sm
 }
 .input-group input{
     @apply w-full bg-[#f8fdfd] h-[60px] rounded-md outline-none px-4 border border-gray-200

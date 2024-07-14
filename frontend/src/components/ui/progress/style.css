@@ -1,0 +1,6 @@
+.progress-container{
+    @apply w-full bg-subtle rounded-lg h-[10px]
+}
+.progress-bar-percent{
+    @apply h-full bg-primary rounded-lg
+}
