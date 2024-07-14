@@ -101,7 +101,7 @@ const Campaign = () => {
           btnCloseText='Cancel'
           btnColor='#187070'
           onClose={()=>setModalOpen(false)}
-          modalSize='xl'
+          modalSize='2xl'
           onAccept={()=>setModalOpen(false)}
           dismissible={true}
         >
@@ -111,84 +111,149 @@ const Campaign = () => {
               <span>Add Photo</span>
             </button>
           </div>
-          <div className="add-campaign-form">
-            <Form 
-              onSubmit={handleCreateCampaign}
-              render={({submitting,hasValidationErrors,handleSubmit})=>(
-                <form onSubmit={handleSubmit}>
-                  <div className="modal-input-group">
-                    <label htmlFor="title">Title</label>
-                    <Field name='title'>
-                      {
-                        (meta,input)=>(
-                          <div>
-                            <input {...input} type="text" placeholder='E.g Tuition Fees' />
-                            {
-                              meta.error && meta.touched &&
-                              <span className='text-red-500'>{meta.error}</span>
-                            }
-                          </div>
-                        )
-                      }
-                    </Field>
+          <Form 
+            onSubmit={handleCreateCampaign}
+            render={({submitting,hasValidationErrors,handleSubmit})=>(
+              <form className='add-campaign-form' onSubmit={handleSubmit}>
+                <div className="modal-input-group modal-half-input">
+                  <label htmlFor="title">Title</label>
+                  <Field name='title'>
+                    {
+                      (meta,input)=>(
+                        <div>
+                          <input {...input} type="text" placeholder='E.g Tuition Fees' />
+                          {
+                            meta.error && meta.touched &&
+                            <span className='text-red-500'>{meta.error}</span>
+                          }
+                        </div>
+                      )
+                    }
+                  </Field>
                     
-                  </div>
-                  <div className="modal-input-group">
-                    <label htmlFor="target_amount">Goal (Target Amount)</label>
-                    <Field name='target_amount'>
-                      {
-                        (meta,input)=>(
-                          <div>
-                            <input {...input} type="text" placeholder='E.g 10,000' />
-                            {
-                              meta.error && meta.touched &&
-                              <span className='text-red-500'>{meta.error}</span>
-                            }
-                          </div>
-                        )
-                      }
-                    </Field>
+                </div>
+                <div className="modal-input-group modal-half-input">
+                  <label htmlFor="target_amount">Goal (Target Amount)</label>
+                  <Field name='target_amount'>
+                    {
+                      (meta,input)=>(
+                        <div>
+                          <input {...input} type="text" placeholder='E.g 10,000' />
+                          {
+                            meta.error && meta.touched &&
+                            <span className='text-red-500'>{meta.error}</span>
+                          }
+                        </div>
+                      )
+                    }
+                  </Field>
                     
-                  </div>
-                  <div className="modal-input-group">
-                    <label htmlFor="title">Title</label>
-                    <Field name='title'>
-                      {
-                        (meta,input)=>(
-                          <div>
-                            <input {...input} type="text" placeholder='E.g Tuition Fees' />
-                            {
-                              meta.error && meta.touched &&
-                              <span className='text-red-500'>{meta.error}</span>
-                            }
-                          </div>
-                        )
-                      }
-                    </Field>
+                </div>
+                <div className="modal-input-group modal-half-input">
+                  <label htmlFor="start_date">Start Date</label>
+                  <Field name='start_date'>
+                    {
+                      (meta,input)=>(
+                        <div>
+                          <input {...input} type="text" />
+                          {
+                            meta.error && meta.touched &&
+                            <span className='text-red-500'>{meta.error}</span>
+                          }
+                        </div>
+                      )
+                    }
+                  </Field>
                     
-                  </div>
-                  <div className="modal-input-group">
-                    <label htmlFor="title">Title</label>
-                    <Field name='title'>
-                      {
-                        (meta,input)=>(
-                          <div>
-                            <input {...input} type="text" placeholder='E.g Tuition Fees' />
-                            {
-                              meta.error && meta.touched &&
-                              <span className='text-red-500'>{meta.error}</span>
-                            }
-                          </div>
-                        )
-                      }
-                    </Field>
+                </div>
+                <div className="modal-input-group modal-half-input">
+                  <label htmlFor="end_date">End Date</label>
+                  <Field name='end_date'>
+                    {
+                      (meta,input)=>(
+                        <div>
+                          <input {...input} type="text" />
+                          {
+                            meta.error && meta.touched &&
+                            <span className='text-red-500'>{meta.error}</span>
+                          }
+                        </div>
+                      )
+                    }
+                  </Field>
                     
-                  </div>
-                </form>
-              )}
-            />
-
-          </div>
+                </div>
+                <div className="modal-input-group modal-half-input">
+                  <label htmlFor="category">Category</label>
+                  <Field name='category'>
+                    {
+                      (meta,input)=>(
+                        <div>
+                          <input {...input} type="text" />
+                          {
+                            meta.error && meta.touched &&
+                            <span className='text-red-500'>{meta.error}</span>
+                          }
+                        </div>
+                      )
+                    }
+                  </Field>
+                    
+                </div>
+                <div className="modal-input-group modal-half-input">
+                  <label htmlFor="beneficiary_type">Beneficiary type</label>
+                  <Field name='beneiciary_type'>
+                    {
+                      (meta,input)=>(
+                        <div>
+                          <input {...input} type="text" />
+                          {
+                            meta.error && meta.touched &&
+                            <span className='text-red-500'>{meta.error}</span>
+                          }
+                        </div>
+                      )
+                    }
+                  </Field>
+                    
+                </div>
+                <div className="modal-input-group">
+                  <label htmlFor="fundraising_target">Fundraising target</label>
+                  <Field name='fundraising_target'>
+                    {
+                      (meta,input)=>(
+                        <div>
+                          <input {...input} type="text" />
+                          {
+                            meta.error && meta.touched &&
+                            <span className='text-red-500'>{meta.error}</span>
+                          }
+                        </div>
+                      )
+                    }
+                  </Field>
+                    
+                </div>
+                <div className="modal-input-group">
+                  <label htmlFor="story">Story</label>
+                  <Field name='story'>
+                    {
+                      (meta,input)=>(
+                        <div>
+                          <textarea {...input} type="text" />
+                          {
+                            meta.error && meta.touched &&
+                            <span className='text-red-500'>{meta.error}</span>
+                          }
+                        </div>
+                      )
+                    }
+                  </Field>
+                    
+                </div>
+              </form>
+            )}
+          />
         </Modals>
       }
     </>

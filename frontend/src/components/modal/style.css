@@ -35,7 +35,7 @@
     @apply text-xl font-semibold text-gray-900 m-0;
   }
   .modal-description {
-    @apply m-0 text-[#7C7B7B] text-sm;
+    @apply m-0 text-[#7C7B7B];
   }
   .modal-close-btn {
     @apply absolute top-4 right-4;
