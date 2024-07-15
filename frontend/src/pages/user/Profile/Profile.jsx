@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './style.css';
 import MoreIcon from '../../../assets/seeMoreIcon.svg';
 import ProfilePicture from '../../../assets/ProfilePicture.png';
@@ -6,9 +6,11 @@ import Donation1 from '../../../assets/donation1.png';
 import Donation2 from '../../../assets/donation2.png';
 import Donation3 from '../../../assets/donation3.png';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import { AppContext } from '../../../store/AppContext';
 
 const Profile = () => {
   const [currentTab,setCurrentTab] = useState("campaign");
+  const {userDetails} = useContext(AppContext)
   return (
     <div className='profile-page'>
       <div className="profile-details">
@@ -17,7 +19,7 @@ const Profile = () => {
         </div>
         <div className="profile-insights">
           <div className="profile-actions-container">
-            <p className="profile-username">ed0ha_</p>
+            <p className="profile-username">{userDetails?.username}</p>
             <div className="profile-actions">
               <button className="profile-action">Edit Profile</button>
               <button className="profile-action">Share Profile</button>
@@ -41,12 +43,12 @@ const Profile = () => {
             </div>
           </div>
           <div className="profile-bio-section">
-            <p className="profile-fullname">Amen Edoha</p>
+            <p className="profile-fullname">{userDetails && userDetails.first_name + " " + userDetails?.last_name}</p>
             <p className="profile-email">
               <AlternateEmailIcon fontSize="small" /> 
-              amenedoha@gmail.com
+              {userDetails?.email}
             </p>
-            <p className="profile-bio">I have a strong passion for helping those in need, I have some campaigns that aim to achieve just that!</p>
+            <p className="profile-bio">{userDetails?.bio}</p>
           </div>
         </div>
       </div>

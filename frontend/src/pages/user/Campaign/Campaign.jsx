@@ -172,7 +172,7 @@ const Campaign = () => {
                     {
                       (meta,input)=>(
                         <div>
-                          <input {...input} type="text" />
+                          <input {...input} type="date" />
                           {
                             meta.error && meta.touched &&
                             <span className='text-red-500'>{meta.error}</span>

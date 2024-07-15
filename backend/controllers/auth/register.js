@@ -40,7 +40,7 @@ export const registerController = async(req,res) => {
 
         const token = jwt.sign(
             {
-                ...userPayload
+                payload: userPayload
             },
             process.env.JWT_SECRET,
             {expiresIn: '2d'});

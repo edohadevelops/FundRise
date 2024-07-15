@@ -42,7 +42,7 @@ const loginController = async(req,res) => {
         const {password,...userPayload} = existingUser.toJSON();
         const token = jwt.sign(
             { 
-                ...userPayload
+                payload: userPayload
             },
             process.env.JWT_SECRET,
             {expiresIn: '2d'}

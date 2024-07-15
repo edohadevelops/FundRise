@@ -8,15 +8,16 @@ const ProtectedRoute = ({Component}) => {
   const navigate = useNavigate();
   const [isAuthenticated,setIsAuthenticated] = useState(false);
   const [isLoading,setIsLoading] = useState(true);
-  const {userDetails} = useContext(AppContext)
+  const {userDetails,setUserDetails} = useContext(AppContext)
 
   useEffect(()=>{
     const initializeApp = () => {
       axiosQuery.get('/initialize')
       .then((response)=>{
-        const { data } = response
-        console.log("Initial data is: ",response.data)
-        if(data.initialData.role === "user"){
+        const { initialData } = response.data
+        // console.log("Initial data is: ",initialData);
+        setUserDetails(initialData.payload)
+        if(initialData.payload.role === "user"){
           setIsAuthenticated(true)
         }
       })
@@ -30,7 +31,7 @@ const ProtectedRoute = ({Component}) => {
       })
     }
     if(userDetails){
-      console.log(userDetails)
+      // console.log(userDetails)
       setIsLoading(false);
       setIsAuthenticated(true)
     }else{
