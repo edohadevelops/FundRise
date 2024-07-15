@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { axiosQuery } from '../../utils/api';
+import { AppContext } from '../../store/AppContext';
 
 const ProtectedRoute = ({Component}) => {
 
   const navigate = useNavigate();
   const [isAuthenticated,setIsAuthenticated] = useState(false);
-  const [isLoading,setIsLoading] = useState(true)
+  const [isLoading,setIsLoading] = useState(true);
+  const {userDetails} = useContext(AppContext)
 
   useEffect(()=>{
     const initializeApp = () => {
@@ -27,10 +29,15 @@ const ProtectedRoute = ({Component}) => {
         setIsLoading(false)
       })
     }
-    initializeApp();
-  },[])
+    if(userDetails){
+      console.log(userDetails)
+      setIsLoading(false);
+      setIsAuthenticated(true)
+    }else{
+      initializeApp();
+    }
+  },[userDetails])
 
-  const token = localStorage.getItem("token")
   return (
     <>
       {

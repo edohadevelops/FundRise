@@ -40,7 +40,7 @@ const loginController = async(req,res) => {
             return res.status(400).send({message: 'Invalid username or password'});
 
         const {password,...userPayload} = existingUser.toJSON();
-        const token = await jwt.sign(
+        const token = jwt.sign(
             { 
                 ...userPayload
             },
@@ -50,7 +50,7 @@ const loginController = async(req,res) => {
         return res.status(200).send({
             message: 'Logged in succesfully!',
             token,
-            ...userPayload
+            payload: userPayload
         });
 
     }catch(err){
