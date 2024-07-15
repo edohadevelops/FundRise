@@ -55,7 +55,10 @@
     @apply block text-gray-700 text-sm
 }
 .register-input-group input{
-    @apply w-full bg-[#f0f8f8]  h-[50px] rounded-md outline-none px-4 drop-shadow-sm border 
+    @apply w-full bg-[#f8fdfd] h-[60px] rounded-md outline-none px-4 border border-gray-200
+}
+.register-input-group span{
+    @apply w-full text-[14px]
 }
 .register-input-group input::placeholder{
     @apply text-gray-400
