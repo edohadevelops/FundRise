@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css'
@@ -6,17 +6,20 @@ import FundRise from '../../../assets/fundRiser.svg'
 import Logo from '../../../assets/logo-white.png';
 import LogoGreen from '../../../assets/Logo3.png';
 import axios from 'axios';
+import { AppContext } from '../../../store/AppContext';
 
 const Register = () => {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { setUserDetails } = useContext(AppContext)
 
     const handleRegister = async(values,form) => {
-        console.log(values)
+        // console.log(values)
         try{
             const {data} = await axios.post(`${process.env.BASE_URL}/register`,values)
             console.log(data);
             localStorage.setItem("token",data.token)
+            setUserDetails(data.payload)
             navigate("/")
         } catch(err){
             console.error(err)

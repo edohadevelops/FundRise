@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './style.css';
 import Filter from '../../../assets/Filter2.svg';
 import AddIcon from '../../../assets/addLine.svg';
@@ -50,6 +50,24 @@ const Campaign = () => {
   }
   const handleCreateCampaign = async() => {
     alert("Created")
+  };
+
+  const [campaignImg,setCampaignImg] = useState(null);
+  const filePicker = useRef(null);
+
+  const handleFilePicker = () => {
+    filePicker.current.click()
+  }
+
+  const handleImgChange = (event) => {
+    const file = event.target.files[0];
+    if(file){
+      const reader = new FileReader;
+      reader.onload= (e) =>{
+        setCampaignImg(e.target.result)
+      }
+      reader.readAsDataURL(file)
+    }
   }
 
   return (
@@ -106,22 +124,27 @@ const Campaign = () => {
           dismissible={true}
         >
           <div className='add-campaign-img'>
-            <button>
-              <img src={AddIcon} alt="plus icon" />
-              <span>Add Photo</span>
-            </button>
+            {
+              !campaignImg ?
+              <button onClick={handleFilePicker}>
+                <img src={AddIcon} alt="plus icon" />
+                <span>Add Photo</span>
+              </button>:
+              <img className='new-campaign-img' onClick={handleFilePicker} src={campaignImg && campaignImg} alt="" />
+            }
+            <input className='hidden' type="file" accept='image/*' onChange={handleImgChange} ref={filePicker}/>
           </div>
           <Form 
             onSubmit={handleCreateCampaign}
             render={({submitting,hasValidationErrors,handleSubmit})=>(
               <form className='add-campaign-form' onSubmit={handleSubmit}>
                 <div className="modal-input-group modal-half-input">
-                  <label htmlFor="title">Title</label>
+                  <label className='modal-input-label' htmlFor="title">Title</label>
                   <Field name='title'>
                     {
                       (meta,input)=>(
                         <div>
-                          <input {...input} type="text" placeholder='E.g Tuition Fees' />
+                          <input className='modal-input' {...input} type="text" placeholder='E.g Tuition Fees' />
                           {
                             meta.error && meta.touched &&
                             <span className='text-red-500'>{meta.error}</span>
@@ -129,16 +152,15 @@ const Campaign = () => {
                         </div>
                       )
                     }
-                  </Field>
-                    
+                  </Field>  
                 </div>
                 <div className="modal-input-group modal-half-input">
-                  <label htmlFor="target_amount">Goal (Target Amount)</label>
+                  <label className='modal-input-label' htmlFor="target_amount">Goal (Target Amount)</label>
                   <Field name='target_amount'>
                     {
                       (meta,input)=>(
                         <div>
-                          <input {...input} type="text" placeholder='E.g 10,000' />
+                          <input className='modal-input' {...input} type="text" placeholder='E.g 10,000' />
                           {
                             meta.error && meta.touched &&
                             <span className='text-red-500'>{meta.error}</span>
@@ -150,12 +172,12 @@ const Campaign = () => {
                     
                 </div>
                 <div className="modal-input-group modal-half-input">
-                  <label htmlFor="start_date">Start Date</label>
+                  <label className='modal-input-label' htmlFor="start_date">Start Date</label>
                   <Field name='start_date'>
                     {
                       (meta,input)=>(
                         <div>
-                          <input {...input} type="text" />
+                          <input className='modal-input' {...input} type="date" />
                           {
                             meta.error && meta.touched &&
                             <span className='text-red-500'>{meta.error}</span>
@@ -167,12 +189,12 @@ const Campaign = () => {
                     
                 </div>
                 <div className="modal-input-group modal-half-input">
-                  <label htmlFor="end_date">End Date</label>
+                  <label className='modal-input-label' htmlFor="end_date">End Date</label>
                   <Field name='end_date'>
                     {
                       (meta,input)=>(
                         <div>
-                          <input {...input} type="text" />
+                          <input className='modal-input' {...input} type="date" />
                           {
                             meta.error && meta.touched &&
                             <span className='text-red-500'>{meta.error}</span>
@@ -180,16 +202,15 @@ const Campaign = () => {
                         </div>
                       )
                     }
-                  </Field>
-                    
+                  </Field>                   
                 </div>
                 <div className="modal-input-group modal-half-input">
-                  <label htmlFor="category">Category</label>
+                  <label className='modal-input-label' htmlFor="category">Category</label>
                   <Field name='category'>
                     {
                       (meta,input)=>(
                         <div>
-                          <input {...input} type="text" />
+                          <input className='modal-input' {...input} type="text" />
                           {
                             meta.error && meta.touched &&
                             <span className='text-red-500'>{meta.error}</span>
@@ -201,12 +222,12 @@ const Campaign = () => {
                     
                 </div>
                 <div className="modal-input-group modal-half-input">
-                  <label htmlFor="beneficiary_type">Beneficiary type</label>
+                  <label className='modal-input-label' htmlFor="beneficiary_type">Beneficiary type</label>
                   <Field name='beneiciary_type'>
                     {
                       (meta,input)=>(
                         <div>
-                          <input {...input} type="text" />
+                          <input className='modal-input' {...input} type="text" />
                           {
                             meta.error && meta.touched &&
                             <span className='text-red-500'>{meta.error}</span>
@@ -218,24 +239,22 @@ const Campaign = () => {
                     
                 </div>
                 <div className="modal-input-group">
-                  <label htmlFor="fundraising_target">Fundraising target</label>
-                  <Field name='fundraising_target'>
-                    {
-                      (meta,input)=>(
-                        <div>
-                          <input {...input} type="text" />
-                          {
-                            meta.error && meta.touched &&
-                            <span className='text-red-500'>{meta.error}</span>
-                          }
-                        </div>
-                      )
-                    }
-                  </Field>
-                    
+                  <label className='modal-input-label' htmlFor="fundraising_target">Fundraising target</label>
+                  <div>
+                    <Field name='fundraising_target' type='radio' value={"All or Nothing"} component="input"/>
+                    <label htmlFor="fundraising_target">All or nothing</label>
+                  </div>
+                  <div>
+                    <Field name='fundraising_target' type='radio' value={"Sweep it All"} component="input"/>
+                    <label htmlFor="fundraising_target">Sweep it all</label>
+                  </div>
+                  <div>
+                    <Field name='fundraising_target' type='radio' value={"All or something"} component="input"/>
+                    <label htmlFor="fundraising_target">All or something</label>
+                  </div>                     
                 </div>
                 <div className="modal-input-group">
-                  <label htmlFor="story">Story</label>
+                  <label className='modal-input-label' htmlFor="story">Story</label>
                   <Field name='story'>
                     {
                       (meta,input)=>(

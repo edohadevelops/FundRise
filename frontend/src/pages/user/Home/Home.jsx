@@ -1,4 +1,4 @@
-import React,{ useEffect, useState } from 'react';
+import React,{ useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import * as routes from '../../../routes/routes';
@@ -11,6 +11,7 @@ import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlin
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import './style.css';
 import Card from '../../../components/cards/Card';
+import { AppContext } from '../../../store/AppContext'
 
 const Home = () => {
 
@@ -48,7 +49,8 @@ const Home = () => {
             username: "jameson",
             totalLikes: 400
         }
-    ])
+    ]);
+    const {userDetails} = useContext(AppContext)
     // useEffect(()=>{
     //     console.log("Campaign items:", Card)
     // },[])
@@ -56,7 +58,7 @@ const Home = () => {
         <div className="home">
             <div className="intro-section">
                 <div className="intro-details">
-                    <p className="page-title">Hi, Edoha</p>
+                    <p className="page-title">Hi, {userDetails?.first_name}</p>
                     <p className="intro-description">Let's start spreading Greatness</p>
                 </div>
                 <div className="intro-avatar">

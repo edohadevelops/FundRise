@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import './style.css'
 import FundRise from '../../../assets/fundRiser.svg'
 import Logo from '../../../assets/Logo3.png';
 import axios from 'axios';
+import { AppContext } from '../../../store/AppContext';
 
 
 const Login = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    const { setUserDetails } = useContext(AppContext)
 
     const validate = (values) => {
-        console.log("Validating: ",values)
+        // console.log("Validating: ",values)
         const {user,password} = values
         const errors = {}
         if(!user){
@@ -27,12 +30,12 @@ const Login = () => {
     }
 
     const handleLogin = async(values,form) => {
-
-        console.log("Values is: ",values)
+        // console.log("Values is: ",values)
         try{
             const {data} = await axios.post(`${process.env.BASE_URL}/login`,values)
             localStorage.setItem('token',data.token);
             // console.log(data);
+            setUserDetails(data.payload)
             navigate("/")
         } catch(err){
             console.error(err)
