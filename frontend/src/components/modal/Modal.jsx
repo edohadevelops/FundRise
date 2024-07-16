@@ -53,7 +53,7 @@ function Modals({
           <div style={{maxWidth: `${modalWidth}px`}} className="modal-content">
               
                   <div className="modal-header">
-                      <div className="flex flex-col gap-[4px]">
+                      <div className="flex flex-col">
                           <h3 className="modal-title">
                               {title}
                           </h3>

@@ -1,8 +1,8 @@
 .modal-container {
-    @apply overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-full max-h-full bg-[#0000001A] backdrop-blur-sm py-8;
+    @apply overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-full max-h-full bg-[#0000001A] backdrop-blur-sm sm:py-8;
   }
   .modal-header {
-    @apply flex px-2 justify-between rounded-t;
+    @apply flex px-2 rounded-t;
   }
   .modal-content {
     @apply relative py-8 px-6 flex flex-col gap-[20px] w-full max-h-full bg-white rounded-lg shadow-[#10182814];
@@ -32,10 +32,10 @@
     @apply border-[1px] border-[#E2E8F0];
   }
   .modal-title {
-    @apply text-xl font-semibold text-gray-900 m-0;
+    @apply text-lg font-semibold text-gray-900;
   }
   .modal-description {
-    @apply m-0 text-[#7C7B7B];
+    @apply text-[#7C7B7B]; 
   }
   .modal-close-btn {
     @apply absolute top-4 right-4;
