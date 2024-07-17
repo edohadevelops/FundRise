@@ -11,7 +11,8 @@ const validate = (data) => {
         fundraising_target: joi.string().required(),
         start_date: joi.date().required(),
         end_date: joi.date().required(),
-        campaign_img: joi.string().required() 
+        campaign_img: joi.string().required(),
+        owner_id: joi.number().required() 
         // campaign_img: joi.object({
         //     mimetype:
         // })
@@ -20,7 +21,7 @@ const validate = (data) => {
 }
 
 export default (req,res,next) => {
-    const payload = {...req.body,campaign_img: req.file};
+    const payload = {...req.body,campaign_img: req.file,owner_id: req.user.payload.user_id};
     console.log(payload)
 
     const { error } = validate(payload);

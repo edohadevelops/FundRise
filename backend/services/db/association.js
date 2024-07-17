@@ -39,21 +39,21 @@ import {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     });
-    User.hasMany(Donation,{
-        foreignKey: 'owner_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
+    // User.hasMany(Donation,{
+    //     foreignKey: 'owner_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
     Donation.belongsTo(User,{
         foreignKey: 'backer_id',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     })
-    Donation.belongsTo(User,{
-        foreignKey: 'owner_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
+    // Donation.belongsTo(User,{
+    //     foreignKey: 'owner_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
     // End
 
     // Campaign-Donation Relationships
