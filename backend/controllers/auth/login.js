@@ -13,7 +13,7 @@ const validate = (data) => {
     return schema.validate(data)
 }
 
-const loginController = async(req,res) => {
+const loginController = async(req,res,next) => {
     try{
 
         console.log(req.body)
@@ -54,7 +54,7 @@ const loginController = async(req,res) => {
         });
 
     }catch(err){
-        return res.status(500).send({message: 'Internal Server Error',error: err});
+        return next();
     }
 
 

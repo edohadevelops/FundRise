@@ -23,7 +23,12 @@ Campaign.init(
         },
         campaign_img: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            get(){
+                const filename = this.getDataValue('campaign_img');
+                const url = `${process.env.CAMPAIGN_IMG_PATH}/${filename}`
+                return url;
+            }
         },
         target_amount: {
             type: DataTypes.INTEGER,
