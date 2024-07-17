@@ -58,6 +58,20 @@ Campaign.init(
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
+        owner_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'User',
+                key: 'user_id'
+            }
+        },
+        category_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Category',
+                key: 'id'
+            }
+        }
     },
     {
         sequelize,

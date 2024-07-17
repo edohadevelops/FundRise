@@ -7,6 +7,7 @@ import Following from '../../../tabs/Campaign/Following/Following';
 import Modals from '../../../components/modal/Modal';
 import { Form, Field } from 'react-final-form'
 import { FormControlLabel } from '@mui/material';
+import { axiosQuery } from '../../../utils/api.js'; 
 
 const Campaign = () => {
   const [currentTab,setCurrentTab] = useState("For You");
@@ -52,7 +53,20 @@ const Campaign = () => {
 
   const createCampaignBtn = useRef();
   const handleCreateCampaign = async(values) => {
-    console.log("Values",values)
+    const payload = {
+      ...values,
+      campaign_img: campaignImg,
+      // category: Number(values.category),
+    }
+    console.log("Payload is: ",payload)
+    axiosQuery.post(`${process.env.BASE_URL}/api/campaign/create`,payload)
+    .then((data)=>{
+      console.log("Data is",data)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+    
   };
   const handleFormSubmit = () => {
     createCampaignBtn.current.click();
@@ -134,7 +148,7 @@ const Campaign = () => {
                 <img src={AddIcon} alt="plus icon" />
                 <span>Add Photo</span>
               </button>:
-              <img className='new-campaign-img' src={imgURL && imgURL} alt="" />
+              <img className='new-campaign-img' src={"http://loacalhost:5000/assets/campaign/images/campaign_img-1721247636309"} alt="" />
             }
             <input className='hidden' type="file" accept='image/*' onChange={handleImgChange} ref={filePicker}/>
           </div>
@@ -146,9 +160,8 @@ const Campaign = () => {
               target_amount: "",
               start_date: "",
               end_date: "",
-              category: "",
+              category_id: "",
               beneficiary_type: "",
-              story: "",
             }}
             render={({submitting,hasValidationErrors,handleSubmit})=>(
               <form className='add-campaign-form' onSubmit={handleSubmit}>
@@ -174,7 +187,7 @@ const Campaign = () => {
                     {
                       ({meta,input})=>(
                         <div>
-                          <input className='modal-input' {...input} type="text" placeholder='E.g 10,000' />
+                          <input className='modal-input' {...input} type="number" placeholder='E.g 10,000' />
                           {
                             meta.error && meta.touched &&
                             <span className='text-red-500'>{meta.error}</span>
@@ -218,17 +231,17 @@ const Campaign = () => {
                   </Field>                   
                 </div>
                 <div className="modal-input-group modal-half-input">
-                  <label className='modal-input-label' htmlFor="category">Category</label>
-                  <Field name='category'>
+                  <label className='modal-input-label' htmlFor="category_id">Category</label>
+                  <Field name='category_id'>
                     {
                       ({meta,input})=>(
                         <div>
                           <select className='modal-input' {...input}>
                             <option></option>
-                            <option>Education</option>
-                            <option>Medical</option>
-                            <option>Business</option>
-                            <option>Sports</option>
+                            <option value={1}>Education</option>
+                            <option value={2}>Medical</option>
+                            <option value={3}>Business</option>
+                            <option value={4} >Sports</option>
                             <option>Other</option>
                           </select>
                           {
@@ -243,15 +256,15 @@ const Campaign = () => {
                 </div>
                 <div className="modal-input-group modal-half-input">
                   <label className='modal-input-label' htmlFor="beneficiary_type">Beneficiary type</label>
-                  <Field name='beneiciary_type'>
+                  <Field name='beneficiary_type'>
                     {
                       ({meta,input})=>(
                         <div>
                           <select className='modal-input' {...input}>
-                            <option></option>
-                            <option>Organisation</option>
-                            <option>Individual</option>
-                            <option>Team</option>
+                            <option value=""></option>
+                            <option value="Organisation">Organisation</option>
+                            <option value="Individual">Individual</option>
+                            <option value="Team">Team</option>
                           </select>
                           {
                             meta.error && meta.touched &&
@@ -296,8 +309,8 @@ const Campaign = () => {
                   </div>                    
                 </div>
                 <div className="modal-input-group">
-                  <label className='modal-input-label' htmlFor="story">Story</label>
-                  <Field name='story'>
+                  <label className='modal-input-label' htmlFor="description">Story</label>
+                  <Field name='description'>
                     {
                       ({meta,input})=>(
                         <div>
