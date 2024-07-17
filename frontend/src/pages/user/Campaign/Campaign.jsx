@@ -49,13 +49,19 @@ const Campaign = () => {
   const openModal = () => {
     setModalOpen(true)
   }
-  const handleCreateCampaign = async() => {
-    alert("Created")
+
+  const createCampaignBtn = useRef();
+  const handleCreateCampaign = async(values) => {
+    console.log("Values",values)
   };
+  const handleFormSubmit = () => {
+    createCampaignBtn.current.click();
+  }
 
   const [campaignImg,setCampaignImg] = useState(null);
   const [imgURL,setImgURL] = useState(null)
   const filePicker = useRef(null);
+
 
   const handleFilePicker = () => {
     filePicker.current.click()
@@ -118,7 +124,7 @@ const Campaign = () => {
           btnColor='#187070'
           onClose={()=>setModalOpen(false)}
           modalSize='2xl'
-          onAccept={()=>setModalOpen(false)}
+          onAccept={handleFormSubmit}
           dismissible={true}
         >
           <div className='add-campaign-img' onClick={handleFilePicker}>
@@ -135,7 +141,14 @@ const Campaign = () => {
           <Form 
             onSubmit={handleCreateCampaign}
             initialValues={{
-              fundraising_target: "All or Nothing"
+              fundraising_target: "All or Nothing",
+              title: "",
+              target_amount: "",
+              start_date: "",
+              end_date: "",
+              category: "",
+              beneficiary_type: "",
+              story: "",
             }}
             render={({submitting,hasValidationErrors,handleSubmit})=>(
               <form className='add-campaign-form' onSubmit={handleSubmit}>
@@ -143,7 +156,7 @@ const Campaign = () => {
                   <label className='modal-input-label' htmlFor="title">Title</label>
                   <Field name='title'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
                           <input className='modal-input' {...input} type="text" placeholder='E.g Tuition Fees' />
                           {
@@ -159,7 +172,7 @@ const Campaign = () => {
                   <label className='modal-input-label' htmlFor="target_amount">Goal (Target Amount)</label>
                   <Field name='target_amount'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
                           <input className='modal-input' {...input} type="text" placeholder='E.g 10,000' />
                           {
@@ -169,14 +182,13 @@ const Campaign = () => {
                         </div>
                       )
                     }
-                  </Field>
-                    
+                  </Field>    
                 </div>
                 <div className="modal-input-group modal-half-input">
                   <label className='modal-input-label' htmlFor="start_date">Start Date</label>
                   <Field name='start_date'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
                           <input className='modal-input' {...input} type="date" />
                           {
@@ -193,7 +205,7 @@ const Campaign = () => {
                   <label className='modal-input-label' htmlFor="end_date">End Date</label>
                   <Field name='end_date'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
                           <input className='modal-input' {...input} type="date" />
                           {
@@ -209,7 +221,7 @@ const Campaign = () => {
                   <label className='modal-input-label' htmlFor="category">Category</label>
                   <Field name='category'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
                           <select className='modal-input' {...input}>
                             <option></option>
@@ -233,7 +245,7 @@ const Campaign = () => {
                   <label className='modal-input-label' htmlFor="beneficiary_type">Beneficiary type</label>
                   <Field name='beneiciary_type'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
                           <select className='modal-input' {...input}>
                             <option></option>
@@ -287,7 +299,7 @@ const Campaign = () => {
                   <label className='modal-input-label' htmlFor="story">Story</label>
                   <Field name='story'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
                           <textarea {...input} type="text" />
                           {
@@ -300,6 +312,7 @@ const Campaign = () => {
                   </Field>
                     
                 </div>
+                <button className='hidden' type='submit' ref={createCampaignBtn} ></button>
               </form>
             )}
           />

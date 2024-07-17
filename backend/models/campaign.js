@@ -31,6 +31,22 @@ Campaign.init(
         },
         current_amount: {
             type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
+        beneficiary_type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        fundraising_target: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        start_date: {
+            type: DataTypes.DATEONLY,
+            allowNull: false
+        },
+        end_date: {
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         status: {

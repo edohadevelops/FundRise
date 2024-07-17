@@ -32,7 +32,7 @@ const Login = () => {
     const handleLogin = async(values,form) => {
         // console.log("Values is: ",values)
         try{
-            const {data} = await axios.post(`${process.env.BASE_URL}/login`,values)
+            const {data} = await axios.post(`${process.env.BASE_URL}/api/login`,values)
             localStorage.setItem('token',data.token);
             // console.log(data);
             setUserDetails(data.payload)

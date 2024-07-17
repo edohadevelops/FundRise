@@ -16,7 +16,7 @@ const Register = () => {
     const handleRegister = async(values,form) => {
         // console.log(values)
         try{
-            const {data} = await axios.post(`${process.env.BASE_URL}/register`,values)
+            const {data} = await axios.post(`${process.env.BASE_URL}/api/register`,values)
             console.log(data);
             localStorage.setItem("token",data.token)
             setUserDetails(data.payload)

@@ -5,14 +5,14 @@ import { AppContext } from '../../store/AppContext';
 
 const ProtectedRoute = ({Component}) => {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [isAuthenticated,setIsAuthenticated] = useState(false);
   const [isLoading,setIsLoading] = useState(true);
   const {userDetails,setUserDetails} = useContext(AppContext)
 
   useEffect(()=>{
     const initializeApp = () => {
-      axiosQuery.get('/initialize')
+      axiosQuery.get('/api/initialize')
       .then((response)=>{
         const { initialData } = response.data
         // console.log("Initial data is: ",initialData);
@@ -22,8 +22,7 @@ const ProtectedRoute = ({Component}) => {
         }
       })
       .catch((error)=>{
-        console.error(error);
-        
+        console.error(error);  
         // navigate("/login")
       })
       .finally(()=>{
