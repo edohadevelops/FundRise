@@ -7,6 +7,9 @@
   line-height: 1.5;
   font-weight: 400;
 }
+textarea{
+  resize: none;
+}
 @layer components{
   .campaign-list{
     @apply flex flex-col gap-4 lg:gap-6

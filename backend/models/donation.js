@@ -19,13 +19,13 @@ Donation.init(
         //         key: 'user_id'
         //     }
         // },
-        owner_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Users',
-                key: 'user_id'
-            }
-        },
+        // owner_id: {
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: 'User',
+        //         key: 'user_id'
+        //     }
+        // },
         message: DataTypes.STRING,
         amount: {
             type: DataTypes.INTEGER,

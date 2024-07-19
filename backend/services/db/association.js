@@ -2,9 +2,11 @@ import {
     User,
     Campaign,
     Donation,
-    Follower
+    Follower,
+    Category
 } from '../../models/index.js';
 
+    // Campaign-User Relationships
     User.hasMany(Campaign,{
         foreignKey: 'owner_id',
         onDelete: 'CASCADE',
@@ -16,6 +18,19 @@ import {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     });
+    // End ofCampaign-User Relationships
+
+    // Campaign-Category Relationships
+    Category.hasMany(Campaign,{
+        foreignKey: 'category_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Campaign.belongsTo(Category,{
+        foreignKey: 'category_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
 
     // Donations Relationships
 
@@ -24,18 +39,31 @@ import {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     });
-    User.hasMany(Donation,{
-        foreignKey: 'owner_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
+    // User.hasMany(Donation,{
+    //     foreignKey: 'owner_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
     Donation.belongsTo(User,{
         foreignKey: 'backer_id',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     })
-    Donation.belongsTo(User,{
-        foreignKey: 'owner_id',
+    // Donation.belongsTo(User,{
+    //     foreignKey: 'owner_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
+    // End
+
+    // Campaign-Donation Relationships
+    Campaign.hasMany(Donation,{
+        foreignKey: 'campaign_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Donation.belongsTo(Campaign,{
+        foreignKey: 'campaign_id',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     })
@@ -70,7 +98,8 @@ const models = {
     User,
     Follower,
     Campaign,
-    Donation
+    Donation,
+    Category
 }
 
 export default models;

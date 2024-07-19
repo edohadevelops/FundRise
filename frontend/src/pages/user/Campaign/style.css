@@ -23,22 +23,22 @@
     @apply bg-subtle text-primary 
 }
 .add-campaign-img{
-    @apply h-[150px] w-full max-w-[300px] rounded-lg
+    @apply h-[180px] max-sm:h-[230px] w-full sm:max-w-[300px] rounded-lg cursor-pointer
 }
 .add-campaign-img button{
     @apply h-full w-full bg-[#CBD5E180] flex flex-col items-center justify-center text-sm rounded-lg
 }
 .new-campaign-img{
-    @apply cursor-pointer w-full h-full rounded-lg
+    @apply w-full h-full rounded-lg
 }
 .add-campaign-form{
-    @apply flex flex-wrap gap-2 justify-between
+    @apply flex flex-wrap gap-3 justify-between
 }
 .modal-input-group{
     @apply w-full drop-shadow-sm bg-none flex flex-col gap-1
 }
 .modal-input-label{
-    @apply block text-black text-sm
+    @apply block text-black text-sm font-semibold
 }
 .modal-input{
     @apply w-full bg-[#F8F8FA] h-[45px] rounded-md outline-none px-2 border border-gray-200 text-[#334155]
@@ -50,7 +50,7 @@
     @apply w-full bg-[#F8F8FA] h-[100px] py-2 px-2 rounded-md outline-none border border-gray-200 text-[#334155] text-sm
 }
 .modal-half-input{
-    @apply max-w-[49%]
+    @apply sm:max-w-[49%]
 }
 .modal-input-group span{
     @apply w-full text-[14px]

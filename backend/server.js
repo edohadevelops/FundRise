@@ -6,9 +6,13 @@ import {connectToDB} from './config/db.js';
 import {
     loginRoute,
     registerRoute,
-    initialRoute
+    initialRoute,
+    createCampaignRoute
 } from './routes/index.js';
-const app = express();
+// import uploadCampaign from './middlewares/campaign/upload.js';
+import errorHandler from './middlewares/error/error.js';
+// import { authUser } from './controllers/auth/auth.js';
+export const app = express();
 
 
 
@@ -23,15 +27,23 @@ app.use(cors({
 }));
 app.options("*",cors())
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: true}));
+
+app.use('/campaign',express.static('public'))
 
 app.get("/", (req,res)=>{
-    res.send('Welcome to fundrise app')
+    // console.log(__dirname)
+    res.send('Welcome to fundrise app');
 });
 
-app.use('/login',loginRoute);
-app.use('/register',registerRoute);
-app.use('/initialize',initialRoute);
+app.use('/api/login',loginRoute);
+app.use('/api/register',registerRoute);
+app.use('/api/initialize',initialRoute);
+app.use('/api/campaign/create',createCampaignRoute)
+
+
+// Errors
+app.use(errorHandler)
 
 
 

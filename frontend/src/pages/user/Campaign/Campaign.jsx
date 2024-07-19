@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './style.css';
 import Filter from '../../../assets/Filter2.svg';
 import AddIcon from '../../../assets/addLine.svg';
@@ -6,6 +6,8 @@ import ForYou from '../../../tabs/Campaign/ForYou/ForYou';
 import Following from '../../../tabs/Campaign/Following/Following';
 import Modals from '../../../components/modal/Modal';
 import { Form, Field } from 'react-final-form'
+import { FormControlLabel } from '@mui/material';
+import { axiosQuery } from '../../../utils/api.js'; 
 
 const Campaign = () => {
   const [currentTab,setCurrentTab] = useState("For You");
@@ -48,12 +50,32 @@ const Campaign = () => {
   const openModal = () => {
     setModalOpen(true)
   }
-  const handleCreateCampaign = async() => {
-    alert("Created")
+
+  const createCampaignBtn = useRef();
+  const handleCreateCampaign = async(values) => {
+    const payload = {
+      ...values,
+      campaign_img: campaignImg,
+      // category: Number(values.category),
+    }
+    console.log("Payload is: ",payload)
+    axiosQuery.post(`${process.env.BASE_URL}/api/campaign/create`,payload)
+    .then((data)=>{
+      console.log("Data is",data)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+    
   };
+  const handleFormSubmit = () => {
+    createCampaignBtn.current.click();
+  }
 
   const [campaignImg,setCampaignImg] = useState(null);
+  const [imgURL,setImgURL] = useState(null)
   const filePicker = useRef(null);
+
 
   const handleFilePicker = () => {
     filePicker.current.click()
@@ -61,13 +83,9 @@ const Campaign = () => {
 
   const handleImgChange = (event) => {
     const file = event.target.files[0];
-    if(file){
-      const reader = new FileReader;
-      reader.onload= (e) =>{
-        setCampaignImg(e.target.result)
-      }
-      reader.readAsDataURL(file)
-    }
+    setCampaignImg(file);
+    const url = URL.createObjectURL(file)
+    setImgURL(url)
   }
 
   return (
@@ -114,35 +132,44 @@ const Campaign = () => {
         modalOpen &&
         <Modals 
           title='Add Campaign'
-          description='All fields are required.'
+          description='Start raising the funds you need.'
           btnAcceptText='Create Campaign'
           btnCloseText='Cancel'
           btnColor='#187070'
           onClose={()=>setModalOpen(false)}
           modalSize='2xl'
-          onAccept={()=>setModalOpen(false)}
+          onAccept={handleFormSubmit}
           dismissible={true}
         >
-          <div className='add-campaign-img'>
+          <div className='add-campaign-img' onClick={handleFilePicker}>
             {
-              !campaignImg ?
-              <button onClick={handleFilePicker}>
+              !imgURL ?
+              <button>
                 <img src={AddIcon} alt="plus icon" />
                 <span>Add Photo</span>
               </button>:
-              <img className='new-campaign-img' onClick={handleFilePicker} src={campaignImg && campaignImg} alt="" />
+              <img className='new-campaign-img' src={imgURL && imgURL} alt="" />
             }
             <input className='hidden' type="file" accept='image/*' onChange={handleImgChange} ref={filePicker}/>
           </div>
           <Form 
             onSubmit={handleCreateCampaign}
+            initialValues={{
+              fundraising_target: "All or Nothing",
+              title: "",
+              target_amount: "",
+              start_date: "",
+              end_date: "",
+              category_id: "",
+              beneficiary_type: "",
+            }}
             render={({submitting,hasValidationErrors,handleSubmit})=>(
               <form className='add-campaign-form' onSubmit={handleSubmit}>
                 <div className="modal-input-group modal-half-input">
                   <label className='modal-input-label' htmlFor="title">Title</label>
                   <Field name='title'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
                           <input className='modal-input' {...input} type="text" placeholder='E.g Tuition Fees' />
                           {
@@ -158,9 +185,9 @@ const Campaign = () => {
                   <label className='modal-input-label' htmlFor="target_amount">Goal (Target Amount)</label>
                   <Field name='target_amount'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
-                          <input className='modal-input' {...input} type="text" placeholder='E.g 10,000' />
+                          <input className='modal-input' {...input} type="number" placeholder='E.g 10,000' />
                           {
                             meta.error && meta.touched &&
                             <span className='text-red-500'>{meta.error}</span>
@@ -168,14 +195,13 @@ const Campaign = () => {
                         </div>
                       )
                     }
-                  </Field>
-                    
+                  </Field>    
                 </div>
                 <div className="modal-input-group modal-half-input">
                   <label className='modal-input-label' htmlFor="start_date">Start Date</label>
                   <Field name='start_date'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
                           <input className='modal-input' {...input} type="date" />
                           {
@@ -192,7 +218,7 @@ const Campaign = () => {
                   <label className='modal-input-label' htmlFor="end_date">End Date</label>
                   <Field name='end_date'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
                           <input className='modal-input' {...input} type="date" />
                           {
@@ -205,12 +231,19 @@ const Campaign = () => {
                   </Field>                   
                 </div>
                 <div className="modal-input-group modal-half-input">
-                  <label className='modal-input-label' htmlFor="category">Category</label>
-                  <Field name='category'>
+                  <label className='modal-input-label' htmlFor="category_id">Category</label>
+                  <Field name='category_id'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
-                          <input className='modal-input' {...input} type="text" />
+                          <select className='modal-input' {...input}>
+                            <option></option>
+                            <option value={1}>Education</option>
+                            <option value={2}>Medical</option>
+                            <option value={3}>Business</option>
+                            <option value={4} >Sports</option>
+                            <option>Other</option>
+                          </select>
                           {
                             meta.error && meta.touched &&
                             <span className='text-red-500'>{meta.error}</span>
@@ -223,11 +256,16 @@ const Campaign = () => {
                 </div>
                 <div className="modal-input-group modal-half-input">
                   <label className='modal-input-label' htmlFor="beneficiary_type">Beneficiary type</label>
-                  <Field name='beneiciary_type'>
+                  <Field name='beneficiary_type'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
-                          <input className='modal-input' {...input} type="text" />
+                          <select className='modal-input' {...input}>
+                            <option value=""></option>
+                            <option value="Organisation">Organisation</option>
+                            <option value="Individual">Individual</option>
+                            <option value="Team">Team</option>
+                          </select>
                           {
                             meta.error && meta.touched &&
                             <span className='text-red-500'>{meta.error}</span>
@@ -240,24 +278,41 @@ const Campaign = () => {
                 </div>
                 <div className="modal-input-group">
                   <label className='modal-input-label' htmlFor="fundraising_target">Fundraising target</label>
-                  <div>
-                    <Field name='fundraising_target' type='radio' value={"All or Nothing"} component="input"/>
-                    <label htmlFor="fundraising_target">All or nothing</label>
-                  </div>
-                  <div>
-                    <Field name='fundraising_target' type='radio' value={"Sweep it All"} component="input"/>
-                    <label htmlFor="fundraising_target">Sweep it all</label>
-                  </div>
-                  <div>
-                    <Field name='fundraising_target' type='radio' value={"All or something"} component="input"/>
-                    <label htmlFor="fundraising_target">All or something</label>
-                  </div>                     
+                  <div className='px-3 flex flex-col gap-2 w-fit'>
+                    <FormControlLabel 
+                      label="All or Nothing"
+                      control={(
+                        <Field name='fundraising_target' type='radio' value={"All or Nothing"} component="input"/>
+                      )}
+                      sx={{
+                        gap: "5px"
+                      }}
+                    />
+                    <FormControlLabel 
+                      label="Sweep what is raised"
+                      control={(
+                        <Field name='fundraising_target' type='radio' value={"Sweep what is raised"} component="input"/>
+                      )}
+                      sx={{
+                        gap: "5px"
+                      }}
+                    />
+                    <FormControlLabel 
+                      label="Forever funding"
+                      control={(
+                        <Field name='fundraising_target' type='radio' value={"Forever funding"} component="input"/>
+                      )}
+                      sx={{
+                        gap: "5px"
+                      }}
+                    />
+                  </div>                    
                 </div>
                 <div className="modal-input-group">
-                  <label className='modal-input-label' htmlFor="story">Story</label>
-                  <Field name='story'>
+                  <label className='modal-input-label' htmlFor="description">Story</label>
+                  <Field name='description'>
                     {
-                      (meta,input)=>(
+                      ({meta,input})=>(
                         <div>
                           <textarea {...input} type="text" />
                           {
@@ -270,6 +325,7 @@ const Campaign = () => {
                   </Field>
                     
                 </div>
+                <button className='hidden' type='submit' ref={createCampaignBtn} ></button>
               </form>
             )}
           />

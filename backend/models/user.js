@@ -26,6 +26,7 @@ User.init(
         first_name: DataTypes.STRING,
         last_name: DataTypes.STRING,
         bio: DataTypes.STRING,
+        profile_picture: DataTypes.STRING,
         role: {
             type: DataTypes.ENUM('super-admin','admin','user'),
             defaultValue: 'user'

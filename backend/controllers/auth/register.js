@@ -13,7 +13,7 @@ const validate = (data) => {
     return schema.validate(data)
 }
 
-export const registerController = async(req,res) => {
+export const registerController = async(req,res,next) => {
     try{
         const {error} = validate(req.body);
         if(error)
@@ -50,8 +50,9 @@ export const registerController = async(req,res) => {
         return res.status(200).send({message: "Sign up successful",payload: userPayload,token})
 
     }catch(err){
-        if(err.name === 'SequelizationValidationError')
-            return res.status(402).send({message: 'Error creating user',err})
-        return res.status(500).send({message: 'Internal Server Error',error: err})
+        return next();
+        // if(err.name === 'SequelizationValidationError')
+        //     return res.status(402).send({message: 'Error creating user',err})
+        // return res.status(500).send({message: 'Internal Server Error',error: err})
     }
 }
