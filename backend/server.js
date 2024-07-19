@@ -29,7 +29,7 @@ app.options("*",cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/assets',express.static('public'))
+app.use('/campaign',express.static('public'))
 
 app.get("/", (req,res)=>{
     // console.log(__dirname)

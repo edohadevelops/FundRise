@@ -148,7 +148,7 @@ const Campaign = () => {
                 <img src={AddIcon} alt="plus icon" />
                 <span>Add Photo</span>
               </button>:
-              <img className='new-campaign-img' src={"http://loacalhost:5000/assets/campaign/images/campaign_img-1721247636309"} alt="" />
+              <img className='new-campaign-img' src={imgURL && imgURL} alt="" />
             }
             <input className='hidden' type="file" accept='image/*' onChange={handleImgChange} ref={filePicker}/>
           </div>
