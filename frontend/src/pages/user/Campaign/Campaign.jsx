@@ -8,6 +8,11 @@ import Modals from '../../../components/modal/Modal';
 import { Form, Field } from 'react-final-form'
 import { FormControlLabel } from '@mui/material';
 import { axiosQuery } from '../../../utils/api.js'; 
+// Parents - 2tabs
+// Settings - various tabs
+// Fee 
+// Student-module
+// modal-component
 
 const Campaign = () => {
   const [currentTab,setCurrentTab] = useState("For You");
