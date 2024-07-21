@@ -8,11 +8,10 @@ import Modals from '../../../components/modal/Modal';
 import { Form, Field } from 'react-final-form'
 import { FormControlLabel } from '@mui/material';
 import { axiosQuery } from '../../../utils/api.js'; 
-// Parents - 2tabs
-// Settings - various tabs
-// Fee 
-// Student-module
-// modal-component
+
+// Ask Mr julius about why the file is saving the way it is, and that it is not downloadable,
+// Ask Mr julius about the object fit
+// Ask Mr Julius about the categories on the home page
 
 const Campaign = () => {
   const [currentTab,setCurrentTab] = useState("For You");
@@ -52,12 +51,69 @@ const Campaign = () => {
       }
   ]);
   const [modalOpen,setModalOpen] = useState(false);
+  const [isBtnDiabled,setBtnDiabled] = useState(true);
+  const [campaignImg,setCampaignImg] = useState(null);
+  const [imgURL,setImgURL] = useState(null)
+  const filePicker = useRef(null);
+
   const openModal = () => {
     setModalOpen(true)
   }
+  
+  const handleFormValidation = (values) => {
+    const errors = {}
+    const {
+      title,
+      target_amount,
+      start_date,
+      end_date,
+      category_id,
+      beneficiary_type,
+      description
+    } = values;
 
+    if(!title){
+      errors.title = "Title is required*"
+    }
+    if(!target_amount){
+      errors.target_amount = "Target amount is required*"
+    }
+    if(!start_date){
+      errors.start_date = "You must select a start date for this campaign*"
+    }
+    if(!end_date){
+      errors.end_date = "You must select an end date for this campaign*"
+    }
+    if(!category_id){
+      errors.category_id = "You must select a category*"
+    }
+    if(!beneficiary_type){
+      errors.beneficiary_type = "You must select a beneficiary type*"
+    }
+    if(!description){
+      errors.description = "You must enter a story for this campaign*"
+    }
+    // if(!campaignImg){
+    //   errors.campaign_img = "Image is required"
+    // }
+
+    if(
+      beneficiary_type &&
+      category_id &&
+      end_date &&
+      start_date &&
+      target_amount &&
+      title &&
+      description &&
+      campaignImg 
+    ){
+      setBtnDiabled(false);
+    }
+
+    return errors;
+  }
   const createCampaignBtn = useRef();
-  const handleCreateCampaign = async(values) => {
+  const handleCreateCampaign = async(values,form,errors) => {
     const payload = {
       ...values,
       campaign_img: campaignImg,
@@ -66,7 +122,13 @@ const Campaign = () => {
     console.log("Payload is: ",payload)
     axiosQuery.post(`${process.env.BASE_URL}/api/campaign/create`,payload)
     .then((data)=>{
-      console.log("Data is",data)
+      console.log("Data is",data);
+      form.reset();
+      setCampaignImg(null);
+      setImgURL(null)
+      setModalOpen(false)
+      // URL.revokeObjectURL(campaignImg)
+      // errors.reset()
     })
     .catch((err)=>{
       console.log(err)
@@ -75,12 +137,7 @@ const Campaign = () => {
   };
   const handleFormSubmit = () => {
     createCampaignBtn.current.click();
-  }
-
-  const [campaignImg,setCampaignImg] = useState(null);
-  const [imgURL,setImgURL] = useState(null)
-  const filePicker = useRef(null);
-
+  };
 
   const handleFilePicker = () => {
     filePicker.current.click()
@@ -145,6 +202,7 @@ const Campaign = () => {
           modalSize='2xl'
           onAccept={handleFormSubmit}
           dismissible={true}
+          btnDisabled={isBtnDiabled}
         >
           <div className='add-campaign-img' onClick={handleFilePicker}>
             {
@@ -158,6 +216,7 @@ const Campaign = () => {
             <input className='hidden' type="file" accept='image/*' onChange={handleImgChange} ref={filePicker}/>
           </div>
           <Form 
+            validate={handleFormValidation}
             onSubmit={handleCreateCampaign}
             initialValues={{
               fundraising_target: "All or Nothing",

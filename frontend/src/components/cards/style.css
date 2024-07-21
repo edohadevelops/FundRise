@@ -2,7 +2,7 @@
     @apply flex flex-col lg:flex-row gap-2 lg:gap-4 text-tertiary
 }
 .campaign-card img{
-    @apply w-full lg:max-w-[300px] h-[200px] max-h-full rounded-2xl
+    @apply w-full lg:max-w-[300px] h-[200px] max-h-full rounded-2xl object-cover
 }
 .img{
     @apply max-h-[200px] lg:max-h-[400px] relative w-full rounded-lg

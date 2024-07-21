@@ -21,7 +21,8 @@ function Modals({
   onPrevious,
   dismissible,
   progressPercent,
-  flexButtons
+  flexButtons,
+  btnDisabled
 }) {
       const modalWidth = getModalSize(modalSize);
       const [windowWidth,setWindowWidth] = useState(window.innerWidth);
@@ -51,7 +52,6 @@ function Modals({
     return (
       <div className="modal-container" onClick={(e)=>{ dismissible && dismissModal(e)}}>
           <div style={{maxWidth: `${modalWidth}px`}} className="modal-content">
-              
                   <div className="modal-header">
                       <div className="flex flex-col">
                           <h3 className="modal-title">
@@ -69,7 +69,7 @@ function Modals({
                   </div>
                 </div>
                   <div className="modal-footer">
-                        <div className={
+                      <div className={
                           `w-full flex flex-row-reverse gap-[12px] 
                             ${
                               (!flexButtons || window.innerWidth < 800) &&
@@ -79,14 +79,16 @@ function Modals({
                           <button 
                             type="button" 
                             style={{
-                              background: btnColor,
+                              background: btnDisabled ? "#b0c7c7" : btnColor,
                               color: "#fff",
                               width: (flexButtons && window.innerWidth > 800) 
                                 ? "177px" 
-                                : "100%"
-                              }} 
-                              className={`modal-btn`} 
-                              onClick={onAccept}
+                                : "100%",
+                              cursor: btnDisabled && "not-allowed"
+                            }} 
+                            className={`modal-btn`} 
+                            onClick={onAccept}
+                            disabled={btnDisabled}
                             >
                               {btnAcceptText}
                             </button>

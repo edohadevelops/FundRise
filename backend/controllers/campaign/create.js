@@ -46,6 +46,7 @@ export default (req,res,next) => {
     })
     .catch((error)=>{
         console.log("Error creating campaign: ",error);
+        req.error = error;
         return next()
     })
 

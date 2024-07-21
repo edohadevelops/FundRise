@@ -7,7 +7,8 @@ import {
     loginRoute,
     registerRoute,
     initialRoute,
-    createCampaignRoute
+    createCampaignRoute,
+    getAllCampaigns
 } from './routes/index.js';
 // import uploadCampaign from './middlewares/campaign/upload.js';
 import errorHandler from './middlewares/error/error.js';
@@ -29,17 +30,17 @@ app.options("*",cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/campaign',express.static('public'))
+app.use('/campaign',express.static('public/campaign/images'))
 
-app.get("/", (req,res)=>{
-    // console.log(__dirname)
-    res.send('Welcome to fundrise app');
+app.get("/",(req,res)=>{
+    res.send("Welcome to fundrise app")
 });
 
 app.use('/api/login',loginRoute);
 app.use('/api/register',registerRoute);
 app.use('/api/initialize',initialRoute);
-app.use('/api/campaign/create',createCampaignRoute)
+app.use('/api/campaign/create',createCampaignRoute);
+app.use('/api/campaign/getAll',getAllCampaigns)
 
 
 // Errors
