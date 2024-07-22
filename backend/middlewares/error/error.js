@@ -1,5 +1,6 @@
 const errorHandler = (req,res) => {
-    res.status(500).send({message: "Internal server error", error})
+    if(req.error)
+        return res.status(500).send({message: "Internal server error", error})
 }
 
 export default errorHandler;
