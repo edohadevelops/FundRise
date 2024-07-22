@@ -42,7 +42,10 @@ export default (req,res,next) => {
     .then((data)=>{
         console.log("Campaign created successfully");
         const campaign = data.toJSON();
-        return res.status(200).send({message: "Campaign created successfully", campaign })
+        return res.status(200).send({
+            message: "Campaign created successfully",
+            campaign: {...campaign,likes: 0,donators: 0} 
+        })
     })
     .catch((error)=>{
         console.log("Error creating campaign: ",error);

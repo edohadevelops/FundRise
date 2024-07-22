@@ -16,19 +16,20 @@ const Card = ({details,index}) => {
       <div className="img">
         <img 
             src={
+                details.campaign_img ?
+                details.campaign_img :
                 index === 0 ?
                 Donation2 :
                 index === 1 ?
                 Donation1 : 
-                index === 2 ?
-                Donation3 :
-                undefined
+                // index === 2 &&
+                Donation3 
             } 
             alt="Donation picture" 
         />
         <div className="card-badge">
             <LocalPoliceOutlinedIcon sx={{fontSize: "20px"}} />
-            <p className="card-category">{details?.category ? details.category : "Education"}</p>
+            <p className="card-category">{details?.Category?.category_name}</p>
         </div>
       </div>
       
@@ -42,26 +43,26 @@ const Card = ({details,index}) => {
                 </div>
                 <BookmarkBorderOutlinedIcon sx={{fontSize: "28px"}} />
             </div>
-            <p className="likes-count">{details?.totalLikes} likes</p>
+            <p className="likes-count">{details.likes ? details.likes : "100" } likes</p>
         </div>
         <p className="card-title">
-            <span className='card-username'>{details.username}: </span> 
+            <span className='card-username'>{details.User?.username }: </span> 
             {details?.title}
         </p>
         <div className="card-progress">
             <div className="card-timeline">
                 <HistoryOutlinedIcon />
-                <span>{details.daysLeft} days Left</span>
+                <span>{details.daysLeft}</span>
             </div>
             <div className="card-progress-bar">
-                <div className="progress-inner-bar" style={{width: `${details?.progressPercent ? details?.progressPercent : 20}%`}}></div>
+                <div className="progress-inner-bar" style={{width: `${details?.progressPercent && details?.progressPercent}%`}}></div>
             </div>
         </div>
         <div className="progress-rate">
-            <p className="progress-value"><span>{details.currentAmmount}</span>/{details.totalAmount}</p>
+            <p className="progress-value"><span>{details.current_amount}</span>/{details.target_amount}</p>
             <p className="progress-percent">{details.progressPercent}%</p>
         </div>
-        <p className="donators-number"><span>{details.totalDonators}</span> donators</p>
+        <p className="donators-number"><span>{details.totalDonators ? details.totalDonators : 0}</span> donators</p>
 
       </div>
 

@@ -71,6 +71,28 @@ Campaign.init(
                 model: 'Category',
                 key: 'id'
             }
+        },
+        progressPercent: {
+            type: DataTypes.VIRTUAL,
+            get(){
+                const percentage = (this.current_amount / this.target_amount) * 100;
+                return percentage
+            },
+            set(){
+                throw new Error("You cannot directly set the progress percent")
+            }
+        },
+        daysLeft: {
+            type: DataTypes.VIRTUAL,
+            get(){
+                const start_date = this.start_date
+                const end_date = this.end_date
+                const timeDifference = new Date(this.end_date) - new Date(this.start_date);
+                const daysDifference = timeDifference / ( 1000 * 60 * 60 * 24 );
+                const daysString = `${daysDifference} days left`
+
+                return daysString;
+            }
         }
     },
     {
@@ -78,6 +100,7 @@ Campaign.init(
         modelName: 'Campaign'
     }
 );
+
 
 
 export default Campaign;

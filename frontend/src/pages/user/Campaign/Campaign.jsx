@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import './style.css';
 import Filter from '../../../assets/Filter2.svg';
 import AddIcon from '../../../assets/addLine.svg';
@@ -8,6 +8,7 @@ import Modals from '../../../components/modal/Modal';
 import { Form, Field } from 'react-final-form'
 import { FormControlLabel } from '@mui/material';
 import { axiosQuery } from '../../../utils/api.js'; 
+import { AppContext } from '../../../store/AppContext.jsx';
 
 // Ask Mr julius about why the file is saving the way it is, and that it is not downloadable,
 // Ask Mr julius about the object fit
@@ -15,41 +16,7 @@ import { axiosQuery } from '../../../utils/api.js';
 
 const Campaign = () => {
   const [currentTab,setCurrentTab] = useState("For You");
-  const [campaignItems,setCampaignItems] = useState([
-      {
-          title: "Kemi's University Tuition",
-          category: "Education",
-          daysLeft: 2,
-          currentAmmount: "50,000",
-          totalAmount: "100,000",
-          progressPercent: 20,
-          totalDonators: 4,
-          username: "edohaTheDev",
-          totalLikes: 1203
-      },
-      {
-          title: "Dorcas Memorial Fund",
-          category: "Memorial",
-          daysLeft: 5,
-          currentAmmount: "100,000",
-          totalAmount: "150,000",
-          progressPercent: 60,
-          totalDonators: 10,
-          username: "uprisenigeria",
-          totalLikes: 50
-      },
-      {
-          title: "Robotic School For Kids",
-          category: "Education",
-          daysLeft: 20,
-          currentAmmount: "300,000",
-          totalAmount: "400,000",
-          progressPercent: 70,
-          totalDonators: 8,
-          username: "jameson",
-          totalLikes: 400
-      }
-  ]);
+  const { allCampaigns,setAllCampaigns } = useContext(AppContext)
   const [modalOpen,setModalOpen] = useState(false);
   const [isBtnDiabled,setBtnDiabled] = useState(true);
   const [campaignImg,setCampaignImg] = useState(null);
@@ -113,28 +80,42 @@ const Campaign = () => {
     return errors;
   }
   const createCampaignBtn = useRef();
+  const getCampaigns = () => {
+    axiosQuery.get("http://localhost:5000/api/campaign/getAll")
+    .then(({data})=>{
+      console.log(data);
+      setAllCampaigns(data.campaigns)
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
+  useEffect(()=>{
+    getCampaigns()
+  },[])
   const handleCreateCampaign = async(values,form,errors) => {
+
     const payload = {
       ...values,
       campaign_img: campaignImg,
-      // category: Number(values.category),
     }
     console.log("Payload is: ",payload)
+
     axiosQuery.post(`${process.env.BASE_URL}/api/campaign/create`,payload)
-    .then((data)=>{
+    .then(({data})=>{
       console.log("Data is",data);
       form.reset();
       setCampaignImg(null);
-      setImgURL(null)
-      setModalOpen(false)
-      // URL.revokeObjectURL(campaignImg)
-      // errors.reset()
+      setImgURL(null);
+      getCampaigns();
+      setModalOpen(false);
     })
     .catch((err)=>{
       console.log(err)
     })
     
   };
+  
   const handleFormSubmit = () => {
     createCampaignBtn.current.click();
   };
@@ -185,8 +166,8 @@ const Campaign = () => {
         <div className="campaign-list">
           {
             currentTab === "For You" ?
-            <ForYou campaigns={campaignItems} />:
-            <Following campaigns={campaignItems} />
+            <ForYou campaigns={allCampaigns} />:
+            <Following campaigns={allCampaigns} />
           }
         </div>
       </div>

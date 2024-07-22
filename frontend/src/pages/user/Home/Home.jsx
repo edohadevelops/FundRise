@@ -12,48 +12,24 @@ import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import './style.css';
 import Card from '../../../components/cards/Card';
 import { AppContext } from '../../../store/AppContext'
+import { axiosQuery } from '../../../utils/api';
 
 const Home = () => {
 
-    const [campaignItems,setCampaignItems] = useState([
-        {
-            title: "Kemi's University Tuition",
-            category: "Education",
-            daysLeft: 2,
-            currentAmmount: "50,000",
-            totalAmount: "100,000",
-            progressPercent: 20,
-            totalDonators: 4,
-            username: "edohaTheDev",
-            totalLikes: 1203
-        },
-        {
-            title: "Dorcas Memorial Fund",
-            category: "Memorial",
-            daysLeft: 5,
-            currentAmmount: "100,000",
-            totalAmount: "150,000",
-            progressPercent: 60,
-            totalDonators: 10,
-            username: "uprisenigeria",
-            totalLikes: 50
-        },
-        {
-            title: "Robotic School For Kids",
-            category: "Education",
-            daysLeft: 20,
-            currentAmmount: "300,000",
-            totalAmount: "400,000",
-            progressPercent: 70,
-            totalDonators: 8,
-            username: "jameson",
-            totalLikes: 400
-        }
-    ]);
-    const {userDetails} = useContext(AppContext)
-    // useEffect(()=>{
-    //     console.log("Campaign items:", Card)
-    // },[])
+    const {userDetails,allCampaigns,setAllCampaigns} = useContext(AppContext);
+    const getCampaigns = () => {
+        console.log("About to make request")
+        axiosQuery.get("http://localhost:5000/api/campaign/getAll")
+        .then(({data})=>{
+          setAllCampaigns(data.campaigns)
+        })
+        .catch((error)=>{
+          console.log(error)
+        })
+      }
+    useEffect(()=>{
+        getCampaigns();
+    },[])
     return (
         <div className="home">
             <div className="intro-section">
@@ -115,16 +91,10 @@ const Home = () => {
                 <p className="trending-title">Trending Campaigns</p>
                 <div className="trending-results">
                     {
-                        campaignItems.map((item,index)=>(
+                        allCampaigns?.map((item,index)=>(
                             <Card details={item} index={index} />
                         ))
                     }
-                    {
-                        campaignItems.map((item,index)=>(
-                            <Card details={item} index={index} />
-                        ))
-                    }
-
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
-import getAll from "../../controllers/campaign/get.js";
 import { Router } from "express";
+import getAll from "../../controllers/campaign/get.js";
+
 
 const router = Router();
 

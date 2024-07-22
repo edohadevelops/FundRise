@@ -2,13 +2,15 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { axiosQuery } from '../../utils/api';
 import { AppContext } from '../../store/AppContext';
+import axios from 'axios';
+// import { refreshAllCampaigns } from '../../utils/campaigns';
 
 const ProtectedRoute = ({Component}) => {
 
   // const navigate = useNavigate();
   const [isAuthenticated,setIsAuthenticated] = useState(false);
   const [isLoading,setIsLoading] = useState(true);
-  const {userDetails,setUserDetails} = useContext(AppContext)
+  const {userDetails,setUserDetails,setAllCampaigns} = useContext(AppContext)
 
   useEffect(()=>{
     const initializeApp = () => {
@@ -25,14 +27,15 @@ const ProtectedRoute = ({Component}) => {
         console.error(error);  
         // navigate("/login")
       })
-      .finally(()=>{
+      .finally(()=>{        
         setIsLoading(false)
       })
     }
+    
     if(userDetails){
-      // console.log(userDetails)
       setIsLoading(false);
       setIsAuthenticated(true)
+      
     }else{
       initializeApp();
     }
