@@ -6,3 +6,5 @@ export {default as DonationPage} from './user/Donation/Donation'
 export {default as NotificationPage} from './user/Notification/Notification'
 export {default as ProfilePage} from './user/Profile/Profile'
 export {default as HistoryPage} from './user/History/History'
+
+export { default as CampaignPostPage } from './user/posts/Post'

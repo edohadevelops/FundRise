@@ -5,6 +5,7 @@ import AppLayout from '../components/layout/AppLayout.jsx';
 import ProtectedRoute from '../components/protected/ProtectedRoute.jsx';
 import { 
   CampaignPage, 
+  CampaignPostPage, 
   DonationPage, 
   HistoryPage, 
   HomePage, 
@@ -26,6 +27,7 @@ const RouterConfig = () => {
           <Route index element={<HomePage />} />
           <Route path={routes.HOME} element={<HomePage />} />
           <Route path={routes.CAMPAIGNS} element={<CampaignPage />} />
+          <Route path={routes.POSTS} element={<CampaignPostPage />} />
           <Route path={routes.DONATIONS} element={<DonationPage />} />
           <Route path={routes.NOTIFICATIONS} element={<NotificationPage />} />
           <Route path={routes.HISTORY} element={<HistoryPage />} />
