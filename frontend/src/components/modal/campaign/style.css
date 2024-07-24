@@ -1,0 +1,104 @@
+.view-campaign-modal{
+    @apply bg-[#0000008e] fixed top-0 left-0 w-[100vw] h-[100vh] z-50 backdrop-blur-[2px] flex items-center justify-center
+}
+.view-campaign-body{
+    @apply h-full max-h-[550px] w-full max-w-[1000px] overflow-y-hidden flex relative
+}
+.view-campaign-left{
+    @apply h-full w-1/2 absolute top-full left-0 ease-in duration-200
+}
+.view-campaign-right{
+    @apply h-full w-1/2 bg-white absolute top-full right-0 ease-in duration-500
+}
+.view-campaign-content{
+    @apply w-full h-full relative
+}
+.view-campaign-img{
+    @apply h-full w-full flex flex-col
+}
+.view-campaign-img img{
+    @apply h-full w-full
+}
+.view-campaign-left-curtain{
+    @apply w-full h-full absolute bottom-0 left-0 bg-[white] ease-in duration-[300ms]
+}
+.view-campaign-right-curtain{
+    @apply w-full h-full absolute bottom-0 right-0 bg-gray-300 ease-in duration-[500ms]
+}
+.view-campaign-details{
+    @apply h-full w-full overflow-y-scroll px-6 py-6 flex flex-col gap-2
+}
+
+/*  */
+
+.view-campaign-user-card{
+    @apply flex w-full items-center py-2 bg-white px-4 rounded-t-2xl
+}
+.view-campaign-user-details{
+    @apply flex items-center w-full gap-2 text-sm
+}
+.view-campaign-flex-user-details{
+    @apply h-full flex flex-col justify-between
+}
+.view-campaign-username{
+    @apply font-semibold;
+    line-height: normal;
+}
+.view-campaign-user-location{
+    @apply text-[13px] ;
+    line-height: normal;
+}
+.view-campaign-user-details img{
+    @apply h-[40px] w-[40px] rounded-[50%] text-sm
+}
+.view-campaign-user-card button{
+    @apply bg-subtle h-full px-2 py-4 rounded-lg
+}
+.view-campaign-content-details{
+    @apply flex flex-col gap-2 text-[#334155]
+}
+.view-campaign-title{
+    @apply text-2xl font-bold text-[#302E37]
+}
+.view-campaign-content-user{
+    @apply flex gap-1 items-center text-[#334155]
+}
+.view-campaign-content-user img{
+    @apply h-[15px]
+}
+.view-campaign-category{
+    @apply py-2 px-3 bg-subtle text-primary w-fit rounded-lg flex gap-1 items-center
+}
+.view-campaign-insights{
+    @apply flex flex-col gap-2 py-2
+}
+.view-campaign-insights-header{
+    @apply flex justify-between w-full items-center
+}
+.view-campaign-insights-title{
+    @apply text-lg font-semibold text-[#302E37]
+}
+.view-campaign-insights-days{
+    @apply text-[#8391A1] flex gap-1
+}
+.view-campaign-insights-body{
+    @apply w-full h-[7px] rounded-lg bg-subtle
+}
+.view-campaign-insights-percentage{
+    @apply h-full bg-primary w-[30%] rounded-lg
+}
+.view-campaign-insights-footer{
+    @apply flex justify-between
+}
+.view-full-details-btn{
+    @apply w-full py-3 border-t border-b px-3 
+}
+.view-full-details-btn p{
+    @apply uppercase tracking-wider font-semibold;
+}
+.view-campaign-action{
+    @apply py-6
+}
+.view-campaign-donate-btn{
+    @apply bg-primary py-3 rounded-lg text-white w-full
+}
