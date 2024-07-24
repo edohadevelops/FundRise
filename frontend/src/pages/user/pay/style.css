@@ -1,0 +1,21 @@
+.payment-page{
+    @apply flex flex-col gap-3
+}
+.pay-header{
+    @apply relative w-full flex items-center
+}
+.pay-header button{
+    @apply absolute top-0 left-0 p-3 bg-subtle rounded-lg
+}
+.pay-header p{
+    @apply text-center w-full py-3 font-semibold text-lg
+}
+.pay-campaign-summary{
+    @apply flex gap-4 items-center px-10
+}
+.pay-campaign-summary-img{
+    @apply w-[100px] h-[100px] rounded-[50%] 
+}
+.pay-campaign-summary-img img{
+    @apply w-full h-full rounded-[50%]
+}

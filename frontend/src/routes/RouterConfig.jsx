@@ -10,6 +10,7 @@ import {
   HistoryPage, 
   HomePage, 
   LoginPage, 
+  MakeDonationPage, 
   NotificationPage, 
   ProfilePage, 
   RegisterPage 
@@ -28,6 +29,7 @@ const RouterConfig = () => {
           <Route path={routes.HOME} element={<HomePage />} />
           <Route path={routes.CAMPAIGNS} element={<CampaignPage />} />
           <Route path={routes.POSTS} element={<CampaignPostPage />} />
+          <Route path={routes.PAY} element={<MakeDonationPage />} />
           <Route path={routes.DONATIONS} element={<DonationPage />} />
           <Route path={routes.NOTIFICATIONS} element={<NotificationPage />} />
           <Route path={routes.HISTORY} element={<HistoryPage />} />

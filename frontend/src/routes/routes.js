@@ -10,3 +10,4 @@ export const HISTORY = "/history";
 export const NOTIFICATIONS = "/notifications"
 export const PROFILE = "/profile"
 export const POSTS = "/campaigns/:campaign_id"
+export const PAY = "/donate/:campaign_id"
