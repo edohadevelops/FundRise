@@ -73,7 +73,7 @@
     @apply text-[#8391A1] flex gap-1
 }
 .post-insights-body{
-    @apply w-full h-[7px] rounded-lg bg-subtle
+    @apply w-full h-[7px] rounded-lg bg-gray-100
 }
 .post-insights-percentage{
     @apply h-full bg-primary w-[30%] rounded-lg

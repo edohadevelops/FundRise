@@ -1,5 +1,5 @@
 .payment-page{
-    @apply flex flex-col gap-3
+    @apply flex flex-col gap-3 items-center
 }
 .pay-header{
     @apply relative w-full flex items-center
@@ -11,11 +11,69 @@
     @apply text-center w-full py-3 font-semibold text-lg
 }
 .pay-campaign-summary{
-    @apply flex gap-4 items-center px-10
+    @apply flex gap-4 items-center w-full max-w-[550px]
 }
-.pay-campaign-summary-img{
-    @apply w-[100px] h-[100px] rounded-[50%] 
+.pay-campaign-user-img{
+    @apply w-[120px] h-[100px] rounded-[50%] border-4 border-gray-300
 }
-.pay-campaign-summary-img img{
+.pay-campaign-user-img img{
     @apply w-full h-full rounded-[50%]
 }
+.pay-campaign-summary-details{
+    @apply w-fit
+}
+.pay-campaign-help{
+    @apply text-sm
+}
+.pay-campaign-details{
+    @apply w-full max-w-[550px] flex flex-col gap-4
+}
+.pay-campaign-card{
+    @apply relative
+}
+.pay-campaign-details-img{
+    @apply w-full h-[350px] 
+}
+.pay-campaign-details-img img{
+    @apply w-full h-full
+}
+.pay-campaign-details-img-frame{
+    @apply bg-white w-full absolute top-0 left-0 h-[20px] rounded-b-lg border 
+}
+.pay-campaign-details-insights{
+    @apply w-fit absolute right-0 bottom-0 rounded-tl-3xl px-2 py-2 flex gap-2 bg-white text-sm
+}
+.pay-campaign-form{
+    @apply flex flex-col gap-2
+}
+.pay-campaign-form-input{
+    @apply flex flex-col gap-1
+}
+.pay-campaign-form-input label{
+    @apply font-semibold
+}
+/* .pay-campaign-form-input input{
+    @apply w-full bg-subtle border outline-none p-2
+} */
+.pay-campaign-form-input textarea{
+    @apply w-full bg-subtle border outline-none h-[150px] p-2;
+    size-adjust: none;
+}
+.pay-campaign-amount-input{
+    @apply relative flex items-center
+}
+.pay-campaign-amount-input img{
+    @apply absolute top-2 left-2
+}
+.pay-campaign-amount-input input{
+    @apply w-full bg-subtle border outline-none py-2 px-10
+}
+.pay-campaign-custom-input{
+    @apply flex gap-1 items-center
+}
+.pay-campaign-custom-input label{
+    @apply font-normal
+}
+/* .pay-campaign-custom-input input[]{
+    @apply h-full
+} */
