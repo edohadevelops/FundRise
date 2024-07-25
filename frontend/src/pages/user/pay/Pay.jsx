@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import User from '../../../assets/ProfilePicture.png'
 import ArrowBack from '../../../assets/BackIcon.svg';
 import Campaign from '../../../assets/CampaignImg.webp';
 import Naira from '../../../assets/currency.svg';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import { FormControlLabel } from '@mui/material';
+import { Form,Field } from 'react-final-form'
 
 import './style.css'
 
 
 
 const Pay = () => {
+
+  const handleFormSubmit = async(values) => {
+    console.log(values)
+  }
+
   return (
     <div className="payment-page">
       <div className="pay-header">
@@ -55,44 +62,123 @@ const Pay = () => {
             <p className="post-insights-pervent">20%</p>
           </div>
         </div>
-        <form className="pay-campaign-form">
-          <div className="pay-campaign-form-input">
-            <label htmlFor="">Enter Amount *</label>
-            <div className="pay-campaign-amount-input">
-              <img src={Naira} alt="" />
-              <input type="text" />
-            </div>
-          </div>
-          <div className="pay-campaign-form-input">
-            <label htmlFor="">Additional Comments</label>
-            <textarea name="" id=""></textarea>
-          </div>
-          <div className="pay-campaign-form-input">
-            <label htmlFor="">Donation Information</label>
-            <div className="pay-campaign-custom-input">
+        <Form 
+          onSubmit={handleFormSubmit}
+          // initialValues={{
+          //   donation_type: "One off"
+          // }}
+          render={({handleSubmit,form})=>(
+            <form className="pay-campaign-form" onSubmit={handleSubmit}>
+              <div className="pay-campaign-form-input">
+                <label htmlFor="">Enter Amount *</label>
+                <Field
+                  name="donation_amount"
+                  render={({input,meta})=>(
+                    <div className="pay-campaign-amount-input">
+                      <img src={Naira} alt="" />
+                      <input type="text" {...input} />
+                      {
+                        meta.error && meta.touched &&
+                        <span>{meta.error}</span>
+                      }
+                    </div>
+                  )}
+                />
+              </div>
+              <div className="pay-campaign-form-input">
+                <label htmlFor="">Additional Comments</label>
+                <Field
+                  name="donation_message"
+                  render={({input,meta})=>(
+                    <div className="pay-campaign-amount-input">
+                      <textarea name="" id="" {...input} /> 
+                      {
+                        meta.error && meta.touched &&
+                        <span>{meta.error}</span>
+                      }
+                    </div>
+                  )}
+                />
+                
+              </div>
+              <div className="pay-campaign-form-input">
+                <label htmlFor="">Donation Information</label>
+                <Field 
+                  name='donation_info'
+                  type='checkbox'
+                  render={({input,meta})=>(
+                    <div className="pay-campaign-custom-input px-4">
+                      <FormControlLabel 
+                        control={<input name="donation_info" {...input} />}
+                        label={"Keep me anonymous"}
+                        sx={{
+                          gap: "5px"
+                        }}
+                      />
+                      {
+                        meta.error && meta.touched &&
+                        <span>{meta.error}</span>
+                      }
+                    </div>
+                  )}
+                
+                />
+              </div>
+              <div className="pay-campaign-form-input">
+                <label htmlFor="">Donation type</label>
+                <Field 
+                  name='donation_type'
+                  type='radio'
+                  value={"One off"}
+                  render={({input,meta})=>(
+                    <div className="pay-campaign-custom-input px-4">
+                      <FormControlLabel 
+                        control={<input {...input} />}
+                        label={"One off"}
+                        sx={{
+                          gap: "5px"
+                        }}
+                      />
+                      {
+                        meta.error && meta.touched &&
+                        <span>{meta.error}</span>
+                      }
+                    </div>
+                  )}
+                
+                />
+                <Field 
+                  name='donation_type'
+                  type='radio'
+                  value={"Monthly recurring"}
+                  render={({input,meta})=>(
+                    <div className="pay-campaign-custom-input px-4">
+                      <FormControlLabel 
+                        control={<input {...input} />}
+                        label={"Monthly recurring"}
+                        sx={{
+                          gap: "5px"
+                        }}
+                      />
+                      {
+                        meta.error && meta.touched &&
+                        <span>{meta.error}</span>
+                      }
+                    </div>
+                  )}
+                
+                />
+              </div>
+              <div className="post-action">
+                <button className="post-donate-btn" type='submit'>
+                  Donate
+                </button>
+              </div>
               
-              <input type="checkbox" />
-              <label htmlFor="">Keep me anonymous</label>
-            </div>
-          </div>
-          <div className="pay-campaign-form-input">
-            <label htmlFor="">Donation type</label>
-            <div className="pay-campaign-custom-input">
-              <input type="radio" name="donation_type" checked />
-              <label htmlFor="">One off</label>
-            </div>
-            <div className="pay-campaign-custom-input">
-              <input type="radio" name="donation_type" />
-              <label htmlFor="">Monthly recurring</label>
-            </div>   
-          </div>
-          <div className="post-action">
-            <button className="post-donate-btn">
-              Donate
-            </button>
-          </div>
-          
-        </form>
+            </form>
+          )}
+        />
+        
         
       </div>
     </div>

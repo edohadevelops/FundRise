@@ -60,7 +60,10 @@
     size-adjust: none;
 }
 .pay-campaign-amount-input{
-    @apply relative flex items-center
+    @apply relative
+}
+.pay-campaign-amount-input span{
+    @apply text-red-500 text-sm
 }
 .pay-campaign-amount-input img{
     @apply absolute top-2 left-2
