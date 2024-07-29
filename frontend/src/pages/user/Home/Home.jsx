@@ -28,10 +28,12 @@ const Home = () => {
         .catch((error)=>{
           console.log(error)
         })
-      }
+    }
     useEffect(()=>{
         getCampaigns();
     },[])
+
+    const [selectedCampaign,setSelectedCampaign] = useState({});
     return (
         <>
             <div className="home">
@@ -95,7 +97,12 @@ const Home = () => {
                     <div className="trending-results">
                         {
                             allCampaigns?.map((item,index)=>(
-                                <Card details={item} index={index} />
+                                <Card 
+                                    details={item} 
+                                    index={index} 
+                                    setCampaign={setSelectedCampaign}
+                                    setModal={setPostOpen}
+                                />
                             ))
                         }
                     </div>
@@ -103,7 +110,11 @@ const Home = () => {
             </div>
             {
                 postOpen &&
-                <CampaignModal setModal={setPostOpen} />
+                <CampaignModal 
+                    setModal={setPostOpen} 
+                    campaign={selectedCampaign}
+
+                />
             }
         </>
     )
