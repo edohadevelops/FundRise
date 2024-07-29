@@ -71,11 +71,11 @@ const AppLayout = () => {
         </nav>
         <div className="main-content">
           <Outlet />
-          {/* <ScrollRestoration 
+          <ScrollRestoration 
             getKey={(location,matches)=>{
               return location.pathname
             }}
-          /> */}
+          />
         </div>
         <div className="suggestions">
           <div className="search-section">

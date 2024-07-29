@@ -19,6 +19,13 @@ Donation.init(
                 key: 'user_id'
             }
         },
+        campaign_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Campaign',
+                key: 'campaign_id'
+            }
+        },
         // owner_id: {
         //     type: DataTypes.INTEGER,
         //     references: {
@@ -26,11 +33,23 @@ Donation.init(
         //         key: 'user_id'
         //     }
         // },
-        message: DataTypes.STRING,
-        amount: {
+        donation_message: DataTypes.STRING,
+        donation_amount: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        donation_status: {
+            type: DataTypes.ENUM('pending','success','failed'),
+            defaultValue: "pending"   
+        },
+        donation_information: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        donation_type: {
+            type: DataTypes.ENUM("One off","Monthly recurring"),
+            allowNull: false
+        }
         
     },
     {

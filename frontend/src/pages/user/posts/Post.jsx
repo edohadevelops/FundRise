@@ -92,7 +92,7 @@ const Post = () => {
             </div>
           </div>
           <div className="post-action">
-            <Link to={`/donate/${1}`} className="post-donate-btn">
+            <Link to={`/donate/${campaign?.campaign_id}`} className="post-donate-btn">
               Donate
             </Link>
           </div>

@@ -10,11 +10,10 @@ import {
     createCampaignRoute,
     getAllCampaigns,
     getAllCategories,
-    getCampaignById
+    getCampaignById,
+    makeDonation
 } from './routes/index.js';
-// import uploadCampaign from './middlewares/campaign/upload.js';
 import errorHandler from './middlewares/error/error.js';
-// import { authUser } from './controllers/auth/auth.js';
 export const app = express();
 
 
@@ -42,7 +41,8 @@ app.use('/api/initialize',initialRoute);
 app.use('/api/campaign/create',createCampaignRoute);
 app.use('/api/campaign/getAll',getAllCampaigns);
 app.use('/api/categories/getAll',getAllCategories);
-app.use('/api/campaign/getById',getCampaignById)
+app.use('/api/campaign/getById',getCampaignById);
+app.use('/api/donate',makeDonation);
 
 
 

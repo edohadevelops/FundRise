@@ -5,6 +5,7 @@ import MoreIcon from '../../../assets/seeMoreIcon.svg';
 import VerifyIcon from '../../../assets/verification-tick.svg'
 import LocalPoliceOutlinedIcon from '@mui/icons-material/LocalPoliceOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import './style.css'
 import { Link } from 'react-router-dom';
 
@@ -98,8 +99,9 @@ const CampaignModal = ({
                     <p className="view-campaign-insights-pervent">{campaign?.progressPercent}%</p>
                   </div>
                 </div>
-                <Link to={`/campaigns/${campaign?.campaign_id}`} className='view-full-details-btn'>
+                <Link to={`/campaigns/${campaign?.campaign_id}`} className='view-campaign-full-details-btn'>
                   <p>View Full Details</p>
+                  <KeyboardArrowRightIcon />
                 </Link>
                 <div className=".view-campaign-action">
                   <Link to={`/donate/${campaign?.campaign_id}`} className="view-campaign-donate-btn">
