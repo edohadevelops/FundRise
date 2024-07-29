@@ -10,7 +10,7 @@ export default (req,res,next) => {
             },
             {
                 model: models.User,
-                attributes: ['username','user_id']
+                attributes: ['username','user_id','first_name','last_name']
             }
         ],
         order: [['createdAt','DESC']]

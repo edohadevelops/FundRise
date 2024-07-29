@@ -14,7 +14,7 @@
     @apply w-full h-full relative
 }
 .view-campaign-img{
-    @apply h-full w-full flex flex-col
+    @apply h-full w-full flex flex-col bg-subtle
 }
 .view-campaign-img img{
     @apply h-full w-full
@@ -97,8 +97,8 @@
     @apply uppercase tracking-wider font-semibold;
 }
 .view-campaign-action{
-    @apply py-6
+    @apply py-6 w-full
 }
 .view-campaign-donate-btn{
-    @apply bg-primary py-3 rounded-lg text-white w-full
+    @apply bg-primary py-3 rounded-lg text-white w-full flex items-center justify-center
 }

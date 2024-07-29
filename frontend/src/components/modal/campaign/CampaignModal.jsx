@@ -9,7 +9,8 @@ import './style.css'
 import { Link } from 'react-router-dom';
 
 const CampaignModal = ({
-  setModal
+  setModal,
+  campaign
 }) => {
 
   const onBackdropDisable = (e) => {
@@ -29,6 +30,8 @@ const CampaignModal = ({
     setTimeout(()=>{
       setOpenCurtain(true)
     },1500)
+
+    console.log("Selected campaign is: ", campaign)
   },[])
 
   return (
@@ -37,12 +40,12 @@ const CampaignModal = ({
         <div className={`view-campaign-left ${ showContent && "top-0" }`}>
           <div className="view-campaign-content">
             <div className="view-campaign-img">
-              <img src={Campaign} alt="" />
+              <img src={campaign?.campaign_img} alt="" />
               <div className="view-campaign-user-card">
                   <div className='view-campaign-user-details gap-3'>
                     <img src={User} alt="" />
                     <div className='view-campaign-flex-user-details'>
-                      <p className='view-campaign-username'>edohaTheDev</p>
+                      <p className='view-campaign-username'>{campaign?.User?.username}</p>
                       <p className='view-campaign-user-location'>Abuja, Nigeria</p>
                     </div>
                   </div>
@@ -61,24 +64,27 @@ const CampaignModal = ({
         <div className={`view-campaign-right ${ showContent && "top-0" }`}>
             <div className="view-campaign-content">
               <div className="view-campaign-details">          
-                <p className="view-campaign-title">Raise Funds for Farming</p>
+                <p className="view-campaign-title">{campaign.title}</p>
                 <div className="view-campaign-content-user">
                   <img src={VerifyIcon} alt="" />
-                  <p>Amen Edoha</p>
+                  <p>{campaign?.User?.first_name + " " + campaign?.User?.last_name}</p>
                 </div>
-                {/* <div className="view-campaign-category">
+                <div className="view-campaign-category">
                   <LocalPoliceOutlinedIcon sx={{fontSize: "20px"}} />
-                  <p>Farming</p>
-                </div> */}
+                  <p>{campaign?.Category?.category_name}</p>
+                </div>
                 <p className="view-campaign-description">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti commodi quia dolores illum debitis vero, impedit quas nulla qui necessitatibus quod eius praesentium accusantium quidem ducimus ut, voluptatum, soluta quis! Reiciendis quos non voluptates. Architecto fugit fuga perspiciatis dolor rem!
+                  {
+                    campaign?.description
+                  }
                 </p>
                 <div className="view-campaign-insights">
                   <div className="view-campaign-insights-header">
                     <p className="view-campaign-insights-title">Campaign Progress</p>
                     <p className="view-campaign-insights-days">
                       <HistoryOutlinedIcon />
-                      <span>2 days left</span>
+                      <span>{campaign?.daysLeft}</span>
                     </p>
                   </div>
                   <div className="view-campaign-insights-body">
@@ -86,19 +92,19 @@ const CampaignModal = ({
                   </div>
                   <div className="view-campaign-insights-footer">
                     <p className="view-campaign-insights-amount">
-                      <span>50,000</span> / 
-                      <span>1,000,000</span>
+                      <span>{campaign?.current_amount}</span> / 
+                      <span>{campaign?.target_amount}</span>
                     </p>
-                    <p className="view-campaign-insights-pervent">20%</p>
+                    <p className="view-campaign-insights-pervent">{campaign?.progressPercent}%</p>
                   </div>
                 </div>
-                <Link to={"/campaigns/34"} className='view-full-details-btn'>
+                <Link to={`/campaigns/${campaign?.campaign_id}`} className='view-full-details-btn'>
                   <p>View Full Details</p>
                 </Link>
-                <div className="post-action">
-                  <button className="post-donate-btn">
+                <div className=".view-campaign-action">
+                  <Link to={`/donate/${campaign?.campaign_id}`} className="view-campaign-donate-btn">
                     DONATE NOW
-                  </button>
+                  </Link>
                 </div>
               </div>
               <div className={`view-campaign-right-curtain ${openCurtain && "bottom-full"}`}>

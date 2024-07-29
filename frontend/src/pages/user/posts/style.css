@@ -82,8 +82,8 @@
     @apply flex justify-between
 }
 .post-action{
-    @apply py-6
+    @apply py-6 w-full
 }
 .post-donate-btn{
-    @apply bg-primary py-3 rounded-lg text-white w-full
+    @apply bg-primary py-3 rounded-lg text-white w-full flex items-center justify-center
 }

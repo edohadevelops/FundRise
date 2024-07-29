@@ -10,9 +10,20 @@ import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import LocalPoliceOutlinedIcon from '@mui/icons-material/LocalPoliceOutlined';
 import './style.css'
 
-const Card = ({details,index}) => {
+const Card = ({
+    details,
+    index,
+    setCampaign,
+    setModal
+}) => {
+
+    const handleCampaignClick = () => {
+        setCampaign(details)
+        setModal(true)
+    }
+    
   return (
-    <div className="campaign-card">
+    <div className="campaign-card" onClick={handleCampaignClick} >
       <div className="img">
         <img 
             src={

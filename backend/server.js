@@ -9,7 +9,8 @@ import {
     initialRoute,
     createCampaignRoute,
     getAllCampaigns,
-    getAllCategories
+    getAllCategories,
+    getCampaignById
 } from './routes/index.js';
 // import uploadCampaign from './middlewares/campaign/upload.js';
 import errorHandler from './middlewares/error/error.js';
@@ -40,7 +41,8 @@ app.use('/api/register',registerRoute);
 app.use('/api/initialize',initialRoute);
 app.use('/api/campaign/create',createCampaignRoute);
 app.use('/api/campaign/getAll',getAllCampaigns);
-app.use('/api/categories/getAll',getAllCategories)
+app.use('/api/categories/getAll',getAllCategories);
+app.use('/api/campaign/getById',getCampaignById)
 
 
 
