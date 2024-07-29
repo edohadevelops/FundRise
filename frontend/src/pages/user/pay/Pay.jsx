@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'
 import User from '../../../assets/ProfilePicture.png'
 import ArrowBack from '../../../assets/BackIcon.svg';
 import Campaign from '../../../assets/CampaignImg.webp';
@@ -8,14 +9,34 @@ import { FormControlLabel } from '@mui/material';
 import { Form,Field } from 'react-final-form'
 
 import './style.css'
+import { axiosQuery } from '../../../utils/api';
 
 
 
 const Pay = () => {
 
+  const {campaign_id} = useParams();
+
   const handleFormSubmit = async(values) => {
     console.log(values)
   }
+  const [campaign,setCampaign] = useState({});
+
+  useEffect(()=>{
+    const getCampaigns = () => {
+      axiosQuery.get(`/api/campaign/getById/${campaign_id}`)
+      .then(({data})=>{
+        console.log("Campaign for donation is: ",data.campaign);
+        setCampaign(data.campaign)
+      })
+      .catch((err)=>{
+        console.log("Error occured while getting campaign: ", err)
+      })
+    }
+
+    getCampaigns();
+  },[])
+
 
   return (
     <div className="payment-page">
@@ -30,14 +51,14 @@ const Pay = () => {
             <img src={User} alt="" />
         </div>
         <div className='pay-campaign-summary-details'>
-            <p className=''>You're about to support <span className='font-semibold'>Donate to support and evacuate 10 families in Gaza</span></p>
-            <p className='pay-campaign-help'>Your donation would help <span className="font-semibold">Amen Edoha</span></p>
+            <p className=''>You're about to support <span className='font-semibold'>{campaign?.title}</span></p>
+            <p className='pay-campaign-help'>Your donation would help <span className="font-semibold">{campaign?.User?.first_name + " " + campaign?.User?.last_name}</span></p>
         </div>
       </div>
       <div className="pay-campaign-details">
         <div className="pay-campaign-card">
           <div className="pay-campaign-details-img">
-            <img src={Campaign} alt="" />
+            <img src={campaign?.campaign_img} alt="" />
           </div>
           <div className="pay-campaign-details-img-frame">
 
@@ -56,10 +77,10 @@ const Pay = () => {
           </div>
           <div className="post-insights-footer">
             <p className="post-insights-amount">
-              <span>50,000</span> / 
-              <span>1,000,000</span>
+              <span>{ campaign?.current_amount }</span> / 
+              <span>{ campaign?.target_amount }</span>
             </p>
-            <p className="post-insights-pervent">20%</p>
+            <p className="post-insights-pervent">{campaign?.progressPercent}%</p>
           </div>
         </div>
         <Form 

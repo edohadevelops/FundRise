@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import './style.css';
 import Logo from '../../assets/Logo3.png'
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, ScrollRestoration } from 'react-router-dom';
 import * as routes from '../../routes/routes';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
@@ -71,6 +71,11 @@ const AppLayout = () => {
         </nav>
         <div className="main-content">
           <Outlet />
+          {/* <ScrollRestoration 
+            getKey={(location,matches)=>{
+              return location.pathname
+            }}
+          /> */}
         </div>
         <div className="suggestions">
           <div className="search-section">
