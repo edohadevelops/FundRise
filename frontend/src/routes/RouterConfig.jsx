@@ -18,7 +18,8 @@ import {
   MakeDonationPage, 
   NotificationPage, 
   ProfilePage, 
-  RegisterPage 
+  RegisterPage, 
+  VerifyDonationPage
 } from '../pages/index.js';
 
 const RouterConfig = createBrowserRouter(
@@ -39,6 +40,8 @@ const RouterConfig = createBrowserRouter(
         <Route path={routes.HISTORY} element={<HistoryPage />} />
         <Route path={routes.PROFILE} element={<ProfilePage />} />
       </Route>
+      {/* End of protected routes */}
+      <Route path={routes.VERIFYDONATION} element={<VerifyDonationPage />} />
       <Route path='*' element={<Navigate to={routes.LOGIN} />} />
     </React.Fragment>
   )

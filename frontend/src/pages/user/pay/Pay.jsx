@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom'
 import User from '../../../assets/ProfilePicture.png'
 import ArrowBack from '../../../assets/BackIcon.svg';
@@ -10,15 +10,58 @@ import { Form,Field } from 'react-final-form'
 
 import './style.css'
 import { axiosQuery } from '../../../utils/api';
+import { AppContext }  from '../../../store/AppContext'
+import axios from 'axios';
 
 
 
 const Pay = () => {
 
+  const { userDetails } = useContext(AppContext)
+
   const {campaign_id} = useParams();
 
   const handleFormSubmit = async(values) => {
-    console.log(values)
+    console.log("Values is: ",{
+      ...values,
+      backer_id: userDetails.user_id,
+      campaign_id: campaign.campaign_id
+    })
+    const payload = {
+      ...values,
+      backer_id: userDetails.user_id,
+      campaign_id: campaign.campaign_id
+    }
+    try{
+      const { data } = await axiosQuery.post(`${process.env.BASE_URL}/api/donate`,payload);
+      console.log(data);
+      window.location.href = data.auth_url
+    }catch(err){
+      console.log("Error occurred is: ",err)
+    }
+  };
+  const handleFormValidation = (values) => {
+
+    const {
+      donation_amount,
+      donation_message,
+      donation_type
+    } = values;
+
+    const errors = {}
+
+    if(!donation_amount){
+      errors.donation_amount = "Donation amount is required*"
+    }
+    if(!donation_message){
+      errors.donation_message = "Donation message is required"
+    }
+    if(!donation_type){
+      errors.donation_type = "Donation type needs to be selected*"
+    }
+
+    return errors
+    
   }
   const [campaign,setCampaign] = useState({});
 
@@ -35,7 +78,8 @@ const Pay = () => {
     }
 
     getCampaigns();
-  },[])
+  },[]);
+
 
 
   return (
@@ -85,10 +129,12 @@ const Pay = () => {
         </div>
         <Form 
           onSubmit={handleFormSubmit}
-          // initialValues={{
-          //   donation_type: "One off"
-          // }}
-          render={({handleSubmit,form})=>(
+          initialValues={{
+            donation_type: "One off",
+            donation_information: false
+          }}
+          validate={handleFormValidation}
+          render={({handleSubmit,form,hasValidationErrors,submitting})=>(
             <form className="pay-campaign-form" onSubmit={handleSubmit}>
               <div className="pay-campaign-form-input">
                 <label htmlFor="">Enter Amount *</label>
@@ -97,7 +143,7 @@ const Pay = () => {
                   render={({input,meta})=>(
                     <div className="pay-campaign-amount-input">
                       <img src={Naira} alt="" />
-                      <input type="text" {...input} />
+                      <input type="number" {...input} />
                       {
                         meta.error && meta.touched &&
                         <span>{meta.error}</span>
@@ -125,7 +171,7 @@ const Pay = () => {
               <div className="pay-campaign-form-input">
                 <label htmlFor="">Donation Information</label>
                 <Field 
-                  name='donation_info'
+                  name='donation_information'
                   type='checkbox'
                   render={({input,meta})=>(
                     <div className="pay-campaign-custom-input px-4">
@@ -191,7 +237,11 @@ const Pay = () => {
                 />
               </div>
               <div className="post-action">
-                <button className="post-donate-btn" type='submit'>
+                <button 
+                  className={`post-donate-btn ${(hasValidationErrors || submitting) && "donate-btn-disabled"}`} 
+                  type='submit' 
+                  disabled={hasValidationErrors || submitting}
+                >
                   Donate
                 </button>
               </div>

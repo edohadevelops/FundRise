@@ -11,7 +11,9 @@ import {
     getAllCampaigns,
     getAllCategories,
     getCampaignById,
-    makeDonation
+    makeDonation,
+    paystackHook,
+    verifyDonation
 } from './routes/index.js';
 import errorHandler from './middlewares/error/error.js';
 export const app = express();
@@ -33,7 +35,10 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/campaign',express.static('public/campaign/images'))
 
-app.get("/",getAllCampaigns);
+app.get("/",(req,res)=>{
+    res.send("Welcome to fundrise")
+    console.log("welcome")
+});
 
 app.use('/api/login',loginRoute);
 app.use('/api/register',registerRoute);
@@ -43,6 +48,9 @@ app.use('/api/campaign/getAll',getAllCampaigns);
 app.use('/api/categories/getAll',getAllCategories);
 app.use('/api/campaign/getById',getCampaignById);
 app.use('/api/donate',makeDonation);
+app.use('/api/donation/verify',verifyDonation)
+
+app.use('/paystack/webhook',paystackHook)
 
 
 

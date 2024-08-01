@@ -8,7 +8,8 @@ export const auth = async(req,res,next) => {
     jwt.verify(authToken,process.env.JWT_SECRET,(err,user)=>{
         if(err)
             return res.status(401).send({message: "Unauthorized access"})
-        req.user = user
+        req.user = user;
+        console.log(req.body)
         next()
     })
 
@@ -23,6 +24,7 @@ export const authUser = async (req,res,next) => {
         if(err || user.payload.role !== 'user' )
             return res.status(401).send({message: 'Unauthorized access'})
         req.user = user;
+        console.log("User is: ",req.user)
         next();
     })
 }

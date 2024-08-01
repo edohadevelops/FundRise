@@ -6,7 +6,7 @@ export const axiosQuery = axios.create({
     baseURL: `${process.env.BASE_URL}`,
     headers: {
         "Authorization": `Bearer ${token}`,
-        "Content-Type": "multipart/form-data"
+        
     }
 
 })
