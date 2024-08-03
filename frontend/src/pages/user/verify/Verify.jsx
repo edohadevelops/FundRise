@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom';
+import VerificationViews from './Views';
 
 const Verify = () => {
 
@@ -25,19 +26,15 @@ const Verify = () => {
         getDonationStatus()
      },[])
   return (
-    <div className='flex h-[100vh] w-full items-center justify-center'>
+    <>
       {
         donationStatus === "success" ?
-        <p className='text-[#187070] text-3xl font-bold italic text-center'>
-            Transfer was successful...
-        </p>:
+        <VerificationViews.Success /> :
         donationStatus === "fail" ?
-        <p className='text-red-400 text-3xl font-bold text-center'>
-            Transfer failed....
-        </p>:
-        "...Loading"
+        <VerificationViews.Fail /> :
+        <VerificationViews.Loading />
       }
-    </div>
+    </>
   )
 }
 
