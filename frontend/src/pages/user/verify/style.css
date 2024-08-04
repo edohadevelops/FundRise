@@ -1,45 +1,90 @@
-.success-page{
-    @apply flex items-center justify-center h-[100vh] w-full bg-[#187070]
+.reciept-page{
+    @apply flex lg:py-8 items-center justify-center min-h-[100vh] w-full bg-[#9de4e4]
 }
-.success-reciept{
-    @apply w-full h-full max-w-[550px] lg:max-h-[600px] flex flex-col items-center rounded-lg gap-3 bg-gray-200
+.reciept{
+    @apply w-full h-full max-w-[550px] lg:max-h-[650px] flex flex-col items-center rounded-lg bg-gray-200 shadow-xl
 }
-.success-reciept-header{
-    @apply bg-white flex flex-col items-center gap-4 w-full px-10 pt-6 pb-8 rounded-t-lg drop-shadow-sm
+.reciept-header{
+    @apply bg-white flex flex-col items-center gap-2 w-full px-10 pt-6 pb-4 rounded-lg drop-shadow-sm relative
 }
-.success-title {
+/* .reciept-back-btn{
+    @apply absolute top-4 left-3 flex gap-4 items-center 
+} */
+/* .reciept-back-btn img{
+    @apply h-[15px] w-[15px]
+}
+.reciept-back-btn p{
+    @apply text-lg font-semibold text-primary
+} */
+.reciept-title {
     @apply w-fit text-2xl font-bold text-primary
 }
-.success-reciept img {
-    @apply w-[60px] h-[60px]
+.reciept-icon {
+    @apply w-[50px] h-[50px]
 }
-.success-donation-details{
+.reciept-donation-details{
     @apply flex flex-col items-center w-full
 }
-.success-donation-title{
+.reciept-donation-title{
     @apply text-lg font-semibold text-slate-800
 }
-.success-donation-description{
+.reciept-donation-description{
     @apply font-semibold text-gray-600 max-w-[400px] text-center
 }
-.success-reciept-body{
-    @apply px-10 flex flex-col gap-2
+.reciept-body-footer{
+    @apply flex flex-col justify-between
 }
-.success-reciept-user{
+.reciept-body{
+    @apply px-10 flex flex-col gap-2 py-4
+}
+.reciept-user{
+    @apply flex flex-col items-center gap-1
+}
+.reciept-user-details{
     @apply flex flex-col items-center
 }
-.success-reciept-user img{
-    @apply w-[105px] h-[100px] rounded-[50%] border-green-700 border-2
+.reciept-user img{
+    @apply w-[90px] h-[90px] rounded-[50%]
 }
-.success-user-name{
+.reciept-user-name{
     @apply font-semibold text-gray-800 w-fit
 }
-.success-user-status{
+.reciept-user-status{
     @apply text-gray-600 text-sm w-fit
 }
-.success-reciept-comment{
-    @apply bg-white rounded-lg relative py-4 px-14 drop-shadow-md 
+.reciept-comment{
+    @apply bg-white rounded-lg relative py-4 px-14 drop-shadow-md
 }
-.success-reciept-comment{
-    @apply text-sm pt-6
+.reciept-comment{
+    @apply text-sm pt-6 text-[#4e4c4c]
+}
+.reciept-speaker-icon{
+    @apply absolute top-3 left-6 rotate-[20deg] text-[#6d6a6a]
+}
+.reciept-footer{
+    @apply bg-white w-full py-4 px-4 rounded-lg flex flex-col gap-2
+}
+.reciept-transaction-title{
+    @apply font-semibold text-slate-900
+}
+.reciept-transaction-details{
+    @apply flex flex-col md:flex-row justify-between flex-wrap px-2 gap-1
+}
+.reciept-transaction-group{
+    @apply flex lg:w-[48%] justify-between text-[15px] text-slate-800
+}
+.reciept-transaction-label{
+    @apply font-semibold
+}
+.reciept-transaction-value{
+    @apply text-gray-600
+}
+.reciept-transaction-actions{
+    @apply flex justify-end pt-3 gap-2
+}
+.reciept-btn-status{
+    @apply flex gap-4 items-center bg-primary py-2 px-4 text-white
+}
+.reciept-btn-back{
+    @apply flex gap-4 items-center py-2 px-4 text-slate-800 border-2
 }
