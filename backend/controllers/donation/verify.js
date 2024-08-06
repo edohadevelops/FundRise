@@ -1,6 +1,8 @@
 import https from 'https'
 
 export default (req,res,next) => {
+    if(!req.params.reference)
+        return res.status(404).send({message: "Reference not found"})
     const reference = req.params.reference;
 
     const options = {
@@ -22,7 +24,7 @@ export default (req,res,next) => {
     payRes.on('end', () => {
         const details = JSON.parse(data);
 
-        res.status(200).send({status: details.data.status, details})
+        res.status(200).send({status: details?.data?.status, details})
         
     })
     }).on('error', error => {
