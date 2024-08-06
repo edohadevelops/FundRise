@@ -1,8 +1,8 @@
 .reciept-page{
-    @apply flex lg:py-8 items-center justify-center min-h-[100vh] w-full bg-[#9de4e4]
+    @apply flex lg:py-8 items-center justify-center h-full w-full bg-[#c1e6e6]
 }
 .reciept{
-    @apply w-full h-full max-w-[550px] lg:max-h-[650px] flex flex-col items-center rounded-lg bg-gray-200 shadow-xl
+    @apply w-full h-full max-w-[550px] lg:max-h-[650px] flex flex-col items-center rounded-lg bg-gray-200 lg:shadow-xl border border-gray-300
 }
 .reciept-header{
     @apply bg-white flex flex-col items-center gap-2 w-full px-10 pt-6 pb-4 rounded-lg drop-shadow-sm relative
@@ -35,7 +35,7 @@
     @apply flex flex-col justify-between
 }
 .reciept-body{
-    @apply px-10 flex flex-col gap-2 py-4
+    @apply px-10 flex flex-col gap-4 py-4
 }
 .reciept-user{
     @apply flex flex-col items-center gap-1
@@ -44,7 +44,7 @@
     @apply flex flex-col items-center
 }
 .reciept-user img{
-    @apply w-[90px] h-[90px] rounded-[50%]
+    @apply w-[200px] h-[150px] 
 }
 .reciept-user-name{
     @apply font-semibold text-gray-800 w-fit

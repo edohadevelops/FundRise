@@ -1,8 +1,10 @@
 
 import './style.css'
 import SuccessIcon from '../../../assets/success-icon.png'
+import FailIcon from '../../../assets/fail-icon.png'
 import User from '../../../assets/ProfilePicture.png';
 import CampaignIcon from '@mui/icons-material/Campaign';
+import Campaign from '../../../assets/CampaignImg.webp'
 import ArrowBack from '../../../assets/BackIcon.svg'
 
 import { Link } from 'react-router-dom';
@@ -36,14 +38,10 @@ const Success = () => {
                 <div className="reciept-body-footer">
                     <div className="reciept-body">
                         <div className="reciept-user">
-                            <img src={User} alt="" />
-                            <div className="reciept-user-details">
-                                <p className="reciept-user-name">Amen Edoha</p>
-                                <p className="reciept-user-status">Owner</p>
-                            </div>
+                            <img src={Campaign} alt="" />
                         </div>
                         <div className="reciept-comment">
-                            <p>! really appreciate your donation of 150,000 and i want you to know that this would aid in helping us reach our goal much more faster. God bless you</p>
+                            <p>Your donation of N 150,000 was successful. This would aid in helping us reach our goal of building a new city much more faster.</p>
                             <CampaignIcon className='reciept-speaker-icon' sx={{color: "#6d6a6a"}} />
                         </div>
                     </div>
@@ -56,25 +54,25 @@ const Success = () => {
                                     <p className="reciept-transaction-value">12ref54</p>
                                 </div>
                                 <div className="reciept-transaction-group">
-                                    <p className="reciept-transaction-label">Donation Id: </p>
-                                    <p className="reciept-transaction-value">12</p>
-                                </div>
-                                <div className="reciept-transaction-group">
                                     <p className="reciept-transaction-label">Transaction Amount: </p>
                                     <p className="reciept-transaction-value">N 150,000.00</p>
                                 </div>
                                 <div className="reciept-transaction-group">
-                                    <p className="reciept-transaction-label">Transaction Status: </p>
-                                    <p className="reciept-transaction-value">Success</p>
+                                    <p className="reciept-transaction-label">Current Amount: </p>
+                                    <p className="reciept-transaction-value">N 170,000.00</p>
+                                </div>
+                                <div className="reciept-transaction-group">
+                                    <p className="reciept-transaction-label">Target Amount: </p>
+                                    <p className="reciept-transaction-value">N 350,000.00</p>
                                 </div>
                             </div>
                         </div>
                         <div className="reciept-transaction-actions">
-                            <Link className='reciept-btn-back'>
+                            <Link to={"/"} className='reciept-btn-back'>
                                 <p>Back to Home</p>
                             </Link>
-                            <Link className='reciept-btn-status'>
-                                <p>Save Payment</p>
+                            <Link to={"/donate/18"} className='reciept-btn-status'>
+                                <p>Donate again</p>
                             </Link>
                         </div>
                     </div>
@@ -87,11 +85,11 @@ const Success = () => {
 const Fail = () => {
 
     return (
-        <div className='reciept-page bg-red-200'>
+        <div className='reciept-page'>
             <div className="reciept">
                 {/* <p className="reciept-title">Payment Successful</p> */}
                 <div className="reciept-header">
-                    <img className='reciept-icon' src={SuccessIcon} alt="" />
+                    <img className='reciept-icon' src={FailIcon} alt="" />
                     <div className="reciept-donation-details">
                         <p className="reciept-donation-title">Donate to help millions</p>
                         <p className="reciept-donation-description">Your donation of 150,000 was unsuccessful</p>
@@ -104,11 +102,11 @@ const Fail = () => {
                 <div className="reciept-body-footer">
                     <div className="reciept-body">
                         <div className="reciept-user">
-                            <img src={User} alt="" />
-                            <div className="reciept-user-details">
+                            <img src={Campaign} alt="" />
+                            {/* <div className="reciept-user-details">
                                 <p className="reciept-user-name">Amen Edoha</p>
                                 <p className="reciept-user-status">Owner</p>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="reciept-comment">
                             <p>It's a shame your transaction could not be completed, Please try again as your donation would be very vital to us</p>
@@ -124,25 +122,25 @@ const Fail = () => {
                                     <p className="reciept-transaction-value">12ref54</p>
                                 </div>
                                 <div className="reciept-transaction-group">
-                                    <p className="reciept-transaction-label">Donation Id: </p>
-                                    <p className="reciept-transaction-value">12</p>
-                                </div>
-                                <div className="reciept-transaction-group">
-                                    <p className="reciept-transaction-label">Transaction Amount: </p>
-                                    <p className="reciept-transaction-value">N 150,000.00</p>
-                                </div>
-                                <div className="reciept-transaction-group">
                                     <p className="reciept-transaction-label">Transaction Status: </p>
                                     <p className="reciept-transaction-value">Failed</p>
+                                </div>
+                                <div className="reciept-transaction-group">
+                                    <p className="reciept-transaction-label">Current Amount: </p>
+                                    <p className="reciept-transaction-value">N 15,000.00</p>
+                                </div>
+                                <div className="reciept-transaction-group">
+                                    <p className="reciept-transaction-label">Target Amount: </p>
+                                    <p className="reciept-transaction-value">N 180,000.00</p>
                                 </div>
                             </div>
                         </div>
                         <div className="reciept-transaction-actions">
-                            <Link className='reciept-btn-back'>
+                            <Link to={"/"} className='reciept-btn-back'>
                                 <p>Back to Home</p>
                             </Link>
-                            <Link className='reciept-btn-status'>
-                                <p>Retry Payment</p>
+                            <Link to={"/donate/18"} className='reciept-btn-status'>
+                                <p>Donate again</p>
                             </Link>
                         </div>
                     </div>
