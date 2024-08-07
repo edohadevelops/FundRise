@@ -90,10 +90,10 @@
 .view-campaign-insights-footer{
     @apply flex justify-between
 }
-.view-full-details-btn{
-    @apply w-full py-3 border-t border-b px-3 
+.view-campaign-full-details-btn{
+    @apply w-full py-3 border-t border-b border-gray-400 px-3 flex justify-between items-center
 }
-.view-full-details-btn p{
+.view-campaign-full-details-btn p{
     @apply uppercase tracking-wider font-semibold;
 }
 .view-campaign-action{

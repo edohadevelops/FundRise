@@ -101,7 +101,15 @@ const Campaign = () => {
     }
     console.log("Payload is: ",payload)
 
-    axiosQuery.post(`${process.env.BASE_URL}/api/campaign/create`,payload)
+    axiosQuery.post(
+      `${process.env.BASE_URL}/api/campaign/create`,
+      payload,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }
+    )
     .then(({data})=>{
       console.log("Data is",data);
       form.reset();

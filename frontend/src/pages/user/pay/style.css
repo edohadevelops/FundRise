@@ -14,7 +14,7 @@
     @apply flex gap-4 items-center w-full max-w-[550px]
 }
 .pay-campaign-user-img{
-    @apply w-[120px] h-[100px] rounded-[50%] border-4 border-gray-300
+    @apply w-[100px] h-[100px] rounded-[50%] border-4 border-gray-300
 }
 .pay-campaign-user-img img{
     @apply w-full h-full rounded-[50%]
@@ -76,6 +76,9 @@
 }
 .pay-campaign-custom-input label{
     @apply font-normal
+}
+.donate-btn-disabled{
+    @apply bg-[#a6caca] cursor-not-allowed
 }
 /* .pay-campaign-custom-input input[]{
     @apply h-full
