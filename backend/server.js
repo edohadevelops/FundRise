@@ -16,6 +16,7 @@ import {
     verifyDonation
 } from './routes/index.js';
 import errorHandler from './middlewares/error/error.js';
+import SendSuccessMail from './services/nodemail/donation/success.js';
 export const app = express();
 
 
@@ -34,11 +35,14 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use('/campaign',express.static('public/campaign/images'))
+app.use("/assets/donation",express.static('public/templates/donation'))
 
-app.get("/",(req,res)=>{
-    res.send("Welcome to fundrise")
-    console.log("welcome")
-});
+// app.get("/",(req,res)=>{
+//     res.send("Welcome to fundrise")
+//     console.log("welcome")
+// });
+app.get("/",SendSuccessMail);
+// 
 
 app.use('/api/login',loginRoute);
 app.use('/api/register',registerRoute);
