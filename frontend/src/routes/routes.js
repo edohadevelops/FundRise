@@ -12,3 +12,5 @@ export const PROFILE = "/profile"
 export const POSTS = "/campaigns/:campaign_id"
 export const PAY = "/donate/:campaign_id"
 export const VERIFYDONATION = "/verify-donation"
+
+export const ONBOARDING ="/onboarding"

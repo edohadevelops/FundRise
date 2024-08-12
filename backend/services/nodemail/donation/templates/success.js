@@ -91,8 +91,8 @@ const createEmailTemplate  = ({amount,reference,campaign_name,campaign_img,date,
                             <td style="background-color: #fafafa; padding: 0 0 30px;">
                                 <img 
                                     src="${
-                                        campaign_img ? 
-                                        campaign_img :
+                                        // campaign_img ? 
+                                        // campaign_img :
                                         "https://res.cloudinary.com/dvpwdppy2/image/upload/v1723449323/Fundrise/CampaignImg_b5iho6.webp"
                                     }" 
                                     alt="" 

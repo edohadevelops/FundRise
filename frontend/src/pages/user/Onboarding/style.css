@@ -1,0 +1,45 @@
+.onboarding-page{
+    @apply flex flex-col gap-6
+}
+.onboarding-navbar{
+    @apply w-full h-[70px] px-14 flex items-center border-b
+}
+.onboarding-navbar img{
+    @apply w-[200px]
+}
+.onboarding-progress{
+    @apply w-full flex px-14 gap-4
+}
+.onboarding-progress-step{
+    @apply flex-1 relative py-4 text-sm
+}
+.onboarding-progress-bar{
+    @apply h-[5px] w-full bg-[#EAECF0] rounded-lg absolute top-0 left-0
+}
+.onboarding-progress-inner-bar{
+    @apply w-full h-full rounded-lg
+}
+.onboarding-step-title{
+    @apply font-semibold text-[#545454]
+}
+.onboarding-step-description{
+    @apply text-[#7C7B7B]
+}
+.onboarding-active-step .onboarding-progress-inner-bar{
+    @apply bg-primary
+}
+.onboarding-active-step .onboarding-step-title{
+    @apply text-primary
+}
+.onboarding-active-step .onboarding-step-description{
+    @apply text-primary
+}
+.onboarding-content{
+    @apply w-full flex flex-col items-center p-4
+}
+.onboarding-card{
+    @apply min-h-[400px] w-full max-w-[500px] border;
+}
+.onboarding-card-title{
+    @apply text-center font-semibold text-[22px]
+}

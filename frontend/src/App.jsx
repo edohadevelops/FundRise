@@ -12,7 +12,8 @@ function App() {
       {/* <Router>
         <RouterConfig />
       </Router> */}
-      <RouterProvider router={RouterConfig} />
+      {/* <RouterProvider router={RouterConfig} /> */}
+      <RouterConfig />
     </AppStore>
   )
 }
