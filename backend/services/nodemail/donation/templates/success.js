@@ -1,4 +1,4 @@
-const createEmailTemplate  = (name) => {
+const createEmailTemplate  = ({amount,reference,campaign_name,campaign_img,date,}) => {
     return (
         `
             <!DOCTYPE html>
@@ -81,7 +81,7 @@ const createEmailTemplate  = (name) => {
                                     </tr>
                                     <tr>
                                         <td style="padding: 15px; text-align: center;">
-                                            <p style="margin: 0;font-size: 25px; font-weight: 800;">N 150,000.00</p>
+                                            <p style="margin: 0;font-size: 25px; font-weight: 800;">N ${amount}</p>
                                         </td>
                                     </tr>
                                 </table>
@@ -89,7 +89,16 @@ const createEmailTemplate  = (name) => {
                         </tr>
                         <tr>
                             <td style="background-color: #fafafa; padding: 0 0 30px;">
-                                <img src="https://res.cloudinary.com/dvpwdppy2/image/upload/v1723449323/Fundrise/CampaignImg_b5iho6.webp" alt="" width="200" style="max-width: 100%;">
+                                <img 
+                                    src="${
+                                        campaign_img ? 
+                                        campaign_img :
+                                        "https://res.cloudinary.com/dvpwdppy2/image/upload/v1723449323/Fundrise/CampaignImg_b5iho6.webp"
+                                    }" 
+                                    alt="" 
+                                    width="200" 
+                                    style="max-width: 100%;"
+                                >
                             </td>
                         </tr>
                         <tr>
@@ -107,7 +116,7 @@ const createEmailTemplate  = (name) => {
                                                     <p>Campaign Name</p>
                                                 </td>
                                                 <td style="text-align:end;padding: 10px 0; border-bottom: 1px solid #e2e2e2;">
-                                                    <p ">Donate to help charity</p>
+                                                    <p ">${campaign_name}</p>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -115,7 +124,7 @@ const createEmailTemplate  = (name) => {
                                                     <p>Donation Amount</p>
                                                 </td>
                                                 <td style="text-align:end;padding: 10px 0; border-bottom: 1px solid #e2e2e2;">
-                                                    <p>N 150,000.00</p>
+                                                    <p>N ${amount}</p>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -123,7 +132,7 @@ const createEmailTemplate  = (name) => {
                                                     <p>Transaction Reference</p>
                                                 </td>
                                                 <td style="text-align:end;padding: 10px 0; border-bottom: 1px solid #e2e2e2;">
-                                                    <p>94gdh53</p>
+                                                    <p>${reference}</p>
                                                 </td>
                                             </tr>
                                             <tr>

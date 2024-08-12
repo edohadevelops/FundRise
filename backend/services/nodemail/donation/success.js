@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import createEmailTemplate from './templates/success.js';
 
-const SendSuccessMail = (req,res) => {
+const SendSuccessMail = (details) => {
 
     console.log("User is: ", process.env.GMAIL_USER, "Pass is: ",process.env.GMAIL_PASS)
     const transporter = nodemailer.createTransport({
@@ -13,9 +13,9 @@ const SendSuccessMail = (req,res) => {
             pass: process.env.GMAIL_PASS
         }
     })
-    const html = createEmailTemplate("edoha")
+    const html = createEmailTemplate(details)
 
-    res.status(200).send(html)
+    // res.status(200).send(html)
 
     transporter.sendMail({
         from: `FundRise Reciepts <edohadevelops@gmail.com>`,
@@ -26,11 +26,11 @@ const SendSuccessMail = (req,res) => {
     })
     .then((data)=>{
         console.log("Message sent",data)
-        res.send("Message sent")
+        // res.send("Message sent")
     })
     .catch((err)=>{
         console.log("Error occurred while sending the mail",err)
-        res.send("Error occured: ",err)
+        // res.send("Error occured: ",err)
     })
 }
 

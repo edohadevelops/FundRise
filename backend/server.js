@@ -37,11 +37,10 @@ app.use(express.urlencoded({extended: true}));
 app.use('/campaign',express.static('public/campaign/images'))
 app.use("/assets/donation",express.static('public/templates/donation'))
 
-// app.get("/",(req,res)=>{
-//     res.send("Welcome to fundrise")
-//     console.log("welcome")
-// });
-app.get("/",SendSuccessMail);
+app.get("/",(req,res)=>{
+    res.send("Welcome to fundrise")
+    console.log("welcome")
+});
 // 
 
 app.use('/api/login',loginRoute);
