@@ -33,7 +33,7 @@ const AppLayout = () => {
   return (
     <>
       {
-        !userDetails.first_name ?
+        userDetails.onboarded ?
         <div className='page'>
           <nav className='page-sidebar'>
             <img className='sidebar-logo' src={Logo} alt='logo' />

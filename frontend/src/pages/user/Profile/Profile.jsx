@@ -15,7 +15,7 @@ const Profile = () => {
     <div className='profile-page'>
       <div className="profile-details">
         <div className="profile-picture">
-          <img src={ProfilePicture} alt="profile picture"/>
+          <img src={userDetails.profile_picture} alt="profile picture"/>
         </div>
         <div className="profile-insights">
           <div className="profile-actions-container">

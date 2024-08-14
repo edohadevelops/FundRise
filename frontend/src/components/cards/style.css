@@ -19,6 +19,18 @@
 .like-comment-share{
     @apply flex gap-3 font-extrabold
 }
+.like-icon{
+    @apply transform transition-transform duration-1000 ease-out
+}
+.show-like-icon{
+    @apply transform transition-transform duration-1000 ease-out
+}
+
+/* .like-icon-gradient {
+    @apply transition-all duration-[10s] ease-in-out;
+    color: #F15A59;
+    transform: scale(0.5);
+} */
 .likes-count{
     @apply text-sm
 }

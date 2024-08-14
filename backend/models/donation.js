@@ -12,20 +12,20 @@ Donation.init(
             primaryKey: true,
             autoIncrement: true
         },
-        backer_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Users',
-                key: 'user_id'
-            }
-        },
-        campaign_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Campaign',
-                key: 'campaign_id'
-            }
-        },
+        // backer_id: {
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: 'Users',
+        //         key: 'user_id'
+        //     }
+        // },
+        // campaign_id: {
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: 'Campaign',
+        //         key: 'campaign_id'
+        //     }
+        // },
         // owner_id: {
         //     type: DataTypes.INTEGER,
         //     references: {

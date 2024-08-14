@@ -10,3 +10,16 @@ export const axiosQuery = axios.create({
     }
 
 })
+
+export const axiosInstance = () => {
+
+    const token = localStorage.getItem("token");
+
+    const instance = axios.create({
+        baseURL: `${process.env.BASE_URL}`,
+        headers: {
+            "Authorization": `Bearer ${token}`,
+        }
+    })
+    return instance;    
+}

@@ -3,8 +3,10 @@ import Logo from '../../../assets/fundriseLogo.png';
 import NoProfile from '../../../assets/no-profile-icon.png';
 import EditIcon from '../../../assets/edit-icon.png';
 import PreviewIcon from '../../../assets/preview-icon.svg';
-import { Form,Field } from 'react-final-form'
+import { Form,Field } from 'react-final-form';
+import { axiosInstance, axiosQuery } from '../../../utils/api';
 import './style.css'
+import { useNavigate } from 'react-router-dom';
 
 const Onboarding = () => {
     const [stage,setStage] = useState(1);
@@ -13,6 +15,9 @@ const Onboarding = () => {
 
     const [preview,setPreview] = useState({});
     const formButton = useRef();
+    const navigate = useNavigate();
+
+    const axios = axiosInstance();
 
     const handleDataSubmit = async(values) => {
         console.log("Values is: ",values);
@@ -22,12 +27,35 @@ const Onboarding = () => {
     const filePicker = useRef();
 
     const handleNextStage = () => {
-        formButton.current.click()
-        setStage((prev)=>{
-            if(prev < 3)
-                return prev + 1;
-            return prev
-        })
+        if(stage < 3){
+            formButton.current.click()
+            setStage((prev)=>{
+                if(prev < 3)
+                    return prev + 1;
+                return prev
+            })
+        }else{
+            axios.post("/api/onboarding",
+                {
+                    ...preview,
+                    profile_picture: imgFile
+                },
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                }
+            )
+            .then((data)=>{
+                console.log("Successful: ",data);
+                window.location.href = "http://localhost:7000/profile"
+                // navigate("/profile")
+            })
+            .catch((err)=>{
+                console.log("Error occurred: ",err)
+            })
+        }
+        
     }
     const handlePreviousStage = () => {
         setStage((prev)=>{

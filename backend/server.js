@@ -35,8 +35,8 @@ app.options("*",cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/campaign',express.static('public/campaign/images'))
-app.use("/assets/donation",express.static('public/templates/donation'))
+app.use('/assets',express.static('public'))
+// app.use("/assets/donation",express.static('public/templates/donation'))
 
 app.get("/",(req,res)=>{
     res.send("Welcome to fundrise")

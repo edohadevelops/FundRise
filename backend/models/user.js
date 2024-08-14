@@ -26,7 +26,17 @@ User.init(
         first_name: DataTypes.STRING,
         last_name: DataTypes.STRING,
         bio: DataTypes.STRING,
-        profile_picture: DataTypes.STRING,
+        profile_picture: {
+            type: DataTypes.STRING,
+            defaultValue: "no-profile-icon.png",
+            get(){
+                const filename = this.getDataValue('profile_picture');
+
+                const url = `${process.env.USER_PROFILE_PIC_PATH}/${filename}`;
+
+                return url;
+            }
+        },
         phone_number: DataTypes.STRING,
         onboarded: {
             type: DataTypes.BOOLEAN,

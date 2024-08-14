@@ -6,7 +6,8 @@ const validate = (data) => {
         first_name: Joi.string().required(),
         last_name: Joi.string().required(),
         phone_number: Joi.string().required(),
-        profile_picture: Joi.string().required()
+        profile_picture: Joi.string().required(),
+        bio: Joi.string().required()
     })
 
     return schema.validate(data)
@@ -21,8 +22,11 @@ export default (req,res,next) => {
         ...req.body,
         profile_picture: filename,
     };
-    
-    const user = req.user
+    console.log("File exists? :",req.file);
+    console.log("Data from frontend to update is: ",req.body)
+    const user = req.user;
+
+    console.log("User is: ",user)
 
     const {error} = validate(payload);
 
@@ -30,10 +34,13 @@ export default (req,res,next) => {
         return res.status(400).send({message: "Bad user input",error: error.details[0].message})
 
     models.User.update(
-        payload,
+        {
+            ...payload,
+            onboarded: true
+        },
         {
             where: {
-                user_id: user.user_id
+                user_id: user.payload.user_id
             }
         }
     )
@@ -43,6 +50,7 @@ export default (req,res,next) => {
     })
     .catch((error)=>{
         req.error = error;
+        console.log("Error occured: ",error)
         next();
     })
 

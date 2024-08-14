@@ -17,9 +17,9 @@ const ProtectedRoute = ({Component}) => {
       axiosQuery.get('/api/initialize')
       .then((response)=>{
         const { initialData } = response.data
-        // console.log("Initial data is: ",initialData);
-        setUserDetails(initialData.payload)
-        if(initialData.payload.role === "user"){
+        console.log("Initial data is: ",initialData);
+        setUserDetails(initialData)
+        if(initialData.role === "user"){
           setIsAuthenticated(true)
         }
       })

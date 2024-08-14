@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Donation1 from '../../assets/donation1.png';
 import Donation2 from '../../assets/donation2.png';
 import Donation3 from '../../assets/donation3.png';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
@@ -16,6 +17,22 @@ const Card = ({
     setCampaign,
     setModal
 }) => {
+
+    const [likeStatus,setLikeStatus] = useState(false);
+
+    const likeRef = useRef();
+    const unLikeRef = useRef()
+
+    const onLikeClick = (event) => {
+        event.stopPropagation()
+
+        // if(!type){
+        //     unLikeRef.current.classList.add("scale-50")
+        //     likeRef.current.classList.add("scale-100")
+        // }
+        // else{}
+        setLikeStatus((prev)=>!prev)
+    }
 
     const handleCampaignClick = () => {
         setCampaign(details)
@@ -48,11 +65,50 @@ const Card = ({
         <div className="card-interactions">
             <div className="flex justify-between">
                 <div className='like-comment-share'>
-                    <FavoriteBorderOutlinedIcon sx={{fontSize: "28px"}} />
-                    <MapsUgcOutlinedIcon sx={{fontSize: "28px"}} />
-                    <SendOutlinedIcon sx={{fontSize: "28px"}} />
+                    {
+                        // !likeStatus ?
+                        <button 
+                          className={`
+                            like-button 
+                            ${!likeStatus && "show-like-button"}
+                          `}
+                         onClick={onLikeClick}
+                         ref={unLikeRef}
+                        >
+
+                            {
+                                !likeStatus ?
+                                <FavoriteBorderOutlinedIcon className={""
+                                    // "like-icon" + likeStatus && "scale-50" 
+                                } sx={{fontSize: "28px"}} /> :
+                                <FavoriteIcon className={""
+                                    // "like-icon" + likeStatus && "scale-100" ""
+                                } sx={{fontSize: "28px",color: "#F15A59"}} />
+                            }
+                        </button> 
+                        // <button 
+                        //   className={`
+                        //     like-button 
+                        //     ${likeStatus && "show-like-button"}
+                        //   `}
+                        //  onClick={(e)=>onLikeClick(e,false)}
+                        //  ref={likeRef}
+                        // >
+                        //     <FavoriteIcon 
+                        //       className={`
+                        //         like-icon 
+                        //         ${likeStatus && "show-like-icon"}
+                        //       `} 
+                        //       sx={{fontSize: "28px",color: "#F15A59"}}
+                        //     />
+                        // </button>
+                        
+                    }
+                    {/* <BookmarkBorderOutlinedIcon sx={{fontSize: "28px"}} /> */}
                 </div>
-                <BookmarkBorderOutlinedIcon sx={{fontSize: "28px"}} />
+                <button className="bg-primary text-white p-2 rounded-lg">
+                    Donate
+                </button>
             </div>
             <p className="likes-count">{details.likes ? details.likes : "100" } likes</p>
         </div>
