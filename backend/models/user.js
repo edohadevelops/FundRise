@@ -27,6 +27,11 @@ User.init(
         last_name: DataTypes.STRING,
         bio: DataTypes.STRING,
         profile_picture: DataTypes.STRING,
+        phone_number: DataTypes.STRING,
+        onboarded: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
         role: {
             type: DataTypes.ENUM('super-admin','admin','user'),
             defaultValue: 'user'

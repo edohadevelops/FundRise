@@ -13,7 +13,8 @@ import {
     getCampaignById,
     makeDonation,
     paystackHook,
-    verifyDonation
+    verifyDonation,
+    onBoardingRoute
 } from './routes/index.js';
 import errorHandler from './middlewares/error/error.js';
 import SendSuccessMail from './services/nodemail/donation/success.js';
@@ -45,6 +46,7 @@ app.get("/",(req,res)=>{
 
 app.use('/api/login',loginRoute);
 app.use('/api/register',registerRoute);
+app.use('/api/onboarding',onBoardingRoute);
 app.use('/api/initialize',initialRoute);
 app.use('/api/campaign/create',createCampaignRoute);
 app.use('/api/campaign/getAll',getAllCampaigns);

@@ -17,7 +17,9 @@
     @apply h-[5px] w-full bg-[#EAECF0] rounded-lg absolute top-0 left-0
 }
 .onboarding-progress-inner-bar{
-    @apply w-full h-full rounded-lg
+    @apply w-0 h-full rounded-lg transition-all duration-[1s] ease-out bg-primary;
+    /* transition: all 2s ease-in; */
+    
 }
 .onboarding-step-title{
     @apply font-semibold text-[#545454]
@@ -26,7 +28,7 @@
     @apply text-[#7C7B7B]
 }
 .onboarding-active-step .onboarding-progress-inner-bar{
-    @apply bg-primary
+    @apply w-full
 }
 .onboarding-active-step .onboarding-step-title{
     @apply text-primary
@@ -35,11 +37,89 @@
     @apply text-primary
 }
 .onboarding-content{
-    @apply w-full flex flex-col items-center p-4
+    @apply w-full flex flex-col items-center px-4
 }
 .onboarding-card{
-    @apply min-h-[400px] w-full max-w-[500px] border;
+    @apply w-full max-w-[450px] py-4 px-6 flex flex-col gap-8;
 }
 .onboarding-card-title{
-    @apply text-center font-semibold text-[22px]
+    @apply text-center font-semibold text-xl text-[]
+}
+.onboarding-input-form{
+    @apply flex flex-col gap-4
+}
+.onboarding-input-group{
+    @apply flex flex-col gap-2
+}
+.onboarding-input-group label{
+    @apply text-sm font-semibold
+}
+.onboarding-input-group input{
+    @apply w-full h-[40px] outline-none border px-2 rounded-[4px] border-[#E2E8F0]
+}
+.onboarding-input-group textarea{
+    @apply w-full h-[100px] outline-none border px-2 py-2 rounded-[4px] border-[#E2E8F0]
+}
+.onboarding-profile-picture{
+    @apply w-full flex items-center justify-center
+}
+.onboarding-profile-img{
+    @apply w-[125px] h-[125px] rounded-[50%] border-4 relative
+}
+.onboarding-profile-img > img{
+    @apply w-full h-full rounded-[50%];
+}
+.onboarding-preview-card{
+    @apply flex flex-col gap-4
+}
+.onboarding-preview-personal,.onboarding-preview-profile{
+    @apply flex flex-col gap-3
+}
+.onboarding-preview-title{
+    @apply w-full flex gap-2 items-center border-b py-2
+}
+.onboarding-preview-title p{
+    @apply font-semibold
+}
+.onboarding-preview-personal-data{
+    @apply w-full lg:max-w-[45%] gap-4 text-sm
+}
+.onboarding-preview-data{
+    @apply w-full gap-4 text-sm
+}
+.onboarding-preview-label{
+    @apply text-[#7C7B7B]
+}
+.onboarding-preview-value{
+    @apply font-semibold
+}
+/* .onboarding-preview-img{
+    @apply w-[50px] h-[50px] rounded-[50%] border-4 relative
+}
+.onboarding-preview-img > img{
+    @apply w-full h-full rounded-[50%]
+} */
+.onboarding-profile-img button{
+    @apply absolute bottom-0 right-0 bg-primary p-2 rounded-full
+}
+.onboarding-footer{
+    @apply bg-subtle w-full flex justify-between items-center py-4 px-10
+}
+.onboarding-controls{
+    @apply flex gap-3
+}
+.onboarding-controls button{
+    @apply py-2 px-4 border rounded-[4px]
+}
+.onboarding-previous{
+    @apply bg-white
+}
+.onboarding-next{
+    @apply bg-primary text-white
+}
+.onboarding-steps{
+    @apply text-sm
+}
+.onboarding-steps span{
+    @apply font-semibold
 }
