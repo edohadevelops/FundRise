@@ -7,7 +7,7 @@ const Following = ({campaigns}) => {
         Following
       {
         campaigns?.map((campaign,index)=>(
-            <Card details={campaign} index={index}/>
+            <Card details={campaign} index={index} isliked={campaign.Likes.length > 0} initialCount={campaign.totalLikes}/>
         ))
       }
     </>

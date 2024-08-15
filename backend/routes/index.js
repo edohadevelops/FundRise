@@ -9,3 +9,4 @@ export { default as getCampaignById } from './campaign/getById.js';
 export { default as makeDonation } from './donation/donate.js';
 export { default as paystackHook } from './donation/webhook.js';
 export { default as verifyDonation } from './donation/verify.js';
+export { default as likeRouter } from './like/like.js'

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Donation1 from '../../assets/donation1.png';
 import Donation2 from '../../assets/donation2.png';
 import Donation3 from '../../assets/donation3.png';
@@ -9,28 +9,41 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import LocalPoliceOutlinedIcon from '@mui/icons-material/LocalPoliceOutlined';
+import {axiosInstance} from '../../utils/api.js'
 import './style.css'
 
 const Card = ({
     details,
     index,
     setCampaign,
-    setModal
+    setModal,
+    isliked,
+    initialCount
 }) => {
 
-    const [likeStatus,setLikeStatus] = useState(false);
+    // const alreadyLiked = details.Likes.length > 0
+    const [likeStatus,setLikeStatus] = useState(isliked);
+
+    const [likeCount,setLikeCount] = useState(initialCount)
 
     const likeRef = useRef();
-    const unLikeRef = useRef()
+    const unLikeRef = useRef();
+
+    // useEffect(()=>{
+    //     if(details?.Likes?.length > 0){
+    //         setLikeStatus(true)
+    //     }
+    // },[]);
+
+    const axios = axiosInstance()
 
     const onLikeClick = (event) => {
-        event.stopPropagation()
+        event.stopPropagation();
 
-        // if(!type){
-        //     unLikeRef.current.classList.add("scale-50")
-        //     likeRef.current.classList.add("scale-100")
-        // }
-        // else{}
+        axios.put(`/api/like/${details.campaign_id}`)
+        .then((data)=>{console.log("Successful: ",data)})
+        .catch((err)=> {console.log("Errror occured: ",err)})
+
         setLikeStatus((prev)=>!prev)
     }
 
@@ -110,7 +123,10 @@ const Card = ({
                     Donate
                 </button>
             </div>
-            <p className="likes-count">{details.likes ? details.likes : "100" } likes</p>
+            {
+                // likeCount > 0 &&
+                <p className="likes-count">{likeCount} likes</p>
+            }
         </div>
         <p className="card-title">
             <span className='card-username'>{details.User?.username }: </span> 

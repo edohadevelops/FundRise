@@ -102,6 +102,8 @@ const Home = () => {
                                     index={index} 
                                     setCampaign={setSelectedCampaign}
                                     setModal={setPostOpen}
+                                    isliked={item.Likes.length > 0}
+                                    initialCount={item.totalLikes}
                                 />
                             ))
                         }

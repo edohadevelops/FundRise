@@ -14,7 +14,8 @@ import {
     makeDonation,
     paystackHook,
     verifyDonation,
-    onBoardingRoute
+    onBoardingRoute,
+    likeRouter
 } from './routes/index.js';
 import errorHandler from './middlewares/error/error.js';
 import SendSuccessMail from './services/nodemail/donation/success.js';
@@ -53,7 +54,8 @@ app.use('/api/campaign/getAll',getAllCampaigns);
 app.use('/api/categories/getAll',getAllCategories);
 app.use('/api/campaign/getById',getCampaignById);
 app.use('/api/donate',makeDonation);
-app.use('/api/donation/verify',verifyDonation)
+app.use('/api/donation/verify',verifyDonation);
+app.use('/api/like',likeRouter)
 
 app.use('/paystack/webhook',paystackHook)
 

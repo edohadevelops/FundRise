@@ -26,7 +26,7 @@ export default (req,res,next) => {
     const payload = {
         ...req.body,
         campaign_img: req.file.filename,
-        owner_id: req.user.payload.user_id
+        owner_id: req.user.user_id
     };
     console.log(payload)
 
