@@ -15,11 +15,13 @@ import {
     paystackHook,
     verifyDonation,
     onBoardingRoute,
-    likeRouter
+    likeRouter,
+    getUserByUsernameRouter
 } from './routes/index.js';
 import errorHandler from './middlewares/error/error.js';
 import SendSuccessMail from './services/nodemail/donation/success.js';
-export const app = express();
+
+const app = express();
 
 
 
@@ -55,7 +57,8 @@ app.use('/api/categories/getAll',getAllCategories);
 app.use('/api/campaign/getById',getCampaignById);
 app.use('/api/donate',makeDonation);
 app.use('/api/donation/verify',verifyDonation);
-app.use('/api/like',likeRouter)
+app.use('/api/like',likeRouter);
+app.use('/api/user/getByUsername',getUserByUsernameRouter);
 
 app.use('/paystack/webhook',paystackHook)
 

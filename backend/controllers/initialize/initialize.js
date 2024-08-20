@@ -11,13 +11,25 @@ export default (req,res,next) => {
         attributes: {
             exclude: ["password"],
             include: [
-                [fn('COUNT',fn('DISTINCT',col('Campaigns.campaign_id'))),'myCampaigns']
+                [fn('COUNT',fn('DISTINCT',col('Campaigns.campaign_id'))),'totalCampaigns'],
+                [fn('COUNT',fn('DISTINCT',col('Donations.donation_id'))),'totalDonations']
             ]
         },
-        include: {
-            model: models.Campaign,
-            attributes: []
-        },
+        include: [
+            {
+                model: models.Campaign,
+                attributes: [],
+                required: false
+            },
+            {
+                model: models.Donation,
+                attributes: [],
+                where: {
+                    donation_status: true
+                },
+                required: false
+            }
+        ],
         group: ['User.user_id']
     })
     .then((data)=>{

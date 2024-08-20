@@ -11,6 +11,7 @@ import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import LocalPoliceOutlinedIcon from '@mui/icons-material/LocalPoliceOutlined';
 import {axiosInstance} from '../../utils/api.js'
 import './style.css'
+import { Link } from 'react-router-dom';
 
 const Card = ({
     details,
@@ -136,7 +137,7 @@ const Card = ({
             }
         </div>
         <p className="card-title">
-            <span className='card-username'>{details.User?.username }: </span> 
+            <Link to={`/users/${details.User?.username}`} className='card-username'>{details.User?.username }: </Link> 
             {details?.title}
         </p>
         <div className="card-progress">

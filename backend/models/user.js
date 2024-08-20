@@ -34,7 +34,9 @@ User.init(
 
                 const url = `${process.env.USER_PROFILE_PIC_PATH}/${filename}`;
 
-                return url;
+                if(filename)
+                    return url
+                return null;
             }
         },
         phone_number: DataTypes.STRING,

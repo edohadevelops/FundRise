@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './style.css';
 import MoreIcon from '../../../assets/seeMoreIcon.svg';
 import ProfilePicture from '../../../assets/ProfilePicture.png';
@@ -7,21 +7,45 @@ import Donation2 from '../../../assets/donation2.png';
 import Donation3 from '../../../assets/donation3.png';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import { AppContext } from '../../../store/AppContext';
+import { useParams } from 'react-router-dom';
+import { axiosInstance } from '../../../utils/api';
+import MyProfile from './MyProfile'
+
 
 const Profile = () => {
   const [currentTab,setCurrentTab] = useState("campaign");
-  const {userDetails} = useContext(AppContext)
+  // 
+  const [otherUser,setOtherUser] = useState(null)
+
+  const {username} = useParams();
+  const {userDetails} = useContext();
+
+  const axios = axiosInstance()
+
+  useEffect(()=>{
+    const getotherUser = () => {
+      axios.get(`/api/user/getByUsername/${username}`)
+      .then(({data})=>{
+        console.log("APi Response: ",data)
+        setOtherUser(data.userDetails)
+      })
+      .catch((err)=>{
+        console.error("Error occoured: ",err)
+      })
+    }
+    getotherUser()
+  },[])
   return (
     <div className='profile-page'>
       <div className="profile-details">
         <div className="profile-picture">
-          <img src={userDetails.profile_picture} alt="profile picture"/>
+          <img src={otherUser?.profile_picture} alt="profile picture"/>
         </div>
         <div className="profile-insights">
           <div className="profile-actions-container">
-            <p className="profile-username">{userDetails?.username}</p>
+            <p className="profile-username">{otherUser?.username}</p>
             <div className="profile-actions">
-              <button className="profile-action">Edit Profile</button>
+              <button className="profile-action bg-primary text-white">Follow</button>
               <button className="profile-action">Share Profile</button>
               <button className="profile-menu-icon">
                 <img src={MoreIcon} alt="profile menu" />
@@ -30,11 +54,11 @@ const Profile = () => {
           </div>
           <div className="profile-insight-details">
             <div className="profile-insight">
-              <p className="profile-insight-number">{userDetails.myCampaigns}</p>
+              <p className="profile-insight-number">{otherUser?.totalCampaigns}</p>
               <p className="profile-insight-text">campaigns</p>
             </div>
             <div className="profile-insight">
-              <p className="profile-insight-number">20</p>
+              <p className="profile-insight-number">{otherUser?.totalDonations}</p>
               <p className="profile-insight-text">donations</p>
             </div>
             <div className="profile-insight">
@@ -43,12 +67,13 @@ const Profile = () => {
             </div>
           </div>
           <div className="profile-bio-section">
-            <p className="profile-fullname">{userDetails && userDetails.first_name + " " + userDetails?.last_name}</p>
+            <p className="profile-fullname">{otherUser && otherUser.first_name + " " + otherUser?.last_name}</p>
             <p className="profile-email">
               <AlternateEmailIcon fontSize="small" /> 
-              {userDetails?.email}
+              {otherUser?.email}
             </p>
-            <p className="profile-bio">{userDetails?.bio}</p>
+            <p className="profile-bio">{otherUser?.bio}</p>
+            <p>Followed by Amen, Edoha +64 more</p>
           </div>
         </div>
       </div>

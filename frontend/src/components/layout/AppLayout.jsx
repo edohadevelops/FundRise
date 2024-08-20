@@ -58,7 +58,7 @@ const AppLayout = () => {
                   <HistoryOutlinedIcon sx={{fontSize: "30px"}} />
                   <span className='side-link-text'>History</span>
                 </Link>
-                <Link className='side-link' to={routes.PROFILE}>
+                <Link className='side-link' to={routes.MYPROFILE}>
                   <AccountCircleOutlinedIcon sx={{fontSize: "30px"}} />
                   <span className='side-link-text'>Profile</span>
                 </Link>

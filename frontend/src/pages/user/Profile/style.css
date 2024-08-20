@@ -26,7 +26,7 @@
     @apply text-xl
 }
 .profile-actions{
-    @apply flex items-center gap-4 
+    @apply flex items-center gap-2
 }
 .profile-action{
     @apply flex items-center justify-center px-4 py-2 bg-subtle font-semibold text-sm rounded-lg 

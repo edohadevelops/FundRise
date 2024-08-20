@@ -20,7 +20,7 @@ import {
   LoginPage, 
   MakeDonationPage, 
   NotificationPage, 
-  ProfilePage, 
+  ProfilePage,
   RegisterPage, 
   VerifyDonationPage
 } from '../pages/index.js';
@@ -50,7 +50,8 @@ const RouterConfig = () => {
           <Route path={routes.DONATIONS} element={<DonationPage />} />
           <Route path={routes.NOTIFICATIONS} element={<NotificationPage />} />
           <Route path={routes.HISTORY} element={<HistoryPage />} />
-          <Route path={routes.PROFILE} element={<ProfilePage />} />
+          <Route path={routes.MYPROFILE} element={<ProfilePage />} />
+          <Route path={routes.USERPROFILE} element={<ProfilePage />} />
           <Route path={routes.ONBOARDING} element={<Onboarding />} />
         </Route>
         {/* End of protected routes */}
