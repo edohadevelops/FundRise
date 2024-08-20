@@ -7,7 +7,7 @@ const ForYou = ({campaigns}) => {
         For you
       {
         campaigns?.map((campaign,index)=>(
-            <Card details={campaign} index={index} isliked={campaign.Likes.length > 0} initialCount={campaign.totalLikes}/>
+            <Card details={campaign} index={index} isliked={campaign.hasUserLiked} initialCount={campaign.totalLikes}/>
         ))
       }
     </>

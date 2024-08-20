@@ -1,4 +1,4 @@
-import { col, fn, Op} from "sequelize";
+import { col, fn, literal, Op, where} from "sequelize";
 import { Campaign } from "../../models/index.js";
 import models from "../../services/db/association.js";
 
@@ -27,14 +27,23 @@ export default (req,res,next) => {
             },
             {
                 model: models.Donation,
-                attributes: []
+                attributes: [],
+                where: {
+                    donation_status: "success"
+                },
+                required: false
             }
         ],
         attributes: {
             include: [
                 [fn('COUNT',fn('DISTINCT',col('Likes.like_id'))),'totalLikes'],
                 [fn('COUNT',fn('DISTINCT',col('Donations.backer_id'))),'totalDonators'],
-                
+                [
+                    literal(`
+                        MAX(CASE WHEN Likes.user_ID = ${user_id} THEN 1 ELSE NULL END)
+                    `),
+                    'hasUserLiked'
+                ]
             ]
         },
         order: [['createdAt','DESC']],

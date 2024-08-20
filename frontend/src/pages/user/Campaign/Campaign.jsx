@@ -7,12 +7,9 @@ import Following from '../../../tabs/Campaign/Following/Following';
 import Modals from '../../../components/modal/Modal';
 import { Form, Field } from 'react-final-form'
 import { FormControlLabel } from '@mui/material';
-import { axiosQuery } from '../../../utils/api.js'; 
+import { axiosInstance, axiosQuery } from '../../../utils/api.js'; 
 import { AppContext } from '../../../store/AppContext.jsx';
 
-// Ask Mr julius about why the file is saving the way it is, and that it is not downloadable,
-// Ask Mr julius about the object fit
-// Ask Mr Julius about the categories on the home page
 
 const Campaign = () => {
   const [currentTab,setCurrentTab] = useState("For You");
@@ -22,6 +19,8 @@ const Campaign = () => {
   const [campaignImg,setCampaignImg] = useState(null);
   const [imgURL,setImgURL] = useState(null)
   const filePicker = useRef(null);
+
+  const axios = axiosInstance()
 
   const openModal = () => {
     setModalOpen(true)
@@ -81,7 +80,7 @@ const Campaign = () => {
   }
   const createCampaignBtn = useRef();
   const getCampaigns = () => {
-    axiosQuery.get("http://localhost:5000/api/campaign/getAll")
+    axios.get("http://localhost:5000/api/campaign/getAll")
     .then(({data})=>{
       console.log(data);
       setAllCampaigns(data.campaigns)
