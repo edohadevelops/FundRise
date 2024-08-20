@@ -30,7 +30,7 @@ const Profile = () => {
           </div>
           <div className="profile-insight-details">
             <div className="profile-insight">
-              <p className="profile-insight-number">3</p>
+              <p className="profile-insight-number">{userDetails.myCampaigns}</p>
               <p className="profile-insight-text">campaigns</p>
             </div>
             <div className="profile-insight">

@@ -43,6 +43,13 @@ const Card = ({
         axios.put(`/api/like/${details.campaign_id}`)
         .then((data)=>{console.log("Successful: ",data)})
         .catch((err)=> {console.log("Errror occured: ",err)})
+        
+        if(likeStatus){
+            setLikeCount((prev)=>prev-1)
+        }
+        else{
+            setLikeCount((prev)=>prev+1)
+        }
 
         setLikeStatus((prev)=>!prev)
     }

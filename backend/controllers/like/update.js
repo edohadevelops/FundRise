@@ -33,7 +33,7 @@ export default (req,res,next) => {
     })
     .catch(err => {
         console.lof("Error occured finding or updating a like",err);
-        req.error = error;
+        req.error = err;
         next();
     })
 

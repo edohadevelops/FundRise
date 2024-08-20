@@ -1,4 +1,4 @@
-import { col, fn} from "sequelize";
+import { col, fn, Op} from "sequelize";
 import { Campaign } from "../../models/index.js";
 import models from "../../services/db/association.js";
 
@@ -20,7 +20,7 @@ export default (req,res,next) => {
             {
                 model: models.Like,
                 where: {
-                    user_id,
+                    // user_id,
                     like_status: true
                 },
                 required: false
@@ -33,7 +33,8 @@ export default (req,res,next) => {
         attributes: {
             include: [
                 [fn('COUNT',fn('DISTINCT',col('Likes.like_id'))),'totalLikes'],
-                [fn('COUNT',fn('DISTINCT',col('Donations.backer_id'))),'totalDonators']
+                [fn('COUNT',fn('DISTINCT',col('Donations.backer_id'))),'totalDonators'],
+                
             ]
         },
         order: [['createdAt','DESC']],
