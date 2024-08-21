@@ -20,7 +20,8 @@ const Profile = () => {
   const [campaigns,setCampaigns] = useState(null);
   const [donations,setDonations] = useState(null);
 
-  const [campaignLoading,setCampaignLoading] = useState(true)
+  const [campaignLoading,setCampaignLoading] = useState(true);
+  const [donationLoading,setDonationLoading] = useState(true)
 
   const {username} = useParams();
   const location = useLocation();
@@ -57,7 +58,21 @@ const Profile = () => {
         console.log("Err when getting user data is: ",err)
       })
     }
-    getUsersCampaigns()
+    const getUsersDonations = () => {
+      // const name = "edohaTheDev"
+      axios.get(`/api/donation/getDonationsByUsername/${isMyProfile ? userDetails.username : username}`)
+      .then(({data})=>{
+        console.log("Data for user donation: ",data)
+        setDonations(data.donations);
+        setDonationLoading(false)
+      })
+      .catch((err)=>{
+        console.log("Err when getting user donation is: ",err)
+      })
+    }
+
+    getUsersCampaigns();
+    getUsersDonations()
   },[location])
 
   return (
@@ -137,7 +152,7 @@ const Profile = () => {
         {
           currentTab === "campaign" ?
           <Tabs.Campaigns  campaigns={campaigns} isCampaignLoading={campaignLoading} /> :
-          <Tabs.Donations />
+          <Tabs.Donations donations={donations} isDonationsLoading={donationLoading}/>
         }
         {/* <div className="profile-campaign">
           <img src={Donation2} alt="profile-post" />
