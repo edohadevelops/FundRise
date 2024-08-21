@@ -10,4 +10,5 @@ export { default as makeDonation } from './donation/donate.js';
 export { default as paystackHook } from './donation/webhook.js';
 export { default as verifyDonation } from './donation/verify.js';
 export { default as likeRouter } from './like/like.js';
-export { default as getUserByUsernameRouter } from './user/getByUsername.js'
+export { default as getUserByUsernameRouter } from './user/getByUsername.js';
+export { default as getAllCampaignsByUsernameRouter } from './campaign/getAllByUsername.js'

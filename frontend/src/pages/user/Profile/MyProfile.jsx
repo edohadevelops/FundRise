@@ -10,12 +10,17 @@ import { AppContext } from '../../../store/AppContext';
 import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { axiosInstance } from '../../../utils/api';
+import Tabs from './Tabs';
 
 const Profile = () => {
   const [currentTab,setCurrentTab] = useState("campaign");
   const {userDetails} = useContext(AppContext);
 
-  const [user,setUser] = useState(null)
+  const [user,setUser] = useState(null);
+  const [campaigns,setCampaigns] = useState(null);
+  const [donations,setDonations] = useState(null);
+
+  const [campaignLoading,setCampaignLoading] = useState(true)
 
   const {username} = useParams();
   const location = useLocation();
@@ -40,7 +45,19 @@ const Profile = () => {
     }else{
       getotherUser()
     }
-    console.log("Location is: ",location)
+    const getUsersCampaigns = () => {
+      // const name = "edohaTheDev"
+      axios.get(`/api/campaign/getUsersCampaigns/${isMyProfile ? userDetails.username : username}`)
+      .then(({data})=>{
+        console.log("Data for user campaign: ",data)
+        setCampaigns(data.campaigns);
+        setCampaignLoading(false)
+      })
+      .catch((err)=>{
+        console.log("Err when getting user data is: ",err)
+      })
+    }
+    getUsersCampaigns()
   },[location])
 
   return (
@@ -117,7 +134,12 @@ const Profile = () => {
         </button>
       </div>
       <div className="profile-results">
-        <div className="profile-campaign">
+        {
+          currentTab === "campaign" ?
+          <Tabs.Campaigns  campaigns={campaigns} isCampaignLoading={campaignLoading} /> :
+          <Tabs.Donations />
+        }
+        {/* <div className="profile-campaign">
           <img src={Donation2} alt="profile-post" />
         </div>
         <div className="profile-campaign">
@@ -125,7 +147,7 @@ const Profile = () => {
         </div>
         <div className="profile-campaign">
           <img src={Donation3} alt="profile-post" />
-        </div>
+        </div> */}
       </div>
     </div>
   )
