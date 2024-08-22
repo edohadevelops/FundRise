@@ -1,49 +1,75 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
 import './style.css';
 import MoreIcon from '../../../assets/seeMoreIcon.svg';
-import ProfilePicture from '../../../assets/ProfilePicture.png';
-import Donation1 from '../../../assets/donation1.png';
-import Donation2 from '../../../assets/donation2.png';
-import Donation3 from '../../../assets/donation3.png';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import { AppContext } from '../../../store/AppContext';
+// import { AppContext } from '../../../store/AppContext';
+// import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { axiosInstance } from '../../../utils/api';
-import MyProfile from './MyProfile'
-
+import Tabs from './Tabs';
 
 const Profile = () => {
   const [currentTab,setCurrentTab] = useState("campaign");
-  // 
-  const [otherUser,setOtherUser] = useState(null)
 
-  const {username} = useParams();
-  const {userDetails} = useContext();
+  const [user,setUser] = useState(null);
+  const [campaigns,setCampaigns] = useState(null);
+  const [donations,setDonations] = useState(null);
+
+  const [campaignLoading,setCampaignLoading] = useState(true);
+  const [donationLoading,setDonationLoading] = useState(true)
+
+  const { username } = useParams();
 
   const axios = axiosInstance()
 
   useEffect(()=>{
-    const getotherUser = () => {
+    const getUsersDetails = () => {
       axios.get(`/api/user/getByUsername/${username}`)
       .then(({data})=>{
         console.log("APi Response: ",data)
-        setOtherUser(data.userDetails)
+        setUser(data.userDetails)
       })
       .catch((err)=>{
         console.error("Error occoured: ",err)
       })
+    }    
+    const getUsersCampaigns = () => {
+      axios.get(`/api/campaign/getUsersCampaigns/${username}`)
+      .then(({data})=>{
+        console.log("Data for user campaign: ",data)
+        setCampaigns(data.campaigns);
+        setCampaignLoading(false)
+      })
+      .catch((err)=>{
+        console.log("Err when getting user data is: ",err)
+      })
     }
-    getotherUser()
+    const getUsersDonations = () => {
+      // const name = "edohaTheDev"
+      axios.get(`/api/donation/getDonationsByUsername/${username}`)
+      .then(({data})=>{
+        console.log("Data for user donation: ",data)
+        setDonations(data.donations);
+        setDonationLoading(false)
+      })
+      .catch((err)=>{
+        console.log("Err when getting user donation is: ",err)
+      })
+    }
+    getUsersDetails();
+    getUsersCampaigns();
+    getUsersDonations()
   },[])
+
   return (
     <div className='profile-page'>
       <div className="profile-details">
         <div className="profile-picture">
-          <img src={otherUser?.profile_picture} alt="profile picture"/>
+          <img src={user?.profile_picture} alt="profile picture"/>
         </div>
         <div className="profile-insights">
           <div className="profile-actions-container">
-            <p className="profile-username">{otherUser?.username}</p>
+            <p className="profile-username">{user?.username}</p>
             <div className="profile-actions">
               <button className="profile-action bg-primary text-white">Follow</button>
               <button className="profile-action">Share Profile</button>
@@ -54,11 +80,11 @@ const Profile = () => {
           </div>
           <div className="profile-insight-details">
             <div className="profile-insight">
-              <p className="profile-insight-number">{otherUser?.totalCampaigns}</p>
+              <p className="profile-insight-number">{user?.totalCampaigns}</p>
               <p className="profile-insight-text">campaigns</p>
             </div>
             <div className="profile-insight">
-              <p className="profile-insight-number">{otherUser?.totalDonations}</p>
+              <p className="profile-insight-number">{user?.totalDonations}</p>
               <p className="profile-insight-text">donations</p>
             </div>
             <div className="profile-insight">
@@ -67,12 +93,12 @@ const Profile = () => {
             </div>
           </div>
           <div className="profile-bio-section">
-            <p className="profile-fullname">{otherUser && otherUser.first_name + " " + otherUser?.last_name}</p>
+            <p className="profile-fullname">{user && user?.first_name + " " + user?.last_name}</p>
             <p className="profile-email">
               <AlternateEmailIcon fontSize="small" /> 
-              {otherUser?.email}
+              {user?.email}
             </p>
-            <p className="profile-bio">{otherUser?.bio}</p>
+            <p className="profile-bio">{user?.bio}</p>
             <p>Followed by Amen, Edoha +64 more</p>
           </div>
         </div>
@@ -102,15 +128,11 @@ const Profile = () => {
         </button>
       </div>
       <div className="profile-results">
-        <div className="profile-campaign">
-          <img src={Donation2} alt="profile-post" />
-        </div>
-        <div className="profile-campaign">
-          <img src={Donation1} alt="profile-post" />
-        </div>
-        <div className="profile-campaign">
-          <img src={Donation3} alt="profile-post" />
-        </div>
+        {
+          currentTab === "campaign" ?
+          <Tabs.Campaigns  campaigns={campaigns} isCampaignLoading={campaignLoading} /> :
+          <Tabs.Donations donations={donations} isDonationsLoading={donationLoading}/>
+        }
       </div>
     </div>
   )

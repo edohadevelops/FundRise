@@ -1,14 +1,10 @@
 import React, { useContext, useState,useEffect } from 'react';
 import './style.css';
 import MoreIcon from '../../../assets/seeMoreIcon.svg';
-import ProfilePicture from '../../../assets/ProfilePicture.png';
-import Donation1 from '../../../assets/donation1.png';
-import Donation2 from '../../../assets/donation2.png';
-import Donation3 from '../../../assets/donation3.png';
+
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import { AppContext } from '../../../store/AppContext';
-import { useLocation } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+
 import { axiosInstance } from '../../../utils/api';
 import Tabs from './Tabs';
 
@@ -23,16 +19,11 @@ const Profile = () => {
   const [campaignLoading,setCampaignLoading] = useState(true);
   const [donationLoading,setDonationLoading] = useState(true)
 
-  const {username} = useParams();
-  const location = useLocation();
-
-  const isMyProfile = location.pathname === "/profile"
-
   const axios = axiosInstance()
 
   useEffect(()=>{
-    const getotherUser = () => {
-      axios.get(`/api/user/getByUsername/${username}`)
+    const getUserDetails = () => {
+      axios.get(`/api/user/getByUsername/${userDetails?.username}`)
       .then(({data})=>{
         console.log("APi Response: ",data)
         setUser(data.userDetails)
@@ -41,14 +32,9 @@ const Profile = () => {
         console.error("Error occoured: ",err)
       })
     }
-    if(isMyProfile){
-      setUser(userDetails)
-    }else{
-      getotherUser()
-    }
     const getUsersCampaigns = () => {
       // const name = "edohaTheDev"
-      axios.get(`/api/campaign/getUsersCampaigns/${isMyProfile ? userDetails.username : username}`)
+      axios.get(`/api/campaign/getUsersCampaigns/${userDetails.username}`)
       .then(({data})=>{
         console.log("Data for user campaign: ",data)
         setCampaigns(data.campaigns);
@@ -60,7 +46,7 @@ const Profile = () => {
     }
     const getUsersDonations = () => {
       // const name = "edohaTheDev"
-      axios.get(`/api/donation/getDonationsByUsername/${isMyProfile ? userDetails.username : username}`)
+      axios.get(`/api/donation/getDonationsByUsername/${userDetails.username}`)
       .then(({data})=>{
         console.log("Data for user donation: ",data)
         setDonations(data.donations);
@@ -71,6 +57,7 @@ const Profile = () => {
       })
     }
 
+    getUserDetails()
     getUsersCampaigns();
     getUsersDonations()
   },[location])
@@ -85,11 +72,7 @@ const Profile = () => {
           <div className="profile-actions-container">
             <p className="profile-username">{user?.username}</p>
             <div className="profile-actions">
-              {
-                isMyProfile ?
-                <button className="profile-action">Edit Profile</button> :
-                <button className="profile-action bg-primary text-white">Follow</button>
-              }
+                <button className="profile-action">Edit Profile</button>
               <button className="profile-action">Share Profile</button>
               <button className="profile-menu-icon">
                 <img src={MoreIcon} alt="profile menu" />
@@ -111,16 +94,13 @@ const Profile = () => {
             </div>
           </div>
           <div className="profile-bio-section">
-            <p className="profile-fullname">{user && user.first_name + " " + user?.last_name}</p>
+            <p className="profile-fullname">{user && user?.first_name + " " + user?.last_name}</p>
             <p className="profile-email">
               <AlternateEmailIcon fontSize="small" /> 
               {user?.email}
             </p>
             <p className="profile-bio">{user?.bio}</p>
-            {
-              !isMyProfile &&
-              <p>Followed by Amen, Edoha +64 more</p>
-            }
+            <p>Followed by Amen, Edoha +64 more</p>
           </div>
         </div>
       </div>
@@ -154,15 +134,6 @@ const Profile = () => {
           <Tabs.Campaigns  campaigns={campaigns} isCampaignLoading={campaignLoading} /> :
           <Tabs.Donations donations={donations} isDonationsLoading={donationLoading}/>
         }
-        {/* <div className="profile-campaign">
-          <img src={Donation2} alt="profile-post" />
-        </div>
-        <div className="profile-campaign">
-          <img src={Donation1} alt="profile-post" />
-        </div>
-        <div className="profile-campaign">
-          <img src={Donation3} alt="profile-post" />
-        </div> */}
       </div>
     </div>
   )

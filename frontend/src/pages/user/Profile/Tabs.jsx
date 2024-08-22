@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 // import { axiosInstance } from '../../../utils/api';
 
 const Campaigns = ({campaigns,isCampaignLoading}) => {
@@ -18,9 +19,9 @@ const Campaigns = ({campaigns,isCampaignLoading}) => {
                 </> :
                 campaigns.length > 0 ?
                 campaigns.map((campaign)=>(
-                    <div className='profile-campaign'>
+                    <Link to={`/campaigns/${campaign?.campaign_id}`} className='profile-campaign'>
                         <img src={campaign.campaign_img} alt="" />
-                    </div>
+                    </Link>
                 )):
                 <div className='h-[300px] w-full flex items-center justify-center'>
                     <p className="font-semibold text-lg">No Campaigns yet</p>
@@ -41,9 +42,9 @@ const Donations = ({donations,isDonationsLoading}) => {
                 </> :
                 donations.length > 0 ?
                 donations.map((donation)=>(
-                    <div className='profile-campaign'>
+                    <Link to={`/campaigns/${donation?.campaign_id}`} className='profile-campaign'>
                         <img src={donation.campaign_img} alt="" />
-                    </div>
+                    </Link>
                 )):
                 <div className='h-[300px] w-full flex items-center justify-center'>
                     <p className="font-semibold text-lg">No Donations yet</p>

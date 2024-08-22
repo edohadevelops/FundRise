@@ -20,13 +20,14 @@ import {
   LoginPage, 
   MakeDonationPage, 
   NotificationPage, 
-  ProfilePage,
+  MyProfilePage,
   RegisterPage, 
+  UserProfilePage, 
   VerifyDonationPage
 } from '../pages/index.js';
 import Onboarding from '../pages/user/Onboarding/Onboarding.jsx';
-import { AppContext } from '../store/AppContext.jsx';
-import Layout from '../components/layout/onboarding/Layout.jsx';
+// import { AppContext } from '../store/AppContext.jsx';
+// import Layout from '../components/layout/onboarding/Layout.jsx';
 
 
 const RouterConfig = () => {
@@ -50,8 +51,8 @@ const RouterConfig = () => {
           <Route path={routes.DONATIONS} element={<DonationPage />} />
           <Route path={routes.NOTIFICATIONS} element={<NotificationPage />} />
           <Route path={routes.HISTORY} element={<HistoryPage />} />
-          <Route path={routes.MYPROFILE} element={<ProfilePage />} />
-          <Route path={routes.USERPROFILE} element={<ProfilePage />} />
+          <Route path={routes.MYPROFILE} element={<MyProfilePage />} />
+          <Route path={routes.USERPROFILE} element={<UserProfilePage />} />
           <Route path={routes.ONBOARDING} element={<Onboarding />} />
         </Route>
         {/* End of protected routes */}
