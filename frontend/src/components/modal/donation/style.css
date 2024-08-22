@@ -1,3 +1,15 @@
 .donation-modal-content{
-    @apply w-[300px] h-[200px] bg-white rounded-lg p-4
+    @apply w-[300px] lg:w-[350px] bg-white rounded-lg p-8 flex flex-col items-center gap-4
+}
+.donation-modal-content img {
+    @apply h-[50px] w-[50px] rounded-full
+}
+.donation-modal-text{
+    @apply text-center font-semibold
+}
+.donation-modal-text span{
+    @apply text-primary font-bold
+}
+.donation-modal-button{
+    @apply w-full p-3 bg-primary text-white rounded-lg text-center font-semibold
 }

@@ -85,9 +85,8 @@ const Donation = () => {
                 donationDetails={
                   {
                     amount: donation.donation_amount,
-                    message: donation.donation_message,
-                    campaign_img: donation.Campaign.campaign_img,
-                    status: donation.donation_status
+                    status: donation.donation_status,
+                    campaign_id: donation.Campaign.campaign_id
                   }
                 }
                 setModalDetails={setModalDetails}
