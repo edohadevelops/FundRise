@@ -25,6 +25,10 @@ Follower.init(
                 model: 'Users',
                 key: 'user_id'
             }
+        },
+        status: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
         }
     },
     {

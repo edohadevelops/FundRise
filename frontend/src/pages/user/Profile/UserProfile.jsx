@@ -59,7 +59,18 @@ const Profile = () => {
     getUsersDetails();
     getUsersCampaigns();
     getUsersDonations()
-  },[])
+  },[]);
+
+  const handleFollowUser = (leader_id) => {
+    axios.put(`/api/follow/${leader_id}`)
+    .then(({data})=>{
+      console.log("Data after trying to follow is: ",data)
+    })
+    .catch((err)=>{
+      console.log("The error while trying to follow is: ",err)
+    })
+
+  }
 
   return (
     <div className='profile-page'>
@@ -71,7 +82,7 @@ const Profile = () => {
           <div className="profile-actions-container">
             <p className="profile-username">{user?.username}</p>
             <div className="profile-actions">
-              <button className="profile-action bg-primary text-white">Follow</button>
+              <button className="profile-action bg-primary text-white" onClick={()=>handleFollowUser(user?.user_id)}>Follow</button>
               <button className="profile-action">Share Profile</button>
               <button className="profile-menu-icon">
                 <img src={MoreIcon} alt="profile menu" />
