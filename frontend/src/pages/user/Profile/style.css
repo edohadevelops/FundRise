@@ -64,7 +64,7 @@
     @apply flex gap-2 pb-6 flex-wrap
 }
 .profile-campaign{
-    @apply flex-1 min-w-[30%] h-[150px] md:h-[200px] rounded-lg border cursor-pointer
+    @apply w-[31%] h-[150px] md:h-[200px] rounded-lg border cursor-pointer
 }
 .profile-campaign img{
     @apply w-full h-full rounded-lg

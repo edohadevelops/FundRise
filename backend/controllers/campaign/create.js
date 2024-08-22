@@ -21,12 +21,12 @@ const validate = (data) => {
 }
 
 export default (req,res,next) => {
-    console.log("Request body is: ",req.body);
-    console.log("File is: ",req.file.filename)
+    // console.log("Request body is: ",req.body);
+    // console.log("File is: ",req.file.filename)
     const payload = {
         ...req.body,
         campaign_img: req.file.filename,
-        owner_id: req.user.user_id
+        owner_id: req.user.payload.user_id
     };
     console.log(payload)
 

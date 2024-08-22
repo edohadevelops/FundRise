@@ -23,9 +23,17 @@ const Card = ({
 }) => {
 
     // const alreadyLiked = details.Likes.length > 0
-    const [likeStatus,setLikeStatus] = useState(isliked);
+    const [likeStatus,setLikeStatus] = useState(false);
 
-    const [likeCount,setLikeCount] = useState(initialCount)
+    const [likeCount,setLikeCount] = useState(null);
+
+    useEffect(()=>{
+        const updateCampaign = () => {
+            setLikeCount(initialCount)
+            setLikeStatus(isliked);
+        }
+        updateCampaign()
+    },[])
 
     const likeRef = useRef();
     const unLikeRef = useRef();
@@ -132,7 +140,7 @@ const Card = ({
                 </button>
             </div>
             {
-                // likeCount > 0 &&
+                likeCount !== null &&
                 <p className="likes-count">{likeCount} likes</p>
             }
         </div>
