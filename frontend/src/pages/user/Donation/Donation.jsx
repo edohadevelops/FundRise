@@ -1,48 +1,42 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './style.css';
 import NoDonation from '../../../assets/NoDonationsIcon.svg';
 import BackIcon from '../../../assets/BackIcon.svg';
 import Card from '../../../components/cards/Card';
+import { axiosInstance } from '../../../utils/api';
+import { AppContext } from '../../../store/AppContext';
+import DonationModal from '../../../components/modal/donation/Modal';
 
 
 
 const Donation = () => {
-  const donations = [];
-  const [campaignItems,setCampaignItems] = useState([
-      {
-          title: "Kemi's University Tuition",
-          category: "Education",
-          daysLeft: 2,
-          currentAmmount: "50,000",
-          totalAmount: "100,000",
-          progressPercent: 20,
-          totalDonators: 4,
-          username: "edohaTheDev",
-          totalLikes: 1203
-      },
-      {
-          title: "Dorcas Memorial Fund",
-          category: "Memorial",
-          daysLeft: 5,
-          currentAmmount: "100,000",
-          totalAmount: "150,000",
-          progressPercent: 60,
-          totalDonators: 10,
-          username: "uprisenigeria",
-          totalLikes: 50
-      },
-      {
-          title: "Robotic School For Kids",
-          category: "Education",
-          daysLeft: 20,
-          currentAmmount: "300,000",
-          totalAmount: "400,000",
-          progressPercent: 70,
-          totalDonators: 8,
-          username: "jameson",
-          totalLikes: 400
-      }
-  ]);
+  // const donations = [];
+  const [isLoading,setIsLoading] = useState(true)
+  const [donations,setDonations] = useState([]);
+
+  const [donationOpen,setDonationOpen] = useState(false)
+
+  const {userDetails} = useContext(AppContext);
+
+  const [ modalDetails, setModalDetails ] = useState(null)
+
+  const axios = axiosInstance();
+
+  useEffect(()=>{
+    const getDonations = () => {
+      axios.get(`/api/donation/getDonationsByUserid/${userDetails.user_id}`)
+      .then(({data})=>{
+        console.log("Donations in donation page is: ",data);
+        setDonations(data.donations);
+        setIsLoading(false)
+      })
+      .catch((err)=>{
+        console.log("The error that occcured is: ",err)
+      })
+    }
+
+    getDonations()
+  },[])
   return (
     <div className='donation-page'>
       <div className='donation-header'>
@@ -82,11 +76,30 @@ const Donation = () => {
         </div>:
         <div className="campaign-list">
           {
-            campaignItems.map((campaign,index)=>(
-              <Card details={campaign} index={index} />
+            donations?.map((donation,index)=>(
+              <Card 
+                details={donation.Campaign} 
+                index={index} 
+                initialCount={donation.Campaign.totalLikes} 
+                isliked={donation?.Campaign?.hasUserLiked} 
+                donationDetails={
+                  {
+                    amount: donation.donation_amount,
+                    message: donation.donation_message,
+                    campaign_img: donation.Campaign.campaign_img,
+                    status: donation.donation_status
+                  }
+                }
+                setModalDetails={setModalDetails}
+                setModal={setDonationOpen}
+              />
             ))
           }
         </div>
+      }
+      {
+        donationOpen && 
+        <DonationModal details={modalDetails} closeModal={setDonationOpen} />
       }
     </div>
   )

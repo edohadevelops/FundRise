@@ -101,7 +101,7 @@ const Home = () => {
                                 <Card 
                                     details={item} 
                                     index={index} 
-                                    setCampaign={setSelectedCampaign}
+                                    setModalDetails={setSelectedCampaign}
                                     setModal={setPostOpen}
                                     isliked={item.hasUserLiked}
                                     initialCount={item.totalLikes}
@@ -116,7 +116,6 @@ const Home = () => {
                 <CampaignModal 
                     setModal={setPostOpen} 
                     campaign={selectedCampaign}
-
                 />
             }
         </>

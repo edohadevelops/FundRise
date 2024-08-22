@@ -11,15 +11,16 @@ import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import LocalPoliceOutlinedIcon from '@mui/icons-material/LocalPoliceOutlined';
 import {axiosInstance} from '../../utils/api.js'
 import './style.css'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Card = ({
     details,
     index,
-    setCampaign,
+    setModalDetails,
     setModal,
     isliked,
-    initialCount
+    initialCount,
+    donationDetails
 }) => {
 
     // const alreadyLiked = details.Likes.length > 0
@@ -27,13 +28,18 @@ const Card = ({
 
     const [likeCount,setLikeCount] = useState(null);
 
+    const location = useLocation();
+
+    const isDonation = location.pathname == "/donations"
+
     useEffect(()=>{
+        // console.log("Is liked: ",isliked)
         const updateCampaign = () => {
             setLikeCount(initialCount)
             setLikeStatus(isliked);
         }
         updateCampaign()
-    },[])
+    },[details])
 
     const likeRef = useRef();
     const unLikeRef = useRef();
@@ -64,7 +70,8 @@ const Card = ({
     }
 
     const handleCampaignClick = () => {
-        setCampaign(details)
+        const forModal = isDonation ? donationDetails : details
+        setModalDetails(forModal)
         setModal(true)
     }
     
@@ -90,60 +97,63 @@ const Card = ({
         </div>
       </div>
       
-      <div className="card-details">
-        <div className="card-interactions">
-            <div className="flex justify-between">
-                <div className='like-comment-share'>
-                    {
-                        // !likeStatus ?
-                        <button 
-                          className={`
-                            like-button 
-                            ${!likeStatus && "show-like-button"}
-                          `}
-                         onClick={onLikeClick}
-                         ref={unLikeRef}
-                        >
+      <div className="card-details pt-2">
+        {
+            !isDonation &&
+            <div className="card-interactions">
+                <div className="flex justify-between">
+                    <div className='like-comment-share'>
+                        {
+                            // !likeStatus ?
+                            <button 
+                            className={`
+                                like-button 
+                                ${!likeStatus && "show-like-button"}
+                            `}
+                            onClick={onLikeClick}
+                            ref={unLikeRef}
+                            >
 
-                            {
-                                !likeStatus ?
-                                <FavoriteBorderOutlinedIcon className={""
-                                    // "like-icon" + likeStatus && "scale-50" 
-                                } sx={{fontSize: "28px"}} /> :
-                                <FavoriteIcon className={""
-                                    // "like-icon" + likeStatus && "scale-100" ""
-                                } sx={{fontSize: "28px",color: "#F15A59"}} />
-                            }
-                        </button> 
-                        // <button 
-                        //   className={`
-                        //     like-button 
-                        //     ${likeStatus && "show-like-button"}
-                        //   `}
-                        //  onClick={(e)=>onLikeClick(e,false)}
-                        //  ref={likeRef}
-                        // >
-                        //     <FavoriteIcon 
-                        //       className={`
-                        //         like-icon 
-                        //         ${likeStatus && "show-like-icon"}
-                        //       `} 
-                        //       sx={{fontSize: "28px",color: "#F15A59"}}
-                        //     />
-                        // </button>
-                        
-                    }
-                    {/* <BookmarkBorderOutlinedIcon sx={{fontSize: "28px"}} /> */}
+                                {
+                                    !likeStatus ?
+                                    <FavoriteBorderOutlinedIcon className={""
+                                        // "like-icon" + likeStatus && "scale-50" 
+                                    } sx={{fontSize: "28px"}} /> :
+                                    <FavoriteIcon className={""
+                                        // "like-icon" + likeStatus && "scale-100" ""
+                                    } sx={{fontSize: "28px",color: "#F15A59"}} />
+                                }
+                            </button> 
+                            // <button 
+                            //   className={`
+                            //     like-button 
+                            //     ${likeStatus && "show-like-button"}
+                            //   `}
+                            //  onClick={(e)=>onLikeClick(e,false)}
+                            //  ref={likeRef}
+                            // >
+                            //     <FavoriteIcon 
+                            //       className={`
+                            //         like-icon 
+                            //         ${likeStatus && "show-like-icon"}
+                            //       `} 
+                            //       sx={{fontSize: "28px",color: "#F15A59"}}
+                            //     />
+                            // </button>
+                            
+                        }
+                        {/* <BookmarkBorderOutlinedIcon sx={{fontSize: "28px"}} /> */}
+                    </div>
+                    <button className="bg-primary text-white p-2 rounded-lg">
+                        Donate
+                    </button>
                 </div>
-                <button className="bg-primary text-white p-2 rounded-lg">
-                    Donate
-                </button>
+                {
+                    likeCount !== null &&
+                    <p className="likes-count">{likeCount} likes</p>
+                }
             </div>
-            {
-                likeCount !== null &&
-                <p className="likes-count">{likeCount} likes</p>
-            }
-        </div>
+        }
         <p className="card-title">
             <Link to={`/users/${details.User?.username}`} className='card-username'>{details.User?.username }: </Link> 
             {details?.title}

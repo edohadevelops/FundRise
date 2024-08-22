@@ -12,4 +12,5 @@ export { default as verifyDonation } from './donation/verify.js';
 export { default as likeRouter } from './like/like.js';
 export { default as getUserByUsernameRouter } from './user/getByUsername.js';
 export { default as getAllCampaignsByUsernameRouter } from './campaign/getAllByUsername.js';
-export { default as getAllDonationsByUsernameRouter } from './donation/get/getAllByUsername.js'
+export { default as getAllDonationsByUsernameRouter } from './donation/get/getAllByUsername.js';
+export { default as getAllDonationsByUseridRouter } from './donation/get/getAllById.js'
