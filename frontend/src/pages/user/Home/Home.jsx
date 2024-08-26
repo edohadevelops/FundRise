@@ -12,16 +12,17 @@ import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import './style.css';
 import Card from '../../../components/cards/Card';
 import { AppContext } from '../../../store/AppContext'
-import { axiosQuery } from '../../../utils/api';
+import { axiosInstance, axiosQuery } from '../../../utils/api';
 import CampaignModal from '../../../components/modal/campaign/CampaignModal'
 
 const Home = () => {
 
     const {userDetails,allCampaigns,setAllCampaigns} = useContext(AppContext);
-    const [postOpen,setPostOpen] = useState(false)
+    const [postOpen,setPostOpen] = useState(false);
+    const axios = axiosInstance()
     const getCampaigns = () => {
         console.log("About to make request")
-        axiosQuery.get("http://localhost:5000/api/campaign/getAll")
+        axios.get("http://localhost:5000/api/campaign/getAll")
         .then(({data})=>{
           setAllCampaigns(data.campaigns)
         })
@@ -46,7 +47,7 @@ const Home = () => {
                         <Link className='' to={routes.NOTIFICATIONS}>
                             <NotificationsActiveOutlinedIcon className='notification-icon' />
                         </Link>
-                        <img src={Avatar} alt="avatar.jpg" onClick={()=>setPostOpen(true)} />
+                        <img src={userDetails?.profile_picture} className="home-profile-pic" alt="avatar.jpg" onClick={()=>setPostOpen(true)} />
                     </div>
                 </div>
                 <div className="filter-section">
@@ -100,8 +101,10 @@ const Home = () => {
                                 <Card 
                                     details={item} 
                                     index={index} 
-                                    setCampaign={setSelectedCampaign}
+                                    setModalDetails={setSelectedCampaign}
                                     setModal={setPostOpen}
+                                    isliked={item.hasUserLiked}
+                                    initialCount={item.totalLikes}
                                 />
                             ))
                         }
@@ -113,7 +116,6 @@ const Home = () => {
                 <CampaignModal 
                     setModal={setPostOpen} 
                     campaign={selectedCampaign}
-
                 />
             }
         </>

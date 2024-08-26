@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { axiosQuery } from '../../utils/api';
+import { axiosInstance, axiosQuery } from '../../utils/api';
 import { AppContext } from '../../store/AppContext';
-import axios from 'axios';
 // import { refreshAllCampaigns } from '../../utils/campaigns';
 
 const ProtectedRoute = ({Component}) => {
@@ -12,14 +11,16 @@ const ProtectedRoute = ({Component}) => {
   const [isLoading,setIsLoading] = useState(true);
   const {userDetails,setUserDetails,setAllCampaigns} = useContext(AppContext)
 
+  const axios = axiosInstance();
+
   useEffect(()=>{
     const initializeApp = () => {
-      axiosQuery.get('/api/initialize')
+      axios.get('/api/initialize')
       .then((response)=>{
         const { initialData } = response.data
-        // console.log("Initial data is: ",initialData);
-        setUserDetails(initialData.payload)
-        if(initialData.payload.role === "user"){
+        console.log("Initial data is: ",initialData);
+        setUserDetails(initialData)
+        if(initialData.role === "user"){
           setIsAuthenticated(true)
         }
       })

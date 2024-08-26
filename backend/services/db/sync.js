@@ -3,7 +3,7 @@ import models from './association.js'
 // import { User,Category } from '../../models/index.js'
 
 export const SyncDB = () => {
-    sequelize.sync({})
+    sequelize.sync({alter: true})
     .then(()=>{
         console.log("Successfully synced");
         // Category.bulkCreate([

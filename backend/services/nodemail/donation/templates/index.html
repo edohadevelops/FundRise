@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+<body style="height: 100vh;">
+    <div class='reciept-page' style="width: 100%; display: flex; justify-content: center; align-items: center; height: 100%; background-color: #c1e6e6;">
+        <div class="reciept" style="width: 100%;max-width: 550px; max-height: 500px; display: flex; flex-direction: column;justify-items: center; border-radius: 8px; background: #fafafa; border: 1px solid #fafafa;">
+            
+            <div class="reciept-header" style="background-color: #ffffff; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; width: 100%; padding: 1.5rem 2.5rem 1rem; border-radius: 0.5rem; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); position: relative;"
+            >
+                <img class='reciept-icon' style="width: 50px; height: 50px;" src={SuccessIcon} alt="" />
+                <div class="reciept-donation-details"
+                style="display: flex; flex-direction: column; align-items: center; width: 100%;"
+                 >
+                    <p class="reciept-donation-title" style="font-size: 1.125rem; font-weight: 600; color: #1e293b;"
+                    >Donate to help millions</p>
+                    <p class="reciept-donation-description" style="font-weight: 600; color: #4b5563; max-width: 400px; text-align: center;"
+                    >Your donation of 150,000 has been well recieved!</p>
+                </div>
+                
+            </div>
+            <div class="reciept-body-footer" style="display: flex; flex-direction: column; justify-content: space-between;"
+            >
+                <div class="reciept-body" style="padding-left: 2.5rem; padding-right: 2.5rem; display: flex; flex-direction: column; gap: 1rem; padding-top: 1rem; padding-bottom: 1rem;"
+                >
+                    <div class="reciept-user" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem;"
+                    >
+                        <img src={Campaign} alt="" style="height: 200px; height: 150px;"/>
+                    </div>
+                    <div class="reciept-comment" style="background-color: #ffffff; border-radius: 0.5rem; position: relative; padding-top: 1rem; padding-bottom: 1rem; padding-left: 3.5rem; padding-right: 3.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); font-size: 0.875rem; padding-top: 1.5rem; color: #4e4c4c;"
+                    >
+                        <p>Your donation of N 150,000 was successful. This would aid in helping us reach our goal of building a new city much more faster.</p>
+                        <!-- <CampaignIcon class='reciept-speaker-icon' sx={{color: "#6d6a6a"}} /> -->
+                    </div>
+                </div>
+                <div class="reciept-footer" style="background-color: #ffffff; width: 100%; padding-top: 1rem; padding-bottom: 1rem; padding-left: 1rem; padding-right: 1rem; border-radius: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div class="reciept-footer-content">
+                        <p class="reciept-transaction-title" style="font-weight: 600; color: #1e293b;">Transaction Summary</p>
+                        <div class="reciept-transaction-details" style="display: flex; flex-direction: column; flex-wrap: wrap; gap: 0.25rem; padding-left: 0.5rem; padding-right: 0.5rem;">
+                            <div class="reciept-transaction-group" style="display: flex;justify-content: space-between; font-size: 0.9375rem; color: #4e4c4c;">
+                                <p class="reciept-transaction-label" style="font-weight: 600;">Transaction Reference: </p>
+                                <p class="reciept-transaction-value" style="color: #4b5563;">12ref54</p>
+                            </div>
+                            <div class="reciept-transaction-group" style="display: flex; justify-content: space-between; font-size: 0.9375rem; color: #4e4c4c;">
+                                <p class="reciept-transaction-label" style="font-weight: 600;">Transaction Amount: </p>
+                                <p class="reciept-transaction-value" style="color: #4b5563;">N 150,000.00</p>
+                            </div>
+                            <div class="reciept-transaction-group" style="display: flex;  justify-content: space-between; font-size: 0.9375rem; color: #4e4c4c;">
+                                <p class="reciept-transaction-label" style="font-weight: 600;">Current Amount: </p>
+                                <p class="reciept-transaction-value" style="color: #4b5563;">N 170,000.00</p>
+                            </div>
+                            <div class="reciept-transaction-group" style="display: flex; justify-content: space-between; font-size: 0.9375rem; color: #4e4c4c;">
+                                <p class="reciept-transaction-label" style="font-weight: 600;">Target Amount: </p>
+                                <p class="reciept-transaction-value" style="color: #4b5563;">N 350,000.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reciept-transaction-actions" style="display: flex; justify-content: flex-end; padding-top: 0.75rem; gap: 0.5rem;">
+                        <a class='reciept-btn-back'href="#" style="display: flex; gap: 1rem; align-items: center; padding-top: 0.5rem; padding-bottom: 0.5rem; padding-left: 1rem; padding-right: 1rem; color: #4e4c4c; border: 2px solid #4e4c4c;">Back to Home</a>
+                        <a class='reciept-btn-status' href="#" style="display: flex; gap: 1rem; align-items: center; background-color: #187070; padding-top: 0.5rem; padding-bottom: 0.5rem; padding-left: 1rem; padding-right: 1rem; color: #ffffff;">Donate again</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

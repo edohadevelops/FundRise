@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { 
+  BrowserRouter as Router,
+  Routes,
   Route,
-  Navigate, 
+  Navigate,
+  RouterProvider, 
   createBrowserRouter, 
   createRoutesFromChildren
 } from 'react-router-dom';
@@ -17,34 +20,48 @@ import {
   LoginPage, 
   MakeDonationPage, 
   NotificationPage, 
-  ProfilePage, 
+  MyProfilePage,
   RegisterPage, 
+  UserProfilePage, 
   VerifyDonationPage
 } from '../pages/index.js';
+import Onboarding from '../pages/user/Onboarding/Onboarding.jsx';
+// import { AppContext } from '../store/AppContext.jsx';
+// import Layout from '../components/layout/onboarding/Layout.jsx';
 
-const RouterConfig = createBrowserRouter(
-  createRoutesFromChildren(
-    <React.Fragment>
-      <Route path={routes.LOGIN} element={<LoginPage />} />
-      <Route path={routes.REGISTER} element={<RegisterPage />} />
-      {/* Protected routes */}
-      
-      <Route element={<ProtectedRoute Component={AppLayout} />}>
-        <Route index element={<HomePage />} />
-        <Route path={routes.HOME} element={<HomePage />} />
-        <Route path={routes.CAMPAIGNS} element={<CampaignPage />} />
-        <Route path={routes.POSTS} element={<CampaignPostPage />} />
-        <Route path={routes.PAY} element={<MakeDonationPage />} />
-        <Route path={routes.DONATIONS} element={<DonationPage />} />
-        <Route path={routes.NOTIFICATIONS} element={<NotificationPage />} />
-        <Route path={routes.HISTORY} element={<HistoryPage />} />
-        <Route path={routes.PROFILE} element={<ProfilePage />} />
-      </Route>
-      {/* End of protected routes */}
-      <Route path={routes.VERIFYDONATION} element={<VerifyDonationPage />} />
-      <Route path='*' element={<Navigate to={routes.LOGIN} />} />
-    </React.Fragment>
+
+const RouterConfig = () => {
+
+
+  return (
+    <Router>
+      <Routes>
+        <Route path={routes.LOGIN} element={<LoginPage />} />
+        <Route path={routes.REGISTER} element={<RegisterPage />} />
+        {/* Protected routes */}
+        
+        <Route element={<ProtectedRoute Component={
+          AppLayout
+        } />}>
+          <Route index element={<HomePage />} />
+          <Route path={routes.HOME} element={<HomePage />} />
+          <Route path={routes.CAMPAIGNS} element={<CampaignPage />} />
+          <Route path={routes.POSTS} element={<CampaignPostPage />} />
+          <Route path={routes.PAY} element={<MakeDonationPage />} />
+          <Route path={routes.DONATIONS} element={<DonationPage />} />
+          <Route path={routes.NOTIFICATIONS} element={<NotificationPage />} />
+          <Route path={routes.HISTORY} element={<HistoryPage />} />
+          <Route path={routes.MYPROFILE} element={<MyProfilePage />} />
+          <Route path={routes.USERPROFILE} element={<UserProfilePage />} />
+          <Route path={routes.ONBOARDING} element={<Onboarding />} />
+        </Route>
+        {/* End of protected routes */}
+        <Route path={routes.VERIFYDONATION} element={<VerifyDonationPage />} />
+        <Route path='*' element={<Navigate to={routes.LOGIN} />} />
+      </Routes>
+    </Router>
   )
-)
+
+}
 
 export default RouterConfig

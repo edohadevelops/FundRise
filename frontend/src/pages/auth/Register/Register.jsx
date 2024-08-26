@@ -20,7 +20,7 @@ const Register = () => {
             console.log(data);
             localStorage.setItem("token",data.token)
             setUserDetails(data.payload)
-            navigate("/")
+            navigate("/onboarding")
         } catch(err){
             console.error(err)
             // form.restart()

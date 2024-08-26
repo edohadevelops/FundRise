@@ -1,24 +1,77 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Donation1 from '../../assets/donation1.png';
 import Donation2 from '../../assets/donation2.png';
 import Donation3 from '../../assets/donation3.png';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import LocalPoliceOutlinedIcon from '@mui/icons-material/LocalPoliceOutlined';
+import {axiosInstance} from '../../utils/api.js'
 import './style.css'
+import { Link, useLocation } from 'react-router-dom';
 
 const Card = ({
     details,
     index,
-    setCampaign,
-    setModal
+    setModalDetails,
+    setModal,
+    isliked,
+    initialCount,
+    donationDetails
 }) => {
 
+    // const alreadyLiked = details.Likes.length > 0
+    const [likeStatus,setLikeStatus] = useState(false);
+
+    const [likeCount,setLikeCount] = useState(null);
+
+    const location = useLocation();
+
+    const isDonation = location.pathname == "/donations"
+
+    useEffect(()=>{
+        // console.log("Is liked: ",isliked)
+        const updateCampaign = () => {
+            setLikeCount(initialCount)
+            setLikeStatus(isliked);
+        }
+        updateCampaign()
+    },[details])
+
+    const likeRef = useRef();
+    const unLikeRef = useRef();
+
+    // useEffect(()=>{
+    //     if(details?.Likes?.length > 0){
+    //         setLikeStatus(true)
+    //     }
+    // },[]);
+
+    const axios = axiosInstance()
+
+    const onLikeClick = (event) => {
+        event.stopPropagation();
+
+        axios.put(`/api/like/${details.campaign_id}`)
+        .then((data)=>{console.log("Successful: ",data)})
+        .catch((err)=> {console.log("Errror occured: ",err)})
+        
+        if(likeStatus){
+            setLikeCount((prev)=>prev-1)
+        }
+        else{
+            setLikeCount((prev)=>prev+1)
+        }
+
+        setLikeStatus((prev)=>!prev)
+    }
+
     const handleCampaignClick = () => {
-        setCampaign(details)
+        const forModal = isDonation ? donationDetails : details
+        setModalDetails(forModal)
         setModal(true)
     }
     
@@ -44,20 +97,65 @@ const Card = ({
         </div>
       </div>
       
-      <div className="card-details">
-        <div className="card-interactions">
-            <div className="flex justify-between">
-                <div className='like-comment-share'>
-                    <FavoriteBorderOutlinedIcon sx={{fontSize: "28px"}} />
-                    <MapsUgcOutlinedIcon sx={{fontSize: "28px"}} />
-                    <SendOutlinedIcon sx={{fontSize: "28px"}} />
+      <div className="card-details pt-2">
+        {
+            !isDonation &&
+            <div className="card-interactions">
+                <div className="flex justify-between">
+                    <div className='like-comment-share'>
+                        {
+                            // !likeStatus ?
+                            <button 
+                            className={`
+                                like-button 
+                                ${!likeStatus && "show-like-button"}
+                            `}
+                            onClick={onLikeClick}
+                            ref={unLikeRef}
+                            >
+
+                                {
+                                    !likeStatus ?
+                                    <FavoriteBorderOutlinedIcon className={""
+                                        // "like-icon" + likeStatus && "scale-50" 
+                                    } sx={{fontSize: "28px"}} /> :
+                                    <FavoriteIcon className={""
+                                        // "like-icon" + likeStatus && "scale-100" ""
+                                    } sx={{fontSize: "28px",color: "#F15A59"}} />
+                                }
+                            </button> 
+                            // <button 
+                            //   className={`
+                            //     like-button 
+                            //     ${likeStatus && "show-like-button"}
+                            //   `}
+                            //  onClick={(e)=>onLikeClick(e,false)}
+                            //  ref={likeRef}
+                            // >
+                            //     <FavoriteIcon 
+                            //       className={`
+                            //         like-icon 
+                            //         ${likeStatus && "show-like-icon"}
+                            //       `} 
+                            //       sx={{fontSize: "28px",color: "#F15A59"}}
+                            //     />
+                            // </button>
+                            
+                        }
+                        {/* <BookmarkBorderOutlinedIcon sx={{fontSize: "28px"}} /> */}
+                    </div>
+                    <button className="bg-primary text-white p-2 rounded-lg">
+                        Donate
+                    </button>
                 </div>
-                <BookmarkBorderOutlinedIcon sx={{fontSize: "28px"}} />
+                {
+                    likeCount !== null &&
+                    <p className="likes-count">{likeCount} likes</p>
+                }
             </div>
-            <p className="likes-count">{details.likes ? details.likes : "100" } likes</p>
-        </div>
+        }
         <p className="card-title">
-            <span className='card-username'>{details.User?.username }: </span> 
+            <Link to={`/users/${details.User?.username}`} className='card-username'>{details.User?.username }: </Link> 
             {details?.title}
         </p>
         <div className="card-progress">

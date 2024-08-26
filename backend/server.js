@@ -13,10 +13,19 @@ import {
     getCampaignById,
     makeDonation,
     paystackHook,
-    verifyDonation
+    verifyDonation,
+    onBoardingRoute,
+    likeRouter,
+    getUserByUsernameRouter,
+    getAllCampaignsByUsernameRouter,
+    getAllDonationsByUsernameRouter,
+    getAllDonationsByUseridRouter,
+    followRouter
 } from './routes/index.js';
 import errorHandler from './middlewares/error/error.js';
-export const app = express();
+// import SendSuccessMail from './services/nodemail/donation/success.js';
+
+const app = express();
 
 
 
@@ -33,22 +42,32 @@ app.options("*",cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/campaign',express.static('public/campaign/images'))
+app.use('/assets',express.static('public'))
+// app.use("/assets/donation",express.static('public/templates/donation'))
 
 app.get("/",(req,res)=>{
     res.send("Welcome to fundrise")
     console.log("welcome")
 });
+// 
 
 app.use('/api/login',loginRoute);
 app.use('/api/register',registerRoute);
+app.use('/api/onboarding',onBoardingRoute);
 app.use('/api/initialize',initialRoute);
 app.use('/api/campaign/create',createCampaignRoute);
 app.use('/api/campaign/getAll',getAllCampaigns);
 app.use('/api/categories/getAll',getAllCategories);
 app.use('/api/campaign/getById',getCampaignById);
 app.use('/api/donate',makeDonation);
-app.use('/api/donation/verify',verifyDonation)
+app.use('/api/donation/verify',verifyDonation);
+app.use('/api/like',likeRouter);
+app.use('/api/user/getByUsername',getUserByUsernameRouter);
+app.use('/api/campaign/getUsersCampaigns',getAllCampaignsByUsernameRouter);
+app.use('/api/donation/getDonationsByUsername',getAllDonationsByUsernameRouter);
+app.use('/api/donation/getDonationsByUserid',getAllDonationsByUseridRouter);
+app.use('/api/follow',followRouter);
+
 
 app.use('/paystack/webhook',paystackHook)
 

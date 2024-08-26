@@ -3,7 +3,8 @@ import {
     Campaign,
     Donation,
     Follower,
-    Category
+    Category,
+    Like
 } from '../../models/index.js';
 
     // Campaign-User Relationships
@@ -94,12 +95,35 @@ import {
     })
     // END
 
+    // START OF LIKE RELATIONSHIPS
+    User.hasMany(Like,{
+        foreignKey: 'user_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Like.belongsTo(User,{
+        foreignKey: 'user_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Campaign.hasMany(Like,{
+        foreignKey: 'campaign_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Like.belongsTo(Campaign,{
+        foreignKey: 'campaign_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+
 const models = {
     User,
     Follower,
     Campaign,
     Donation,
-    Category
+    Category,
+    Like
 }
 
 export default models;

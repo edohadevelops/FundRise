@@ -26,7 +26,7 @@
     @apply text-xl
 }
 .profile-actions{
-    @apply flex items-center gap-4 
+    @apply flex items-center gap-2
 }
 .profile-action{
     @apply flex items-center justify-center px-4 py-2 bg-subtle font-semibold text-sm rounded-lg 
@@ -61,11 +61,11 @@
 }
 
 .profile-results{
-    @apply flex gap-1 pb-6
+    @apply flex gap-2 pb-6 flex-wrap
 }
 .profile-campaign{
-    @apply flex-1
+    @apply w-[31%] h-[150px] md:h-[200px] rounded-lg border cursor-pointer
 }
 .profile-campaign img{
-    @apply w-full h-full
+    @apply w-full h-full rounded-lg
 }
