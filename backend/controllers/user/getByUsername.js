@@ -5,6 +5,8 @@ export default (req,res,next) => {
 
     const { username } = req.params;
 
+    const { user_id } = req.user.payload;
+
     models.User.findOne(
         {
             where: { username },
@@ -24,7 +26,7 @@ export default (req,res,next) => {
                 },
                 {
                     model: models.Follower,
-                    attributes: [],
+                    // attributes: [],
                     // where: {
                     //     status: true,
                     // },
@@ -41,6 +43,13 @@ export default (req,res,next) => {
                             FROM Followers AS F 
                             WHERE F.leader_id = User.user_id AND F.status = true
                         )`), 'totalFollowers'
+                    ],
+                    [
+                        literal(`
+                            (SELECT COUNT(*) 
+                            FROM Followers AS F 
+                            WHERE F.follower_id = ${user_id} AND F.status = true AND F.leader_id = User.user_id
+                        )`), 'isUserFollowed'
                     ]
                 ]
             },
