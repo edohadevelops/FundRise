@@ -89,7 +89,7 @@ const Profile = () => {
               <p className="profile-insight-text">donations</p>
             </div>
             <div className="profile-insight">
-              <p className="profile-insight-number">500</p>
+              <p className="profile-insight-number">{user?.totalFollowers}</p>
               <p className="profile-insight-text">followers</p>
             </div>
           </div>

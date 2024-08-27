@@ -3,7 +3,7 @@ import createEmailTemplate from './templates/success.js';
 
 const SendSuccessMail = (details) => {
 
-    console.log("User is: ", process.env.GMAIL_USER, "Pass is: ",process.env.GMAIL_PASS)
+    // console.log("User is: ", process.env.GMAIL_USER, "Pass is: ",process.env.GMAIL_PASS)
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,

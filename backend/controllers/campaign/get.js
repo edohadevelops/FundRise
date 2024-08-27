@@ -51,7 +51,7 @@ export default (req,res,next) => {
     })
     .then((data)=>{
         const jsonData = data.map((instance)=>instance.toJSON())
-        console.log(data);
+        // console.log(data);
         return res.status(200).send({
             message: "Campaigns gotten successfully",
             campaigns: jsonData 

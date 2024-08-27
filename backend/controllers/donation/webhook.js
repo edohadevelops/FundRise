@@ -1,6 +1,7 @@
 import { createHmac } from 'node:crypto';
 import models from '../../services/db/association.js';
 import SendSuccessMail from '../../services/nodemail/donation/success.js';
+import updateCampaign from '../../services/donation/update.js';
 
 
 export default (req,res) => {
@@ -13,9 +14,10 @@ export default (req,res) => {
 
     if(hash === req.headers['x-paystack-signature']){
         const { event, data:paystackData} = req.body;
+        const { metadata } = paystackData
         res.send(200)
         // console.log("Event from paystack is: ", event);
-        // console.log("Data from paystack is: ", paystackData);
+        console.log("Data from paystack is: ", paystackData);
         if(event === "charge.success"  || event === "charge.failed" ){
             // Handle Updating Donation
             models.Donation.update(
@@ -36,8 +38,9 @@ export default (req,res) => {
                 console.log("Error occured while updating donation: ",err)
             })
 
+            updateCampaign(metadata.campaign_id,paystackData.amount)
+
             // Handle Email Sending
-            const { metadata } = paystackData
 
             models.Donation.findByPk(metadata.donation_id,{
                 include: [
