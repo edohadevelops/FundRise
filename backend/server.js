@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import {connectToDB} from './config/db.js';
-// import { SyncDB } from './services/db/sync.js';
+import { SyncDB } from './services/db/sync.js';
 import {
     loginRoute,
     registerRoute,
@@ -30,7 +30,7 @@ const app = express();
 
 
 connectToDB();
-// SyncDB();
+SyncDB();
 
 
 app.use(cors({

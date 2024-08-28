@@ -4,7 +4,8 @@ import {
     Donation,
     Follower,
     Category,
-    Like
+    Like,
+    Notification
 } from '../../models/index.js';
 
     // Campaign-User Relationships
@@ -116,6 +117,59 @@ import {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     })
+    // END OF LIKE ASSOCIATIONS
+
+    // START OF NOTIFICATION ASSOCIATIONS
+    User.hasMany(Notification,{
+        foreignKey: 'sender_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    User.hasMany(Notification,{
+        foreignKey: 'reciever_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Follower.hasMany(Notification,{
+        foreignKey: 'entity_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Like.hasMany(Notification,{
+        foreignKey: 'entity_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Donation.hasMany(Notification,{
+        foreignKey: 'entity_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Notification.belongsTo(User,{
+        foreignKey: 'sender_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Notification.belongsTo(User,{
+        foreignKey: 'reciever_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Notification.belongsTo(Follower,{
+        foreignKey: 'entity_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Notification.belongsTo(Like,{
+        foreignKey: 'entity_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+    Notification.belongsTo(Donation,{
+        foreignKey: 'entity_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
 
 const models = {
     User,
@@ -123,7 +177,8 @@ const models = {
     Campaign,
     Donation,
     Category,
-    Like
+    Like,
+    Notification
 }
 
 export default models;
