@@ -120,56 +120,56 @@ import {
     // END OF LIKE ASSOCIATIONS
 
     // START OF NOTIFICATION ASSOCIATIONS
-    User.hasMany(Notification,{
-        foreignKey: 'sender_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
-    User.hasMany(Notification,{
-        foreignKey: 'reciever_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
-    Follower.hasMany(Notification,{
-        foreignKey: 'entity_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
-    Like.hasMany(Notification,{
-        foreignKey: 'entity_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
-    Donation.hasMany(Notification,{
-        foreignKey: 'entity_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
-    Notification.belongsTo(User,{
-        foreignKey: 'sender_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
-    Notification.belongsTo(User,{
-        foreignKey: 'reciever_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
-    Notification.belongsTo(Follower,{
-        foreignKey: 'entity_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
-    Notification.belongsTo(Like,{
-        foreignKey: 'entity_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
-    Notification.belongsTo(Donation,{
-        foreignKey: 'entity_id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
+    // User.hasMany(Notification,{
+    //     foreignKey: 'sender_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
+    // User.hasMany(Notification,{
+    //     foreignKey: 'reciever_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
+    // Follower.hasMany(Notification,{
+    //     foreignKey: 'entity_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
+    // Like.hasMany(Notification,{
+    //     foreignKey: 'entity_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
+    // Donation.hasMany(Notification,{
+    //     foreignKey: 'entity_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
+    // Notification.belongsTo(User,{
+    //     foreignKey: 'sender_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
+    // Notification.belongsTo(User,{
+    //     foreignKey: 'reciever_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
+    // Notification.belongsTo(Follower,{
+    //     foreignKey: 'entity_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
+    // Notification.belongsTo(Like,{
+    //     foreignKey: 'entity_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
+    // Notification.belongsTo(Donation,{
+    //     foreignKey: 'entity_id',
+    //     onDelete: 'CASCADE',
+    //     onUpdate: 'CASCADE'
+    // })
 
 const models = {
     User,
@@ -178,7 +178,7 @@ const models = {
     Donation,
     Category,
     Like,
-    Notification
+    // Notification
 }
 
 export default models;

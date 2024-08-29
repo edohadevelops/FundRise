@@ -30,7 +30,7 @@ const Card = ({
     const isDonation = location.pathname == "/donations"
 
     useEffect(()=>{
-        // console.log("Is liked: ",isliked)
+        console.log("Details Campaign:  ",details)
         const updateCampaign = () => {
             setLikeCount(initialCount)
             setLikeStatus(isliked);
@@ -52,7 +52,7 @@ const Card = ({
     const onLikeClick = (event) => {
         event.stopPropagation();
 
-        axios.put(`/api/like/${details.campaign_id}`)
+        axios.put(`/api/like/${details.campaign_id}`,{reciever_id: details.User?.user_id})
         .then((data)=>{console.log("Successful: ",data)})
         .catch((err)=> {console.log("Errror occured: ",err)})
         

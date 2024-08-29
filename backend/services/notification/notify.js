@@ -1,5 +1,6 @@
-import models from "../db/association.js";
+// import models from "../db/association.js";
 import joi from 'joi'
+import { Notification } from '../../models/index.js'
 
 const validate = (data) => {
 
@@ -22,12 +23,14 @@ const CreateNotification = async(details) => {
             error: error.details[0].message
     }
     try{
-        const notification = await models.Notification.create(details);
+        const notification = await Notification.create(details);
 
-        console.log("Notification created successfully",notification.toJSON());
+        const promise = await notification.toJSON()
+
+        console.log("Notification created successfully", promise);
 
         return {
-            notification: notification.toJSON()
+            notification: promise
         }
     }catch(err){
         console.log("Error occured when trying to create Notification: ",err)
