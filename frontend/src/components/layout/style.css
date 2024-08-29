@@ -2,7 +2,7 @@
     @apply w-[100vw] h-[100vh] flex flex-col-reverse sm:flex-row text-tertiary
 }
 .page-sidebar{
-    @apply w-full sm:w-fit lg:w-[20%] border-r border-gray-400 sm:px-4 sm:py-8 lg:py-6 flex sm:flex-col gap-6 h-fit sm:h-full sm:overflow-y-scroll text-tertiary justify-center
+    @apply w-full sm:w-fit lg:w-[20%] border-r border-gray-400 sm:px-4 sm:py-8 lg:py-6 flex sm:flex-col gap-6 h-fit sm:h-full sm:overflow-y-scroll text-tertiary
 }
 .page-sidebar::-webkit-scrollbar{
     @apply w-[5px]
@@ -12,6 +12,9 @@
 }
 .sidebar-logo{
     @apply h-[20px] lg:h-[40px] w-fit pl-2 lg:pl-6 sm:mt-2 hidden sm:block
+}
+.sidebar-content{
+    @apply flex flex-col gap-6 w-full h-full justify-between
 }
 .sidebar-links{
     @apply flex sm:flex-col w-full justify-between sm:justify-normal gap-2

@@ -124,7 +124,7 @@ const Pay = () => {
               <span>{ campaign?.current_amount }</span> / 
               <span>{ campaign?.target_amount }</span>
             </p>
-            <p className="post-insights-pervent">{campaign?.progressPercent}%</p>
+            <p className="post-insights-pervent">{Math.floor(campaign?.progressPercent)}%</p>
           </div>
         </div>
         <Form 

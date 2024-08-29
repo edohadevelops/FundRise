@@ -3,29 +3,29 @@ import models from './association.js'
 import { User,Category } from '../../models/index.js'
 
 export const SyncDB = () => {
-    sequelize.sync({})
+    sequelize.sync({alter: true})
     .then(()=>{
         console.log("Successfully synced");
-        Category.bulkCreate([
-            {
-                category_name: "Medical"
-            },
-            {
-                category_name: "Business"
-            },
-            {
-                category_name: "Education"
-            },
-            {
-                category_name: "Sport"
-            },
-            {
-                category_name: "Transportation"
-            },
-            {
-                category_name: "Charity"
-            }
-        ])
+        // Category.bulkCreate([
+        //     {
+        //         category_name: "Medical"
+        //     },
+        //     {
+        //         category_name: "Business"
+        //     },
+        //     {
+        //         category_name: "Education"
+        //     },
+        //     {
+        //         category_name: "Sport"
+        //     },
+        //     {
+        //         category_name: "Transportation"
+        //     },
+        //     {
+        //         category_name: "Charity"
+        //     }
+        // ])
         // User.update(
         //     {
         //         first_name: "Amen",

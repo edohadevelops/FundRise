@@ -1,13 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Donation1 from '../../assets/donation1.png';
-import Donation2 from '../../assets/donation2.png';
-import Donation3 from '../../assets/donation3.png';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
-import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
+// import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+// import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
+// import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import LocalPoliceOutlinedIcon from '@mui/icons-material/LocalPoliceOutlined';
 import {axiosInstance} from '../../utils/api.js'
 import './style.css'
@@ -80,14 +77,7 @@ const Card = ({
       <div className="img">
         <img 
             src={
-                details.campaign_img ?
-                details.campaign_img :
-                index === 0 ?
-                Donation2 :
-                index === 1 ?
-                Donation1 : 
-                // index === 2 &&
-                Donation3 
+                details?.campaign_img
             } 
             alt="Donation picture" 
         />
@@ -155,23 +145,23 @@ const Card = ({
             </div>
         }
         <p className="card-title">
-            <Link to={`/users/${details.User?.username}`} className='card-username'>{details.User?.username }: </Link> 
+            <Link to={`/users/${details?.User?.username}`} className='card-username'>{details?.User?.username }: </Link> 
             {details?.title}
         </p>
         <div className="card-progress">
             <div className="card-timeline">
                 <HistoryOutlinedIcon />
-                <span>{details.daysLeft}</span>
+                <span>{details?.daysLeft}</span>
             </div>
             <div className="card-progress-bar">
                 <div className="progress-inner-bar" style={{width: `${details?.progressPercent && details?.progressPercent}%`}}></div>
             </div>
         </div>
         <div className="progress-rate">
-            <p className="progress-value"><span>{details.current_amount}</span>/{details.target_amount}</p>
-            <p className="progress-percent">{details.progressPercent}%</p>
+            <p className="progress-value"><span>{details?.current_amount}</span>/{details?.target_amount}</p>
+            <p className="progress-percent">{Math.floor(details?.progressPercent)}%</p>
         </div>
-        <p className="donators-number"><span>{details.totalDonators ? details.totalDonators : 0}</span> donators</p>
+        <p className="donators-number"><span>{details?.totalDonators ? details?.totalDonators : 0}</span> donators</p>
 
       </div>
 

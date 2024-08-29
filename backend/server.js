@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import {connectToDB} from './config/db.js';
-import { SyncDB } from './services/db/sync.js';
+// import { SyncDB } from './services/db/sync.js';
 import {
     loginRoute,
     registerRoute,
@@ -23,14 +23,14 @@ import {
     followRouter
 } from './routes/index.js';
 import errorHandler from './middlewares/error/error.js';
-// import SendSuccessMail from './services/nodemail/donation/success.js';
+import SendSuccessMail from './services/nodemail/donation/success.js';
 
 const app = express();
 
 
 
 connectToDB();
-SyncDB();
+// SyncDB();
 
 
 app.use(cors({

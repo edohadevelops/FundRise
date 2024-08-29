@@ -87,9 +87,9 @@ Campaign.init(
             get(){
                 const start_date = this.start_date
                 const end_date = this.end_date
-                const timeDifference = new Date(this.end_date) - new Date(this.start_date);
+                const timeDifference = new Date(end_date) - new Date(start_date);
                 const daysDifference = timeDifference / ( 1000 * 60 * 60 * 24 );
-                const daysString = `${daysDifference} days left`
+                const daysString = `${daysDifference} days left`;
 
                 return daysString;
             }

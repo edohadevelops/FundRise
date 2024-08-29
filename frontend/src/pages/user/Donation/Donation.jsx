@@ -6,6 +6,7 @@ import Card from '../../../components/cards/Card';
 import { axiosInstance } from '../../../utils/api';
 import { AppContext } from '../../../store/AppContext';
 import DonationModal from '../../../components/modal/donation/Modal';
+import DonationCard from '../../../components/cards/donation/DonationCard';
 
 
 
@@ -77,16 +78,15 @@ const Donation = () => {
         <div className="campaign-list">
           {
             donations?.map((donation,index)=>(
-              <Card 
-                details={donation.Campaign} 
-                index={index} 
-                initialCount={donation.Campaign.totalLikes} 
+              <DonationCard 
+                details={donation?.Campaign} 
+                index={index}
                 isliked={donation?.Campaign?.hasUserLiked} 
                 donationDetails={
                   {
-                    amount: donation.donation_amount,
-                    status: donation.donation_status,
-                    campaign_id: donation.Campaign.campaign_id
+                    amount: donation?.donation_amount,
+                    status: donation?.donation_status,
+                    campaign_id: donation?.Campaign?.campaign_id
                   }
                 }
                 setModalDetails={setModalDetails}

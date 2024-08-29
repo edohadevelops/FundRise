@@ -37,44 +37,47 @@ const AppLayout = () => {
         <div className='page'>
           <nav className='page-sidebar'>
             <img className='sidebar-logo' src={Logo} alt='logo' />
-            <div className="sidebar-links">
-                <Link className='side-link' to={routes.HOME}>
-                  <HomeOutlinedIcon sx={{fontSize: "30px"}} />
-                  <span className='side-link-text'>Home</span>
-                </Link>
-                <Link className='side-link' to={routes.CAMPAIGNS}>
-                  <EmojiEventsOutlinedIcon sx={{fontSize: "30px"}} />
-                  <span className='side-link-text'>Campaigns</span>
-                </Link>
-                <Link className='side-link' to={routes.DONATIONS}>
-                  <VolunteerActivismOutlinedIcon sx={{fontSize: "30px"}} />
-                  <span className='side-link-text'>Donations</span>
-                </Link>
-                <Link className='side-notify side-link' to={routes.NOTIFICATIONS}>
-                  <NotificationsActiveOutlinedIcon sx={{fontSize: "30px"}} />
-                  <span className='side-link-text'>Notifications</span>
-                </Link>
-                <Link className='side-link' to={routes.HISTORY}>
-                  <HistoryOutlinedIcon sx={{fontSize: "30px"}} />
-                  <span className='side-link-text'>History</span>
-                </Link>
-                <Link className='side-link' to={routes.MYPROFILE}>
-                  <AccountCircleOutlinedIcon sx={{fontSize: "30px"}} />
-                  <span className='side-link-text'>Profile</span>
-                </Link>
-                <Link className='add-campaign-side'>
-                  <AddOutlinedIcon />
-                  <span>Campaign</span>  
-                </Link>
-            </div>
-            <Link className="sidebar-profile-actions">
-              <img src={Avatar} alt='profile-picture'/>
-              <div className="side-profile-details">
-                <p className="profile-name">Amen Edoha</p>
-                <p className="profile-user">@edohaTheDev</p>
+            <div className="sidebar-content">
+              <div className="sidebar-links">
+                  <Link className='side-link' to={routes.HOME}>
+                    <HomeOutlinedIcon sx={{fontSize: "30px"}} />
+                    <span className='side-link-text'>Home</span>
+                  </Link>
+                  <Link className='side-link' to={routes.CAMPAIGNS}>
+                    <EmojiEventsOutlinedIcon sx={{fontSize: "30px"}} />
+                    <span className='side-link-text'>Campaigns</span>
+                  </Link>
+                  <Link className='side-link' to={routes.DONATIONS}>
+                    <VolunteerActivismOutlinedIcon sx={{fontSize: "30px"}} />
+                    <span className='side-link-text'>Donations</span>
+                  </Link>
+                  <Link className='side-link' to={routes.NOTIFICATIONS}>
+                    <NotificationsActiveOutlinedIcon sx={{fontSize: "30px"}} />
+                    <span className='side-link-text'>Notifications</span>
+                  </Link>
+                  {/* <Link className='side-link' to={routes.HISTORY}>
+                    <HistoryOutlinedIcon sx={{fontSize: "30px"}} />
+                    <span className='side-link-text'>History</span>
+                  </Link> */}
+                  <Link className='side-link' to={routes.MYPROFILE}>
+                    <AccountCircleOutlinedIcon sx={{fontSize: "30px"}} />
+                    <span className='side-link-text'>Profile</span>
+                  </Link>
+                  
               </div>
-              <MoreHorizOutlinedIcon className="side-profile-menu-icon" />
-            </Link>
+              <Link className='add-campaign-side'>
+                <AddOutlinedIcon />
+                <span>Campaign</span>  
+              </Link>
+              <Link className="sidebar-profile-actions">
+                <img src={Avatar} alt='profile-picture'/>
+                <div className="side-profile-details">
+                  <p className="profile-name">Amen Edoha</p>
+                  <p className="profile-user">@edohaTheDev</p>
+                </div>
+                <MoreHorizOutlinedIcon className="side-profile-menu-icon" />
+              </Link>
+            </div>
           </nav>
           <div className="main-content">
             <Outlet />
