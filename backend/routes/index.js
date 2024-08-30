@@ -15,3 +15,4 @@ export { default as getAllCampaignsByUsernameRouter } from './campaign/getAllByU
 export { default as getAllDonationsByUsernameRouter } from './donation/get/getAllByUsername.js';
 export { default as getAllDonationsByUseridRouter } from './donation/get/getAllById.js';
 export { default as followRouter } from './follow/update.js'
+export { default as getNotificationsRouter } from './notification/get.js'

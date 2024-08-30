@@ -39,9 +39,6 @@ const CreateNotification = async(details) => {
         }
     }
 
-
-
-
 }
 
 export default CreateNotification
