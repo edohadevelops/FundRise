@@ -132,11 +132,11 @@ const Card = ({
                             // </button>
                             
                         }
-                        {/* <BookmarkBorderOutlinedIcon sx={{fontSize: "28px"}} /> */}
+                        {/* <SendOutlinedIcon sx={{fontSize: "28px"}} /> */}
                     </div>
-                    <button className="bg-primary text-white p-2 rounded-lg">
+                    <Link to={`/donate/${details.campaign_id}`} className="bg-primary text-white p-2 rounded-lg">
                         Donate
-                    </button>
+                    </Link>
                 </div>
                 {
                     likeCount !== null &&

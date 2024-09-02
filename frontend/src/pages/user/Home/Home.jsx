@@ -47,7 +47,7 @@ const Home = () => {
                         <Link className='' to={routes.NOTIFICATIONS}>
                             <NotificationsActiveOutlinedIcon className='notification-icon' />
                         </Link>
-                        <img src={userDetails?.profile_picture} className="home-profile-pic" alt="avatar.jpg" onClick={()=>setPostOpen(true)} />
+                        <img src={userDetails?.profile_picture} className="home-profile-pic" alt="avatar.jpg"/>
                     </div>
                 </div>
                 <div className="filter-section">

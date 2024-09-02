@@ -1,0 +1,26 @@
+.notification-card{
+    @apply flex justify-between gap-2 items-center
+}
+.notification-user-img{
+    @apply h-[55px] w-[55px] rounded-[50%]
+}
+.notification-user-img img{
+    @apply h-full w-full rounded-[50%]
+}
+.notification-content{
+    @apply w-full max-w-[65%] sm:max-w-[80%] text-sm
+}
+.notification-content a{
+    @apply font-semibold
+}
+.notification-campaign-img{
+    @apply h-[70px] w-[70px] rounded-sm
+}
+.notification-campaign-img img{
+    @apply h-full w-full rounded-lg
+}
+.notification-follow-button{
+    @apply bg-primary text-white px-4 py-2 rounded-lg text-sm
+}
+
+/*  */
