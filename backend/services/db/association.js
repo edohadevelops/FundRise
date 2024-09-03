@@ -122,11 +122,13 @@ import {
     // START OF NOTIFICATION ASSOCIATIONS
     User.hasMany(Notification,{
         foreignKey: 'sender_id',
+        as: 'Sender',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     })
     User.hasMany(Notification,{
         foreignKey: 'reciever_id',
+        as: 'Reciever',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     })
@@ -147,11 +149,13 @@ import {
     // })
     Notification.belongsTo(User,{
         foreignKey: 'sender_id',
+        as: 'Sender',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     })
     Notification.belongsTo(User,{
         foreignKey: 'reciever_id',
+        as: 'Reciever',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     })

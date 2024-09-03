@@ -28,8 +28,6 @@ const AppLayout = () => {
 
   const { userDetails } = useContext(AppContext);
 
-  console.log("USer details is: ",userDetails)
-
   return (
     <>
       {
@@ -70,12 +68,14 @@ const AppLayout = () => {
                 <span>Campaign</span>  
               </Link>
               <Link className="sidebar-profile-actions">
-                <img src={Avatar} alt='profile-picture'/>
-                <div className="side-profile-details">
-                  <p className="profile-name">Amen Edoha</p>
-                  <p className="profile-user">@edohaTheDev</p>
+                <img src={userDetails?.profile_picture} alt='profile-picture'/>
+                <div className='flex justify-between w-full items-center'>
+                  <div className="side-profile-details">
+                    <p className="profile-name">{userDetails?.first_name + " " + userDetails?.last_name}</p>
+                    <p className="profile-user">@{userDetails?.username}</p>
+                  </div>
+                  <MoreHorizOutlinedIcon className="side-profile-menu-icon" />
                 </div>
-                <MoreHorizOutlinedIcon className="side-profile-menu-icon" />
               </Link>
             </div>
           </nav>

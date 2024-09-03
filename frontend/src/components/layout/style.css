@@ -20,7 +20,7 @@
     @apply flex sm:flex-col w-full justify-between sm:justify-normal gap-2
 }
 .side-link{
-    @apply py-3 px-4 text-lg rounded-xl flex gap-2 items-center text-[#0b2929]
+    @apply py-2 px-4 rounded-xl flex gap-2 items-center text-[#0b2929]
 }
 .side-link:hover{
     @apply bg-[#fafafa]
@@ -35,7 +35,10 @@
     @apply w-full hidden lg:flex items-center justify-center p-3 bg-[#187070] text-white font-bold rounded-xl text-xl gap-1
 }
 .sidebar-profile-actions{
-    @apply w-full hidden lg:flex items-center px-4 gap-3
+    @apply w-full hidden lg:flex items-center gap-3 
+}
+.sidebar-profile-actions img{
+    @apply w-[45px] h-[45px] rounded-full
 }
 .profile-name{
     @apply font-semibold

@@ -3,6 +3,7 @@ import NoNotification from '../../../assets/NoDonationsIcon.svg';
 import ArrowBack from '../../../assets/BackIcon.svg'
 import { axiosInstance } from '../../../utils/api';
 import Cards from '../../../components/cards/notification/Notification';
+import './style.css'
 
 const Notification = () => {
   const axios = axiosInstance();
@@ -48,11 +49,24 @@ const Notification = () => {
             {
               notifications?.map((notification)=>{
                 if(notification.entity_type === "Like")
-                  return <Cards.Like profile_pic={notification.User.profile_picture} username={notification.User.username} campaign_image={notification.entity.Campaign.campaign_img}/>
+                  return <Cards.Like 
+                            profile_pic={notification.Sender.profile_picture} 
+                            username={notification.Sender.username} 
+                            campaign_image={notification.entity.Campaign.campaign_img} campaign_id={notification.entity.Campaign.campaign_id}
+                          />
                 else if(notification.entity_type === "Follow")
-                  return <Cards.Follow profile_pic={notification.User.profile_picture} username={notification.User.username} />
+                  return <Cards.Follow 
+                            profile_pic={notification.Sender.profile_picture} 
+                            username={notification.Sender.username} 
+                          />
                 else if(notification.entity_type === "Donation")
-                  return <Cards.Donation profile_pic={notification.User.profile_picture} username={notification.User.username} campaign_image={notification.entity.Campaign.campaign_img} donation_amount={notification.entity.donation_amount} />
+                  return <Cards.Donation 
+                            profile_pic={notification.Sender.profile_picture} 
+                            username={notification.Sender.username} 
+                            campaign_image={notification.entity.Campaign.campaign_img} 
+                            campaign_id={notification.entity.Campaign.campaign_id} 
+                            donation_amount={notification.entity.donation_amount} 
+                          />
               })
             }
           </div>
@@ -63,11 +77,11 @@ const Notification = () => {
             {
               notifications?.map((notification)=>{
                 if(notification.entity_type === "Like")
-                  return <Cards.Like profile_pic={notification.User.profile_picture} username={notification.User.username} campaign_image={notification.entity.Campaign.campaign_img}/>
+                  return <Cards.Like profile_pic={notification.Sender.profile_picture} username={notification.Sender.username} campaign_image={notification.entity.Campaign.campaign_img} campaign_id={notification.entity.Campaign.campaign_id}/>
                 else if(notification.entity_type === "Follow")
-                  return <Cards.Follow profile_pic={notification.User.profile_picture} username={notification.User.username}/>
+                  return <Cards.Follow profile_pic={notification.Sender.profile_picture} username={notification.Sender.username}/>
                 else if(notification.entity_type === "Donation")
-                  return <Cards.Donation profile_pic={notification.User.profile_picture} username={notification.User.username} campaign_image={notification.entity.Campaign.campaign_img} donation_amount={notification.entity.donation_amount} />
+                  return <Cards.Donation profile_pic={notification.Sender.profile_picture} username={notification.Sender.username} campaign_image={notification.entity.Campaign.campaign_img} campaign_id={notification.entity.Campaign.campaign_id} donation_amount={notification.entity.donation_amount} />
               })
             }
           </div>
@@ -78,11 +92,11 @@ const Notification = () => {
             {
               notifications?.map((notification)=>{
                 if(notification.entity_type === "Like")
-                  return <Cards.Like profile_pic={notification.User.profile_picture} username={notification.User.username} campaign_image={notification.entity.Campaign.campaign_img}/>
+                  return <Cards.Like profile_pic={notification.Sender.profile_picture} username={notification.Sender.username} campaign_image={notification.entity.Campaign.campaign_img} campaign_id={notification.entity.Campaign.campaign_id}/>
                 else if(notification.entity_type === "Follow")
-                  return <Cards.Follow profile_pic={notification.User.profile_picture} username={notification.User.username} />
+                  return <Cards.Follow profile_pic={notification.Sender.profile_picture} username={notification.Sender.username} />
                 else if(notification.entity_type === "Donation")
-                  return <Cards.Donation profile_pic={notification.User.profile_picture} username={notification.User.username} campaign_image={notification.entity.Campaign.campaign_img} donation_amount={notification.entity.donation_amount} />
+                  return <Cards.Donation profile_pic={notification.Sender.profile_picture} username={notification.Sender.username} campaign_image={notification.entity.Campaign.campaign_img} campaign_id={notification.entity.Campaign.campaign_id} donation_amount={notification.entity.donation_amount} />
               })
             }
           </div>

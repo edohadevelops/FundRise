@@ -19,9 +19,7 @@ export default async(req,res,next) => {
                     {
                         model: models.User,
                         attributes: ["username","user_id","profile_picture"],
-                        where: {
-                            user_id: col('Notification.sender_id')
-                        },
+                        as: 'Sender',
                         required: true
                     }
                 ]

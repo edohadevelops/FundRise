@@ -1,0 +1,6 @@
+.notification-page{
+    @apply h-full flex flex-col gap-2
+}
+.notification-group-title{
+    @apply font-semibold;
+}

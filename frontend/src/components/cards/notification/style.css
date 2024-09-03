@@ -1,5 +1,5 @@
 .notification-card{
-    @apply flex justify-between gap-2 items-center
+    @apply flex justify-between gap-2 items-center py-1
 }
 .notification-user-img{
     @apply h-[55px] w-[55px] rounded-[50%]
