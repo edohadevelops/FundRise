@@ -51,13 +51,16 @@ const Notification = () => {
                 if(notification.entity_type === "Like")
                   return <Cards.Like 
                             profile_pic={notification.Sender.profile_picture} 
-                            username={notification.Sender.username} 
-                            campaign_image={notification.entity.Campaign.campaign_img} campaign_id={notification.entity.Campaign.campaign_id}
+                            username={notification.Sender.username}  
+                            campaign_image={notification.entity.Campaign.campaign_img} 
+                            campaign_id={notification.entity.Campaign.campaign_id}
                           />
                 else if(notification.entity_type === "Follow")
                   return <Cards.Follow 
                             profile_pic={notification.Sender.profile_picture} 
                             username={notification.Sender.username} 
+                            user_id={notification.Sender.user_id}
+                            initial_status={notification.entity.isUserFollowed ? true : false} 
                           />
                 else if(notification.entity_type === "Donation")
                   return <Cards.Donation 
@@ -66,6 +69,7 @@ const Notification = () => {
                             campaign_image={notification.entity.Campaign.campaign_img} 
                             campaign_id={notification.entity.Campaign.campaign_id} 
                             donation_amount={notification.entity.donation_amount} 
+                            donation_message={notification.entity.donation_message} 
                           />
               })
             }
@@ -77,11 +81,28 @@ const Notification = () => {
             {
               notifications?.map((notification)=>{
                 if(notification.entity_type === "Like")
-                  return <Cards.Like profile_pic={notification.Sender.profile_picture} username={notification.Sender.username} campaign_image={notification.entity.Campaign.campaign_img} campaign_id={notification.entity.Campaign.campaign_id}/>
+                  return <Cards.Like 
+                            profile_pic={notification.Sender.profile_picture} 
+                            username={notification.Sender.username}  
+                            campaign_image={notification.entity.Campaign.campaign_img} 
+                            campaign_id={notification.entity.Campaign.campaign_id}
+                          />
                 else if(notification.entity_type === "Follow")
-                  return <Cards.Follow profile_pic={notification.Sender.profile_picture} username={notification.Sender.username}/>
+                  return <Cards.Follow 
+                            profile_pic={notification.Sender.profile_picture} 
+                            username={notification.Sender.username} 
+                            user_id={notification.Sender.user_id}
+                            initial_status={notification.entity.isUserFollowed ? true : false} 
+                          />
                 else if(notification.entity_type === "Donation")
-                  return <Cards.Donation profile_pic={notification.Sender.profile_picture} username={notification.Sender.username} campaign_image={notification.entity.Campaign.campaign_img} campaign_id={notification.entity.Campaign.campaign_id} donation_amount={notification.entity.donation_amount} />
+                  return <Cards.Donation 
+                            profile_pic={notification.Sender.profile_picture} 
+                            username={notification.Sender.username} 
+                            campaign_image={notification.entity.Campaign.campaign_img} 
+                            campaign_id={notification.entity.Campaign.campaign_id} 
+                            donation_amount={notification.entity.donation_amount} 
+                            donation_message={notification.entity.donation_message} 
+                          />
               })
             }
           </div>
@@ -92,11 +113,28 @@ const Notification = () => {
             {
               notifications?.map((notification)=>{
                 if(notification.entity_type === "Like")
-                  return <Cards.Like profile_pic={notification.Sender.profile_picture} username={notification.Sender.username} campaign_image={notification.entity.Campaign.campaign_img} campaign_id={notification.entity.Campaign.campaign_id}/>
+                  return <Cards.Like 
+                            profile_pic={notification.Sender.profile_picture} 
+                            username={notification.Sender.username}  
+                            campaign_image={notification.entity.Campaign.campaign_img} 
+                            campaign_id={notification.entity.Campaign.campaign_id}
+                          />
                 else if(notification.entity_type === "Follow")
-                  return <Cards.Follow profile_pic={notification.Sender.profile_picture} username={notification.Sender.username} />
+                  return <Cards.Follow 
+                            profile_pic={notification.Sender.profile_picture} 
+                            username={notification.Sender.username} 
+                            user_id={notification.Sender.user_id} 
+                            initial_status={notification.entity.isUserFollowed ? true : false} 
+                          />
                 else if(notification.entity_type === "Donation")
-                  return <Cards.Donation profile_pic={notification.Sender.profile_picture} username={notification.Sender.username} campaign_image={notification.entity.Campaign.campaign_img} campaign_id={notification.entity.Campaign.campaign_id} donation_amount={notification.entity.donation_amount} />
+                  return <Cards.Donation 
+                            profile_pic={notification.Sender.profile_picture} 
+                            username={notification.Sender.username} 
+                            campaign_image={notification.entity.Campaign.campaign_img} 
+                            campaign_id={notification.entity.Campaign.campaign_id} 
+                            donation_amount={notification.entity.donation_amount} 
+                            donation_message={notification.entity.donation_message} 
+                          />
               })
             }
           </div>

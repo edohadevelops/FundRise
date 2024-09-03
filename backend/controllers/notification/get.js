@@ -1,4 +1,4 @@
-import { col } from "sequelize";
+import { col, literal } from "sequelize";
 import { Notification } from "../../models/index.js";
 import models from "../../services/db/association.js";
 
@@ -61,6 +61,26 @@ export default async(req,res,next) => {
                     ]
                 })
                 entity = donationDetails.toJSON()
+                return {
+                    ...notification,
+                    entity
+                }
+            }
+            else if(notification.entity_type === "Follow"){
+                const followerDetails = await models.Follower.findOne({
+                    attributes: [
+                        [literal(`
+                            MAX(CASE WHEN Follower.leader_id = ${notification.sender_id} AND Follower.follower_id = ${notification.reciever_id} AND Follower.status = ${true} THEN 1 ELSE 0 END)
+                        `),'isUserFollowed']
+                    ],
+                    where: {
+                        leader_id: notification.sender_id,
+                        follower_id: notification.reciever_id
+                    }
+                })
+
+                entity = followerDetails.toJSON()
+
                 return {
                     ...notification,
                     entity

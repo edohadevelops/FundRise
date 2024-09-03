@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './style.css';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import LocalPoliceOutlinedIcon from '@mui/icons-material/LocalPoliceOutlined';
+import { formatter } from '../../../utils/numberFormatter'
 
 
 
@@ -54,7 +55,7 @@ const DonationCard = ({
             </div>
             <div className="donation-card-details">
                 <p className='donation-card-title'>Amount Donated</p>
-                <p className='donation-card-value'>N 30,000.00</p>
+                <p className='donation-card-value'>{formatter.format(donationDetails?.amount).replace("₦", "₦ ")}</p>
             </div>
             <div className="card-progress py-1 flex flex-col gap-2">
                 <div className="card-timeline">
@@ -66,7 +67,7 @@ const DonationCard = ({
                 </div>
             </div>
             <div className="progress-rate">
-                <p className="progress-value"><span>{details?.current_amount}</span>/{details?.target_amount}</p>
+                <p className="progress-value"><span>{formatter.format(details?.current_amount).replace("₦", "₦ ")}</span>/{formatter.format(details?.target_amount).replace("₦", "₦ ")}</p>
                 <p className="progress-percent">{Math.floor(details?.progressPercent)}%</p>
             </div>
         </div>
