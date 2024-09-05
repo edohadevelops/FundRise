@@ -1,7 +1,7 @@
 import React,{useContext, useState} from 'react'
 import './style.css';
 import Logo from '../../assets/Logo3.png'
-import { Link, Outlet, ScrollRestoration } from 'react-router-dom';
+import { Link, Outlet, ScrollRestoration, useNavigate } from 'react-router-dom';
 import * as routes from '../../routes/routes';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
@@ -18,6 +18,16 @@ import { AppContext } from '../../store/AppContext';
 
 
 const AppLayout = () => {
+  const { userDetails,setIsAuthenticated } = useContext(AppContext);
+
+  const navigate = useNavigate()
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login"
+    setIsAuthenticated(false)
+    
+  }
 
   const [suggestedUsers,setSuggestedUsers] = useState([
     "ed0ha_",
@@ -26,7 +36,7 @@ const AppLayout = () => {
     "covenantuniversityota"
   ]);
 
-  const { userDetails } = useContext(AppContext);
+  
 
   return (
     <>
@@ -67,7 +77,7 @@ const AppLayout = () => {
                 <AddOutlinedIcon />
                 <span>Campaign</span>  
               </Link>
-              <Link className="sidebar-profile-actions">
+              <button className="sidebar-profile-actions">
                 <img src={userDetails?.profile_picture} alt='profile-picture'/>
                 <div className='flex justify-between w-full items-center'>
                   <div className="side-profile-details">
@@ -76,7 +86,14 @@ const AppLayout = () => {
                   </div>
                   <MoreHorizOutlinedIcon className="side-profile-menu-icon" />
                 </div>
-              </Link>
+                <div className="sidebar-menu-options">
+                  <div className='flex flex-col gap-2 border-b-2 pb-2'>
+                    <Link>Saved</Link>
+                    <Link>Settings</Link>
+                  </div>
+                  <button onClick={handleLogOut}>Log out</button>
+                </div>
+              </button>
             </div>
           </nav>
           <div className="main-content">

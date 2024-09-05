@@ -35,10 +35,16 @@
     @apply w-full hidden lg:flex items-center justify-center p-3 bg-[#187070] text-white font-bold rounded-xl text-xl gap-1
 }
 .sidebar-profile-actions{
-    @apply w-full hidden lg:flex items-center gap-3 
+    @apply w-full hidden lg:flex items-center gap-3 relative hover:bg-subtle px-2 rounded-lg
+}
+.sidebar-menu-options{
+    @apply border bg-white absolute top-0 -translate-y-full left-0 py-4 px-2 w-full rounded-lg flex-col flex gap-2
+}
+.sidebar-menu-options a,.sidebar-menu-options button{
+    @apply p-3 w-full rounded-lg text-start text-sm hover:bg-subtle
 }
 .sidebar-profile-actions img{
-    @apply w-[45px] h-[45px] rounded-full
+    @apply w-[45px] h-[45px] rounded-full 
 }
 .profile-name{
     @apply font-semibold

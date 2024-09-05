@@ -7,9 +7,8 @@ import { AppContext } from '../../store/AppContext';
 const ProtectedRoute = ({Component}) => {
 
   // const navigate = useNavigate();
-  const [isAuthenticated,setIsAuthenticated] = useState(false);
   const [isLoading,setIsLoading] = useState(true);
-  const {userDetails,setUserDetails,setAllCampaigns} = useContext(AppContext)
+  const {userDetails,setUserDetails,setAllCampaigns,isAuthenticated,setIsAuthenticated} = useContext(AppContext)
 
   const axios = axiosInstance();
 
