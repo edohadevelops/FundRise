@@ -7,11 +7,13 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
 import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
-import Avatar from '../../assets/Avatar.png';
 import Suggestion from '../cards/suggestion/Suggestion';
 import { AppContext } from '../../store/AppContext';
 
@@ -20,7 +22,19 @@ import { AppContext } from '../../store/AppContext';
 const AppLayout = () => {
   const { userDetails,setIsAuthenticated } = useContext(AppContext);
 
-  const navigate = useNavigate()
+  const [isMenuOpen,setMenuOpen] = useState(false)
+
+  const handleMenu = (event) => {
+    event.stopPropagation();
+
+    setMenuOpen(prev => !prev)
+  }
+
+  const navigate = useNavigate();
+
+  const handleProfileClick = () => {
+    navigate("/profile")
+  }
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
@@ -77,22 +91,27 @@ const AppLayout = () => {
                 <AddOutlinedIcon />
                 <span>Campaign</span>  
               </Link>
-              <button className="sidebar-profile-actions">
+              <button onClick={handleProfileClick} className="sidebar-profile-actions">
                 <img src={userDetails?.profile_picture} alt='profile-picture'/>
                 <div className='flex justify-between w-full items-center'>
                   <div className="side-profile-details">
                     <p className="profile-name">{userDetails?.first_name + " " + userDetails?.last_name}</p>
                     <p className="profile-user">@{userDetails?.username}</p>
                   </div>
-                  <MoreHorizOutlinedIcon className="side-profile-menu-icon" />
+                  <button onClick={handleMenu}>
+                    <MoreHorizOutlinedIcon className="side-profile-menu-icon" />
+                  </button>
                 </div>
-                <div className="sidebar-menu-options">
-                  <div className='flex flex-col gap-2 border-b-2 pb-2'>
-                    <Link>Saved</Link>
-                    <Link>Settings</Link>
+                {
+                  isMenuOpen &&
+                  <div className="sidebar-menu-options">
+                    <div className='flex flex-col gap-2 border-b-2 pb-2'>
+                      <Link><FavoriteBorderOutlinedIcon /> Saved</Link>
+                      <Link><SettingsOutlinedIcon /> Settings</Link>
+                    </div>
+                    <button onClick={handleLogOut}> <LogoutOutlinedIcon /> Log out</button>
                   </div>
-                  <button onClick={handleLogOut}>Log out</button>
-                </div>
+                }
               </button>
             </div>
           </nav>
