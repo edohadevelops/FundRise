@@ -23,7 +23,8 @@ import {
   MyProfilePage,
   RegisterPage, 
   UserProfilePage, 
-  VerifyDonationPage
+  VerifyDonationPage,
+  EditProfilePage
 } from '../pages/index.js';
 import Onboarding from '../pages/user/Onboarding/Onboarding.jsx';
 // import { AppContext } from '../store/AppContext.jsx';
@@ -53,6 +54,7 @@ const RouterConfig = () => {
           <Route path={routes.HISTORY} element={<HistoryPage />} />
           <Route path={routes.MYPROFILE} element={<MyProfilePage />} />
           <Route path={routes.USERPROFILE} element={<UserProfilePage />} />
+          <Route path={routes.EDITPROFILE} element={<EditProfilePage />} />
           <Route path={routes.ONBOARDING} element={<Onboarding />} />
         </Route>
         {/* End of protected routes */}

@@ -37,108 +37,111 @@ const Notification = () => {
         </div> : 
         <div className="notification-page">
           <div className='post-page-header'>
-          <button className='post-back-btn' onClick={()=>history.back()}>
-            <img src={ArrowBack} alt="" />
-          </button>
-          <p>Notifications</p>
+            <button className='post-back-btn' onClick={()=>history.back()}>
+              <img src={ArrowBack} alt="" />
+            </button>
+            <p>Notifications</p>
 
-        </div>
-        <div className="notification-group">
-          <p className="notification-group-title">Today</p>
-          <div className="notification-group-list">
-            {
-              notifications?.map((notification)=>{
-                if(notification.entity_type === "Like")
-                  return <Cards.Like 
-                            profile_pic={notification.Sender.profile_picture} 
-                            username={notification.Sender.username}  
-                            campaign_image={notification.entity.Campaign.campaign_img} 
-                            campaign_id={notification.entity.Campaign.campaign_id}
-                          />
-                else if(notification.entity_type === "Follow")
-                  return <Cards.Follow 
-                            profile_pic={notification.Sender.profile_picture} 
-                            username={notification.Sender.username} 
-                            user_id={notification.Sender.user_id}
-                            initial_status={notification.entity.isUserFollowed ? true : false} 
-                          />
-                else if(notification.entity_type === "Donation")
-                  return <Cards.Donation 
-                            profile_pic={notification.Sender.profile_picture} 
-                            username={notification.Sender.username} 
-                            campaign_image={notification.entity.Campaign.campaign_img} 
-                            campaign_id={notification.entity.Campaign.campaign_id} 
-                            donation_amount={notification.entity.donation_amount} 
-                            donation_message={notification.entity.donation_message} 
-                          />
-              })
-            }
           </div>
-        </div>
-        <div className="notification-group">
-          <p className="notification-group-title">Yesterday</p>
-          <div className="notification-group-list">
-            {
-              notifications?.map((notification)=>{
-                if(notification.entity_type === "Like")
-                  return <Cards.Like 
-                            profile_pic={notification.Sender.profile_picture} 
-                            username={notification.Sender.username}  
-                            campaign_image={notification.entity.Campaign.campaign_img} 
-                            campaign_id={notification.entity.Campaign.campaign_id}
-                          />
-                else if(notification.entity_type === "Follow")
-                  return <Cards.Follow 
-                            profile_pic={notification.Sender.profile_picture} 
-                            username={notification.Sender.username} 
-                            user_id={notification.Sender.user_id}
-                            initial_status={notification.entity.isUserFollowed ? true : false} 
-                          />
-                else if(notification.entity_type === "Donation")
-                  return <Cards.Donation 
-                            profile_pic={notification.Sender.profile_picture} 
-                            username={notification.Sender.username} 
-                            campaign_image={notification.entity.Campaign.campaign_img} 
-                            campaign_id={notification.entity.Campaign.campaign_id} 
-                            donation_amount={notification.entity.donation_amount} 
-                            donation_message={notification.entity.donation_message} 
-                          />
-              })
-            }
+          <div className="notification-body">
+            <div className="notification-group">
+              <p className="notification-group-title">Today</p>
+              <div className="notification-group-list">
+                {
+                  notifications?.map((notification)=>{
+                    if(notification.entity_type === "Like")
+                      return <Cards.Like 
+                                profile_pic={notification.Sender.profile_picture} 
+                                username={notification.Sender.username}  
+                                campaign_image={notification.entity.Campaign.campaign_img} 
+                                campaign_id={notification.entity.Campaign.campaign_id}
+                              />
+                    else if(notification.entity_type === "Follow")
+                      return <Cards.Follow 
+                                profile_pic={notification.Sender.profile_picture} 
+                                username={notification.Sender.username} 
+                                user_id={notification.Sender.user_id}
+                                initial_status={notification.entity.isUserFollowed ? true : false} 
+                              />
+                    else if(notification.entity_type === "Donation")
+                      return <Cards.Donation 
+                                profile_pic={notification.Sender.profile_picture} 
+                                username={notification.Sender.username} 
+                                campaign_image={notification.entity.Campaign.campaign_img} 
+                                campaign_id={notification.entity.Campaign.campaign_id} 
+                                donation_amount={notification.entity.donation_amount} 
+                                donation_message={notification.entity.donation_message} 
+                              />
+                  })
+                }
+              </div>
+            </div>
+            <div className="notification-group">
+              <p className="notification-group-title">Yesterday</p>
+              <div className="notification-group-list">
+                {
+                  notifications?.map((notification)=>{
+                    if(notification.entity_type === "Like")
+                      return <Cards.Like 
+                                profile_pic={notification.Sender.profile_picture} 
+                                username={notification.Sender.username}  
+                                campaign_image={notification.entity.Campaign.campaign_img} 
+                                campaign_id={notification.entity.Campaign.campaign_id}
+                              />
+                    else if(notification.entity_type === "Follow")
+                      return <Cards.Follow 
+                                profile_pic={notification.Sender.profile_picture} 
+                                username={notification.Sender.username} 
+                                user_id={notification.Sender.user_id}
+                                initial_status={notification.entity.isUserFollowed ? true : false} 
+                              />
+                    else if(notification.entity_type === "Donation")
+                      return <Cards.Donation 
+                                profile_pic={notification.Sender.profile_picture} 
+                                username={notification.Sender.username} 
+                                campaign_image={notification.entity.Campaign.campaign_img} 
+                                campaign_id={notification.entity.Campaign.campaign_id} 
+                                donation_amount={notification.entity.donation_amount} 
+                                donation_message={notification.entity.donation_message} 
+                              />
+                  })
+                }
+              </div>
+            </div>
+            <div className="notification-group">
+              <p className="notification-group-title">Last week</p>
+              <div className="notification-group-list">
+                {
+                  notifications?.map((notification)=>{
+                    if(notification.entity_type === "Like")
+                      return <Cards.Like 
+                                profile_pic={notification.Sender.profile_picture} 
+                                username={notification.Sender.username}  
+                                campaign_image={notification.entity.Campaign.campaign_img} 
+                                campaign_id={notification.entity.Campaign.campaign_id}
+                              />
+                    else if(notification.entity_type === "Follow")
+                      return <Cards.Follow 
+                                profile_pic={notification.Sender.profile_picture} 
+                                username={notification.Sender.username} 
+                                user_id={notification.Sender.user_id} 
+                                initial_status={notification.entity.isUserFollowed ? true : false} 
+                              />
+                    else if(notification.entity_type === "Donation")
+                      return <Cards.Donation 
+                                profile_pic={notification.Sender.profile_picture} 
+                                username={notification.Sender.username} 
+                                campaign_image={notification.entity.Campaign.campaign_img} 
+                                campaign_id={notification.entity.Campaign.campaign_id} 
+                                donation_amount={notification.entity.donation_amount} 
+                                donation_message={notification.entity.donation_message} 
+                              />
+                  })
+                }
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="notification-group">
-          <p className="notification-group-title">Last week</p>
-          <div className="notification-group-list">
-            {
-              notifications?.map((notification)=>{
-                if(notification.entity_type === "Like")
-                  return <Cards.Like 
-                            profile_pic={notification.Sender.profile_picture} 
-                            username={notification.Sender.username}  
-                            campaign_image={notification.entity.Campaign.campaign_img} 
-                            campaign_id={notification.entity.Campaign.campaign_id}
-                          />
-                else if(notification.entity_type === "Follow")
-                  return <Cards.Follow 
-                            profile_pic={notification.Sender.profile_picture} 
-                            username={notification.Sender.username} 
-                            user_id={notification.Sender.user_id} 
-                            initial_status={notification.entity.isUserFollowed ? true : false} 
-                          />
-                else if(notification.entity_type === "Donation")
-                  return <Cards.Donation 
-                            profile_pic={notification.Sender.profile_picture} 
-                            username={notification.Sender.username} 
-                            campaign_image={notification.entity.Campaign.campaign_img} 
-                            campaign_id={notification.entity.Campaign.campaign_id} 
-                            donation_amount={notification.entity.donation_amount} 
-                            donation_message={notification.entity.donation_message} 
-                          />
-              })
-            }
-          </div>
-        </div>
+        
         </div>
       }
       

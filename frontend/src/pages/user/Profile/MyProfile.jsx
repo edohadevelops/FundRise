@@ -3,12 +3,17 @@ import './style.css';
 import MoreIcon from '../../../assets/seeMoreIcon.svg';
 
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+
 import { AppContext } from '../../../store/AppContext';
 
 import { axiosInstance } from '../../../utils/api';
 import Tabs from './Tabs';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+  const navigate = useNavigate();
+
   const [currentTab,setCurrentTab] = useState("campaign");
   const {userDetails} = useContext(AppContext);
 
@@ -72,10 +77,10 @@ const Profile = () => {
           <div className="profile-actions-container">
             <p className="profile-username">{user?.username}</p>
             <div className="profile-actions">
-                <button className="profile-action">Edit Profile</button>
+              <button className="profile-action" onClick={()=>{ navigate("/profile/edit") }}>Edit Profile</button>
               <button className="profile-action">Share Profile</button>
               <button className="profile-menu-icon">
-                <img src={MoreIcon} alt="profile menu" />
+                <SettingsOutlinedIcon sx={{fontSize: "20px"}} />
               </button>
             </div>
           </div>
