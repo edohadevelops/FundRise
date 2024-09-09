@@ -22,14 +22,33 @@ export default async(req,res,next) => {
                         as: 'Sender',
                         required: true
                     }
-                ]
+                ],
+                attributes: {
+                    include: [
+                        [literal(`
+                            CASE 
+                            WHEN DATE(Notification.createdAt) = CURDATE() THEN 'Today'
+                            WHEN DATE(Notification.createdAt) = DATE_SUB(CURDATE(), INTERVAL 1 DAY) THEN 'Yesterday'
+                            WHEN Notification.createdAt >= DATE_SUB(CURDATE(), INTERVAL (WEEKDAY(CURDATE()) + 7) DAY)
+                                AND Notification.createdAt < CURDATE() THEN 'Last Week'
+                            ELSE 'Earlier'
+                            END
+                        `),`notification_date`]
+                    ]
+                },
+                group: ["notification_date"]
             }
         )
 
-        const jsonNotifications = notificationsList.map((notification)=>notification.toJSON())
+        const jsonNotifications = notificationsList.map((notification)=>notification.toJSON());
+
+        const todayNotifications = [];
+        const yesterdayNotifications = [];
+        const lastWeekNotifications = [];
+        const earlierNotifications = [];
 
 
-        const myNotifications = await Promise.all(jsonNotifications.map(async(notification)=>{
+        await Promise.all(jsonNotifications.map(async(notification)=>{
             let entity;
 
             if(notification.entity_type === "Like"){
@@ -45,10 +64,7 @@ export default async(req,res,next) => {
                     ]
                 })
 
-                return {
-                    ...notification,
-                    entity: likeDetails
-                }
+                entity = likeDetails
             }
             else if(notification.entity_type === "Donation"){
                 const donationDetails = await models.Donation.findByPk(notification.entity_id,{
@@ -60,11 +76,7 @@ export default async(req,res,next) => {
                         }
                     ]
                 })
-                entity = donationDetails.toJSON()
-                return {
-                    ...notification,
-                    entity
-                }
+                entity = donationDetails
             }
             else if(notification.entity_type === "Follow"){
                 const followerDetails = await models.Follower.findOne({
@@ -79,16 +91,37 @@ export default async(req,res,next) => {
                     }
                 })
 
-                entity = followerDetails.toJSON()
-
-                return {
-                    ...notification,
-                    entity
-                }
+                entity = followerDetails
             }
 
-            return notification
+            if(notification.notification_date === "Today"){
+                todayNotifications.push(
+                    {
+                        ...notification,
+                        entity
+                    }
+                )
+            }else if(notification.notification_date === "Yesterday"){
+                yesterdayNotifications.push({
+                    ...notification,
+                    entity
+                })
+            }
+            else if(notification.notification_date === "Last Week"){
+                lastWeekNotifications.push(
+                    {...notification,entity}
+                )
+            }
+            else{
+                earlierNotifications.push({...notification,entity})
+            }
         }))
+        const myNotifications = {
+            todayNotifications,
+            yesterdayNotifications,
+            lastWeekNotifications,
+            earlierNotifications
+        }
 
         console.log("Notifications gotten successfully",myNotifications);
         
