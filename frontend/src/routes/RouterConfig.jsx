@@ -24,7 +24,8 @@ import {
   RegisterPage, 
   UserProfilePage, 
   VerifyDonationPage,
-  EditProfilePage
+  EditProfilePage,
+  LikedCampaignsPage
 } from '../pages/index.js';
 import Onboarding from '../pages/user/Onboarding/Onboarding.jsx';
 // import { AppContext } from '../store/AppContext.jsx';
@@ -56,6 +57,7 @@ const RouterConfig = () => {
           <Route path={routes.USERPROFILE} element={<UserProfilePage />} />
           <Route path={routes.EDITPROFILE} element={<EditProfilePage />} />
           <Route path={routes.ONBOARDING} element={<Onboarding />} />
+          <Route path={routes.LIKEDCAMPAIGNS} element={<LikedCampaignsPage />} />
         </Route>
         {/* End of protected routes */}
         <Route path={routes.VERIFYDONATION} element={<VerifyDonationPage />} />

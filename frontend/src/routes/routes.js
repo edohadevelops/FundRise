@@ -15,4 +15,6 @@ export const POSTS = "/campaigns/:campaign_id"
 export const PAY = "/donate/:campaign_id"
 export const VERIFYDONATION = "/verify-donation"
 
+export const LIKEDCAMPAIGNS = "/myLiked"
+
 export const ONBOARDING ="/onboarding"

@@ -12,3 +12,5 @@ export {default as HistoryPage} from './user/History/History'
 export { default as CampaignPostPage } from './user/posts/Post'
 export { default as MakeDonationPage } from './user/pay/Pay';
 export { default as VerifyDonationPage } from './user/verify/Verify'
+
+export { default as LikedCampaignsPage } from './user/Campaign/Liked/LikedCampaigns.jsx'
