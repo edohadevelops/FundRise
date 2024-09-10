@@ -75,22 +75,26 @@ import {
 
     User.hasMany(Follower,{
         foreignKey: 'leader_id',
+        as: 'Leader',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     })
     User.hasMany(Follower,{
         foreignKey: 'follower_id',
+        as: 'Follower',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     })
 
     Follower.belongsTo(User,{
         foreignKey: 'leader_id',
+        as: 'Leader',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     })
     Follower.belongsTo(User,{
         foreignKey: 'follower_id',
+        as: 'Follower',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     })

@@ -17,4 +17,5 @@ export { default as getAllDonationsByUseridRouter } from './donation/get/getAllB
 export { default as followRouter } from './follow/update.js'
 export { default as getNotificationsRouter } from './notification/get.js';
 export { default as updateUserRouter } from './user/edit.js';
-export { default as getLikedCampaignsRouter } from './campaign/getLiked.js'
+export { default as getLikedCampaignsRouter } from './campaign/getLiked.js';
+export { default as getFollowingCampaignsRouter } from'./campaign/getFollowed.js';

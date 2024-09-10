@@ -5,7 +5,7 @@ const LikedCampaigns = () => {
     const axios = axiosInstance()
     useEffect(()=>{
         const getLikedCampaigns = () => {
-            axios.get("/api/campaign/liked")
+            axios.get("/api/campaign/getFollowing")
             .then(({data})=>{
                 console.log("Liked campaigns is: ",data)
             })
