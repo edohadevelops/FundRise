@@ -106,7 +106,7 @@ const AppLayout = () => {
                   isMenuOpen &&
                   <div className="sidebar-menu-options">
                     <div className='flex flex-col gap-2 border-b-2 pb-2'>
-                      <Link><FavoriteBorderOutlinedIcon /> Saved</Link>
+                      <Link><FavoriteBorderOutlinedIcon /> Liked Campaigns</Link>
                       <Link><SettingsOutlinedIcon /> Settings</Link>
                     </div>
                     <button onClick={handleLogOut}> <LogoutOutlinedIcon /> Log out</button>

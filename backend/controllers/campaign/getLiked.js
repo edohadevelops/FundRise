@@ -47,7 +47,7 @@ export default (req,res,next) => {
                 ]
             ]
         },
-        order: [['createdAt','DESC']],
+        order: [['updatedAt','DESC']],
         group: ['Campaign.campaign_id','Category.id','User.user_id']
     })
     .then((data)=>{
@@ -56,7 +56,7 @@ export default (req,res,next) => {
         return res.status(200).send({likedCampaigns})
     })
     .catch((err)=>{
-        console.log("Error occurred while getting liked campaign")
+        console.log("Error occurred while getting liked campaign",err)
         req.error = err;
         return next()
     })
