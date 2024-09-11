@@ -35,8 +35,13 @@ const AppLayout = () => {
   const handleProfileClick = () => {
     navigate("/profile")
   }
+  const handleLikeClick = (e) => {
+    e.stopPropagation();
+    navigate("/myLiked")
+  }
 
-  const handleLogOut = () => {
+  const handleLogOut = (e) => {
+    e.stopPropagation()
     localStorage.removeItem("token");
     window.location.href = "/login"
     setIsAuthenticated(false)
@@ -106,7 +111,7 @@ const AppLayout = () => {
                   isMenuOpen &&
                   <div className="sidebar-menu-options">
                     <div className='flex flex-col gap-2 border-b-2 pb-2'>
-                      <Link><FavoriteBorderOutlinedIcon /> Liked Campaigns</Link>
+                      <button onClick={handleLikeClick}><FavoriteBorderOutlinedIcon /> Favourites</button>
                       <Link><SettingsOutlinedIcon /> Settings</Link>
                     </div>
                     <button onClick={handleLogOut}> <LogoutOutlinedIcon /> Log out</button>

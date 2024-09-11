@@ -42,8 +42,8 @@ const Donations = ({donations,isDonationsLoading}) => {
                 </> :
                 donations.length > 0 ?
                 donations.map((donation)=>(
-                    <Link to={`/campaigns/${donation?.campaign_id}`} className='profile-campaign'>
-                        <img src={donation.campaign_img} alt="" />
+                    <Link to={`/campaigns/${donation?.Campaign.campaign_id}`} className='profile-campaign'>
+                        <img src={donation?.Campaign.campaign_img} alt="" />
                     </Link>
                 )):
                 <div className='h-[300px] w-full flex items-center justify-center'>

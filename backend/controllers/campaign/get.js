@@ -46,7 +46,7 @@ export default (req,res,next) => {
                 ]
             ]
         },
-        order: [['createdAt','DESC']],
+        order: [['current_amount','DESC']],
         group: ['Campaign.campaign_id','Category.id','User.user_id']
     })
     .then((data)=>{

@@ -26,6 +26,16 @@ export default (req,res,next) => {
                 },
                 {
                     model: models.Follower,
+                    as: 'Leader',
+                    // attributes: [],
+                    // where: {
+                    //     status: true,
+                    // },
+                    required: false
+                },
+                {
+                    model: models.Follower,
+                    as: 'Follower',
                     // attributes: [],
                     // where: {
                     //     status: true,

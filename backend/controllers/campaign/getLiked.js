@@ -24,7 +24,6 @@ export default (req,res,next) => {
                     // user_id,
                     like_status: true
                 },
-                required: false
             },
             {
                 model: models.Donation,
@@ -47,7 +46,7 @@ export default (req,res,next) => {
                 ]
             ]
         },
-        order: [['updatedAt','DESC']],
+        order: [[{model: models.Like},`updatedAt`,'DESC']],
         group: ['Campaign.campaign_id','Category.id','User.user_id']
     })
     .then((data)=>{

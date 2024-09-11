@@ -16,7 +16,10 @@ const Profile = () => {
   const [donations,setDonations] = useState(null);
 
   const [campaignLoading,setCampaignLoading] = useState(true);
-  const [donationLoading,setDonationLoading] = useState(true)
+  const [donationLoading,setDonationLoading] = useState(true);
+
+  const [followStatus,setFollowStatus] = useState(false);
+  const [followers,setFollowers] = useState(null);
 
   const { username } = useParams();
 
@@ -28,6 +31,8 @@ const Profile = () => {
       .then(({data})=>{
         console.log("APi Response: ",data)
         setUser(data.userDetails)
+        setFollowStatus(data.userDetails.isUserFollowed);
+        setFollowers(data.userDetails.totalFollowers);
       })
       .catch((err)=>{
         console.error("Error occoured: ",err)
@@ -62,6 +67,14 @@ const Profile = () => {
   },[]);
 
   const handleFollowUser = (leader_id) => {
+    setFollowers((prev)=>{
+      if(followStatus){
+        return prev - 1
+      }else{
+        return prev + 1
+      }
+    })
+    setFollowStatus((prev)=>!prev)
     axios.put(`/api/follow/${leader_id}`)
     .then(({data})=>{
       console.log("Data after trying to follow is: ",data)
@@ -71,6 +84,7 @@ const Profile = () => {
     })
 
   }
+
 
   return (
     <div className='profile-page'>
@@ -82,7 +96,16 @@ const Profile = () => {
           <div className="profile-actions-container">
             <p className="profile-username">{user?.username}</p>
             <div className="profile-actions">
-              <button className="profile-action bg-primary text-white" onClick={()=>handleFollowUser(user?.user_id)}>Follow</button>
+              <button 
+                className={`profile-action ${followStatus ? "already-following" : "bg-primary text-white"}`} 
+                onClick={()=>handleFollowUser(user?.user_id)}
+              >
+                {
+                  followStatus ?
+                  "Following":
+                  "Follow"
+                }
+              </button>
               <button className="profile-action">Share Profile</button>
               <button className="profile-menu-icon">
                 <img src={MoreIcon} alt="profile menu" />
@@ -99,7 +122,7 @@ const Profile = () => {
               <p className="profile-insight-text">donations</p>
             </div>
             <div className="profile-insight">
-              <p className="profile-insight-number">{user?.totalFollowers}</p>
+              <p className="profile-insight-number">{followers}</p>
               <p className="profile-insight-text">followers</p>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { where } from "sequelize";
+import { col, fn, literal, where } from "sequelize";
 import models from "../../../services/db/association.js";
 
 
@@ -51,7 +51,7 @@ export default (req,res,next) => {
                     [fn('COUNT',fn('DISTINCT',col('Donations.backer_id'))),'totalDonators'],
                     [
                         literal(`
-                            MAX(CASE WHEN Likes.user_ID = ${user_id} THEN 1 ELSE NULL END)
+                            MAX(CASE WHEN Likes.user_ID = ${follower_id} THEN 1 ELSE NULL END)
                         `),
                         'hasUserLiked'
                     ]
@@ -62,10 +62,10 @@ export default (req,res,next) => {
         }
     )
     .then((data)=>{
-        const myFollowers = data.map(user=>user.toJSON());
+        const myFollowingCampaigns = data.map(user=>user.toJSON());
 
 
-        res.status(200).send({message: "Following campaigns: ",myFollowers})
+        res.status(200).send({message: "Following campaigns: ",myFollowingCampaigns})
     })
     .catch((err)=>{
         req.error = err;
