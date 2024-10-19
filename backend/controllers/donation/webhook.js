@@ -1,6 +1,8 @@
 import { createHmac } from 'node:crypto';
 import models from '../../services/db/association.js';
 import SendSuccessMail from '../../services/nodemail/donation/success.js';
+import updateCampaign from '../../services/donation/update.js';
+import CreateNotification from '../../services/notification/notify.js';
 
 
 export default (req,res) => {
@@ -13,9 +15,10 @@ export default (req,res) => {
 
     if(hash === req.headers['x-paystack-signature']){
         const { event, data:paystackData} = req.body;
+        const { metadata } = paystackData
         res.send(200)
         // console.log("Event from paystack is: ", event);
-        // console.log("Data from paystack is: ", paystackData);
+        console.log("Data from paystack is: ", paystackData);
         if(event === "charge.success"  || event === "charge.failed" ){
             // Handle Updating Donation
             models.Donation.update(
@@ -36,19 +39,36 @@ export default (req,res) => {
                 console.log("Error occured while updating donation: ",err)
             })
 
-            // Handle Email Sending
-            const { metadata } = paystackData
+            updateCampaign(metadata.campaign_id,paystackData.amount);
+
+            
+
+            // Handle Email Sending and Notify Owner
 
             models.Donation.findByPk(metadata.donation_id,{
                 include: [
                     {
                         model: models.Campaign,
-                        attributes: ["title","campaign_img"]
+                        attributes: ["title","campaign_img","owner_id"]
                     }
                 ]
             })
             .then((data)=>{
-                const jsonData = data.toJSON()
+                const jsonData = data.toJSON();
+
+                const notification = {
+                    sender_id: jsonData.backer_id,
+                    reciever_id: jsonData.Campaign.owner_id,
+                    entity_type: "Donation",
+                    entity_id: jsonData.donation_id
+                }
+
+                if(notification.sender_id !== notification.reciever_id){
+                    CreateNotification(notification)
+                }
+
+
+
                 const details = {
                     status: paystackData.status,
                     amount: paystackData.amount / 100,

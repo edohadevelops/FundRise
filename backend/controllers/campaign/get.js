@@ -46,12 +46,12 @@ export default (req,res,next) => {
                 ]
             ]
         },
-        order: [['createdAt','DESC']],
+        order: [['current_amount','DESC']],
         group: ['Campaign.campaign_id','Category.id','User.user_id']
     })
     .then((data)=>{
         const jsonData = data.map((instance)=>instance.toJSON())
-        console.log(data);
+        // console.log(data);
         return res.status(200).send({
             message: "Campaigns gotten successfully",
             campaigns: jsonData 

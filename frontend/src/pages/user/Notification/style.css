@@ -1,0 +1,9 @@
+.notification-page{
+    @apply h-full flex flex-col gap-2 relative
+}
+.notification-body{
+    @apply  py-8 pt-16
+}
+.notification-group-title{
+    @apply font-semibold;
+}

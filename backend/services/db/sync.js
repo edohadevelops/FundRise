@@ -1,6 +1,6 @@
 import sequelize from "../../config/db.js";
 import models from './association.js'
-// import { User,Category } from '../../models/index.js'
+import { User,Category } from '../../models/index.js'
 
 export const SyncDB = () => {
     sequelize.sync({alter: true})

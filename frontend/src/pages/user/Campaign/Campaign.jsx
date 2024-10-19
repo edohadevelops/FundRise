@@ -17,8 +17,10 @@ const Campaign = () => {
   const [modalOpen,setModalOpen] = useState(false);
   const [isBtnDiabled,setBtnDiabled] = useState(true);
   const [campaignImg,setCampaignImg] = useState(null);
+  const [followingCampaigns,setFollowingCampaigns] = useState([])
   const [imgURL,setImgURL] = useState(null)
   const filePicker = useRef(null);
+  const [categories,setCategories] = useState([])
 
   const axios = axiosInstance()
 
@@ -89,9 +91,33 @@ const Campaign = () => {
       console.log(error)
     })
   }
+  const getFollowingCampaigns = () => {
+    // console.log("Reached here at least")
+    axios.get("/api/campaign/getFollowing")
+    .then(({data})=>{
+      console.log("Following campaigns: ",data);
+      setFollowingCampaigns(data.myFollowingCampaigns)
+    })
+    .catch((err)=>{
+      console.log("The error that occured while getting following campaigns is: ",err)
+    })
+  }
+  const getCategories = () => {
+    axios.get("/api/categories/getAll")
+    .then(({data})=>{
+        console.log("The available categories is: ",data);
+        setCategories(data.categories)
+    })
+    .catch((err)=>{
+        console.log("The error that occured while getting categories is: ",err)
+    })
+}
   useEffect(()=>{
-    getCampaigns()
+    getCampaigns();
+    getFollowingCampaigns();
+    getCategories()
   },[])
+  // const axios = axiosInstance()
   const handleCreateCampaign = async(values,form,errors) => {
 
     const payload = {
@@ -100,7 +126,7 @@ const Campaign = () => {
     }
     console.log("Payload is: ",payload)
 
-    axiosQuery.post(
+    axios.post(
       `${process.env.BASE_URL}/api/campaign/create`,
       payload,
       {
@@ -174,7 +200,7 @@ const Campaign = () => {
           {
             currentTab === "For You" ?
             <ForYou campaigns={allCampaigns} />:
-            <Following campaigns={allCampaigns} />
+            <Following campaigns={followingCampaigns} />
           }
         </div>
       </div>
@@ -264,7 +290,6 @@ const Campaign = () => {
                       )
                     }
                   </Field>
-                    
                 </div>
                 <div className="modal-input-group modal-half-input">
                   <label className='modal-input-label' htmlFor="end_date">End Date</label>
@@ -290,11 +315,11 @@ const Campaign = () => {
                         <div>
                           <select className='modal-input' {...input}>
                             <option></option>
-                            <option value={1}>Education</option>
-                            <option value={2}>Medical</option>
-                            <option value={3}>Business</option>
-                            <option value={4} >Sports</option>
-                            <option>Other</option>
+                            {
+                              categories.map((category)=>(
+                                <option value={category.id}>{category.category_name}</option>
+                              ))
+                            }
                           </select>
                           {
                             meta.error && meta.touched &&

@@ -1,5 +1,5 @@
 .campaign-card{
-    @apply flex flex-col lg:flex-row gap-2 lg:gap-4 text-tertiary cursor-pointer
+    @apply flex flex-col lg:flex-row gap-2 lg:gap-4 text-tertiary cursor-pointer items-center
 }
 .campaign-card img{
     @apply w-full lg:max-w-[300px] h-[200px] max-h-full rounded-2xl object-cover
@@ -14,7 +14,7 @@
     @apply 
 } */
 .card-interactions{
-    @apply flex flex-col gap-2 mt-2
+    @apply flex flex-col gap-2 max-sm:mt-2
 }
 .like-comment-share{
     @apply flex gap-3 font-extrabold

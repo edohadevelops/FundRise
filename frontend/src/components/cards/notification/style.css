@@ -1,0 +1,35 @@
+.notification-card{
+    @apply flex gap-3 items-center py-1 hover:bg-subtle px-2 rounded-lg
+}
+.notification-user-img{
+    @apply h-[55px] w-[15%] max-w-[55px] rounded-[50%]
+}
+.notification-user-img img{
+    @apply h-full w-full rounded-[50%]
+}
+.notification-info{
+    @apply flex items-center justify-between w-[85%] lg:w-[90%]
+}
+.notification-content{
+    @apply w-full max-w-[240px] sm:max-w-[85%] text-sm
+}
+.notification-content a{
+    @apply font-semibold
+}
+.notification-campaign-img{
+    @apply h-[70px] w-[70px] rounded-sm
+}
+.notification-campaign-img img{
+    @apply h-full w-full rounded-lg
+}
+.notification-follow-button{
+    @apply px-4 py-2 rounded-lg text-sm
+}
+.already-following{
+    @apply bg-subtle
+}
+.not-following{
+    @apply bg-primary text-white
+}
+
+/*  */

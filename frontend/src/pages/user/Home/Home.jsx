@@ -18,6 +18,7 @@ import CampaignModal from '../../../components/modal/campaign/CampaignModal'
 const Home = () => {
 
     const {userDetails,allCampaigns,setAllCampaigns} = useContext(AppContext);
+    const [categories,setCategories] = useState([])
     const [postOpen,setPostOpen] = useState(false);
     const axios = axiosInstance()
     const getCampaigns = () => {
@@ -30,8 +31,19 @@ const Home = () => {
           console.log(error)
         })
     }
+    const getCategories = () => {
+        axios.get("/api/categories/getAll")
+        .then(({data})=>{
+            console.log("The available categories is: ",data);
+            // setCategories(data)
+        })
+        .catch((err)=>{
+            console.log("The error that occured while getting categories is: ",err)
+        })
+    }
     useEffect(()=>{
         getCampaigns();
+        getCategories()
     },[])
 
     const [selectedCampaign,setSelectedCampaign] = useState({});
@@ -47,7 +59,7 @@ const Home = () => {
                         <Link className='' to={routes.NOTIFICATIONS}>
                             <NotificationsActiveOutlinedIcon className='notification-icon' />
                         </Link>
-                        <img src={userDetails?.profile_picture} className="home-profile-pic" alt="avatar.jpg" onClick={()=>setPostOpen(true)} />
+                        <img src={userDetails?.profile_picture} className="home-profile-pic" alt="avatar.jpg"/>
                     </div>
                 </div>
                 <div className="filter-section">

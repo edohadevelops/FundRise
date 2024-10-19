@@ -5,6 +5,8 @@ export default (req,res,next) => {
 
     const { username } = req.params;
 
+    const { user_id } = req.user.payload;
+
     models.User.findOne(
         {
             where: { username },
@@ -24,16 +26,21 @@ export default (req,res,next) => {
                 },
                 {
                     model: models.Follower,
-                    attributes: [],
-                    where: {
-                        status: true,
-                    },
-                    include: [
-                        {
-                            model: models.User,
-                            attributes: [],
-                        }
-                    ]
+                    as: 'Leader',
+                    // attributes: [],
+                    // where: {
+                    //     status: true,
+                    // },
+                    required: false
+                },
+                {
+                    model: models.Follower,
+                    as: 'Follower',
+                    // attributes: [],
+                    // where: {
+                    //     status: true,
+                    // },
+                    required: false
                 }
             ],
             attributes: {
@@ -42,8 +49,17 @@ export default (req,res,next) => {
                     [fn('COUNT',fn('DISTINCT',col('Donations.donation_id'))),'totalDonations'],
                     [
                         literal(`
-                            SUM(CASE WHEN \`User\`.\`user_id\` = \`Followers\`.\`leader_id\` THEN 1 ELSE 0 END)
-                        `),'totalFollowers'
+                            (SELECT COUNT(*) 
+                            FROM Followers AS F 
+                            WHERE F.leader_id = User.user_id AND F.status = true
+                        )`), 'totalFollowers'
+                    ],
+                    [
+                        literal(`
+                            (SELECT COUNT(*) 
+                            FROM Followers AS F 
+                            WHERE F.follower_id = ${user_id} AND F.status = true AND F.leader_id = User.user_id
+                        )`), 'isUserFollowed'
                     ]
                 ]
             },

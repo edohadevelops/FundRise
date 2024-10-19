@@ -1,8 +1,8 @@
 .post-page{
-    @apply w-full flex flex-col gap-6
+    @apply w-full flex flex-col gap-6 relative
 }
 .post-page-header{
-    @apply w-full flex gap-6 items-center
+    @apply w-full flex gap-6 items-center pt-4 absolute top-0 left-0 bg-white
 }
 .post-page-header button{
     @apply p-3 bg-subtle rounded-lg

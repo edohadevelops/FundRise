@@ -1,0 +1,15 @@
+.liked-campaigns-page{
+    @apply h-full relative
+}
+.liked-campaigns-header{
+    @apply bg-white py-2 pt-6 w-full flex gap-4 absolute items-center
+}
+.liked-campaigns-back{
+    @apply p-2 bg-subtle rounded-lg
+}
+.liked-campaigns-header p{
+    @apply text-xl font-semibold
+}
+.liked-campaigns-content{
+    @apply h-full w-full py-20
+}

@@ -1,0 +1,39 @@
+.donation-card{
+    @apply bg-white border rounded-lg py-4 px-4 md:px-6 flex flex-col gap-2
+}
+.donation-card-header{
+    @apply flex w-full justify-between items-center border-b pb-2
+}
+.donation-card-date{
+    @apply font-semibold text-lg
+}
+.donation-card-status{
+    @apply py-1 px-4 font-semibold text-[15px] rounded-lg capitalize
+}
+.donation-status-success{
+    @apply bg-[#d4edda] text-primary
+}
+.donation-status-pending{
+    @apply bg-[#FFFFE0] text-[#F5C300]
+}
+.donation-status-failed{
+    @apply bg-[#F8D7DA] text-[#721C24]
+}
+.donation-card-campaign{
+    @apply flex flex-col gap-6 md:flex-row py-2
+}
+.donation-card-img{
+    @apply w-full md:max-w-[300px] h-[200px] rounded-lg relative
+}
+.donation-card-img img{
+    @apply w-full h-full rounded-lg
+}
+.donation-card-content{
+    @apply flex flex-col gap-2 w-full
+}
+.donation-card-title{
+    @apply text-slate-700
+}
+.donation-card-value{
+    @apply font-semibold
+}

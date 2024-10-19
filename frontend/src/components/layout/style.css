@@ -2,7 +2,7 @@
     @apply w-[100vw] h-[100vh] flex flex-col-reverse sm:flex-row text-tertiary
 }
 .page-sidebar{
-    @apply w-full sm:w-fit lg:w-[20%] border-r border-gray-400 sm:px-4 sm:py-8 lg:py-6 flex sm:flex-col gap-6 h-fit sm:h-full sm:overflow-y-scroll text-tertiary justify-center
+    @apply w-full sm:w-fit lg:w-[20%] border-r border-gray-400 sm:px-4 sm:py-8 lg:py-6 flex sm:flex-col gap-6 h-fit sm:h-full sm:overflow-y-scroll text-tertiary
 }
 .page-sidebar::-webkit-scrollbar{
     @apply w-[5px]
@@ -13,11 +13,14 @@
 .sidebar-logo{
     @apply h-[20px] lg:h-[40px] w-fit pl-2 lg:pl-6 sm:mt-2 hidden sm:block
 }
+.sidebar-content{
+    @apply flex flex-col gap-6 w-full h-full justify-between
+}
 .sidebar-links{
     @apply flex sm:flex-col w-full justify-between sm:justify-normal gap-2
 }
 .side-link{
-    @apply py-3 px-4 text-lg rounded-xl flex gap-2 items-center text-[#0b2929]
+    @apply py-2 px-4 rounded-xl flex gap-2 items-center text-[#0b2929]
 }
 .side-link:hover{
     @apply bg-[#fafafa]
@@ -32,7 +35,16 @@
     @apply w-full hidden lg:flex items-center justify-center p-3 bg-[#187070] text-white font-bold rounded-xl text-xl gap-1
 }
 .sidebar-profile-actions{
-    @apply w-full hidden lg:flex items-center px-4 gap-3
+    @apply w-full hidden lg:flex items-center gap-3 relative hover:bg-subtle px-2 py-2 rounded-lg
+}
+.sidebar-menu-options{
+    @apply border bg-white absolute top-0 -translate-y-full left-0 py-4 px-2 w-full rounded-lg flex-col flex gap-2 drop-shadow-lg
+}
+.sidebar-menu-options a,.sidebar-menu-options button{
+    @apply p-3 w-full rounded-lg text-start text-sm hover:bg-subtle
+}
+.sidebar-profile-actions img{
+    @apply w-[45px] h-[45px] rounded-full 
 }
 .profile-name{
     @apply font-semibold
@@ -44,7 +56,7 @@
     @apply ml-4
 }
 .main-content{
-    @apply w-full lg:w-[55%] p-4 sm:p-8 h-full overflow-y-scroll
+    @apply w-full lg:w-[55%] px-4 sm:px-8 h-full overflow-y-scroll
 }
 .main-content::-webkit-scrollbar{
     @apply w-[5px]

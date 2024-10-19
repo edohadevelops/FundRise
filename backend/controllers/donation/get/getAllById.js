@@ -28,35 +28,32 @@ export default (req,res,next) => {
                         },
                         {
                             model: models.Donation,
-                            where: {
-                                donation_status: true
-                            },
+                            // where: {
+                            //     donation_status: "success"
+                            // },
                             attributes: []
                         },
-                        {
-                            model: models.User,
-                            attributes: ['username']
-                        }
+                        // {
+                        //     model: models.User,
+                        //     attributes: ['username']
+                        // }
                     ],
-                    attributes: {
-                        include: [
-                            [fn('COUNT',fn('DISTINCT',col('Campaign->Donations.backer_id'))),'totalDonators'],
-                            [fn('COUNT',fn('DISTINCT',col('Campaign->Likes.like_id'))),'totalLikes'],
-                            [
-                                literal(`
-                                    MAX(CASE WHEN \`Campaign->Likes\`.\`user_id\` = ${user_id} THEN 1 ELSE NULL END)
-                                `),'hasUserLiked'
-                            ],
-                            // 'title','campaign_img','current_amount','target_amount'
-                        ]
-                    },
+                    attributes: [
+                        [fn('COUNT',fn('DISTINCT',col('Campaign->Donations.backer_id'))),'totalDonators'],
+                        [fn('COUNT',fn('DISTINCT',col('Campaign->Likes.like_id'))),'totalLikes'],
+                        [
+                            literal(`
+                                MAX(CASE WHEN \`Campaign->Likes\`.\`user_id\` = ${user_id} THEN 1 ELSE NULL END)
+                            `),'hasUserLiked'
+                        ],
+                        'title','campaign_img','current_amount','target_amount','progressPercent','daysLeft','campaign_id','start_date','end_date'
+                    ],
                     group: ['Donation.donation_id']
                 }
             ],
             attributes: ['donation_message','donation_amount','donation_status'],
             order: [["updatedAt",'DESC']],
             group: ['Donation.donation_id','Campaign.campaign_id']
-            
         }
     )
     .then((data)=>{

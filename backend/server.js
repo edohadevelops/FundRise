@@ -20,10 +20,13 @@ import {
     getAllCampaignsByUsernameRouter,
     getAllDonationsByUsernameRouter,
     getAllDonationsByUseridRouter,
-    followRouter
+    followRouter,
+    getNotificationsRouter,
+    updateUserRouter,
+    getLikedCampaignsRouter,
+    getFollowingCampaignsRouter
 } from './routes/index.js';
 import errorHandler from './middlewares/error/error.js';
-// import SendSuccessMail from './services/nodemail/donation/success.js';
 
 const app = express();
 
@@ -67,6 +70,10 @@ app.use('/api/campaign/getUsersCampaigns',getAllCampaignsByUsernameRouter);
 app.use('/api/donation/getDonationsByUsername',getAllDonationsByUsernameRouter);
 app.use('/api/donation/getDonationsByUserid',getAllDonationsByUseridRouter);
 app.use('/api/follow',followRouter);
+app.use('/api/notification/getAll',getNotificationsRouter);
+app.use('/api/user/update',updateUserRouter);
+app.use('/api/campaign/liked',getLikedCampaignsRouter);
+app.use('/api/campaign/getFollowing',getFollowingCampaignsRouter);
 
 
 app.use('/paystack/webhook',paystackHook)

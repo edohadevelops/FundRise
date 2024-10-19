@@ -1,4 +1,5 @@
 import models from "../../services/db/association.js";
+import CreateNotification from "../../services/notification/notify.js";
 
 export default (req,res,next) => {
     const follower_id = req.user.payload.user_id;
@@ -20,6 +21,15 @@ export default (req,res,next) => {
             follower.update({
                 status: !follower.status
             })
+            if(follower.status){
+                const notification = {
+                    sender_id: follower_id,
+                    reciever_id: leader_id,
+                    entity_type: "Follow",
+                    entity_id: follower.id
+                }
+                CreateNotification(notification)
+            }
             return res.status(200).send({message: "Follower updated successfully"})
         }else{
             models.Follower.create(
@@ -28,6 +38,18 @@ export default (req,res,next) => {
                     follower_id
                 }
             )
+            .then((data)=>{
+                const jsonData = data.toJSON();
+
+                const notification = {
+                    sender_id: follower_id,
+                    reciever_id: leader_id,
+                    entity_type: "Follow",
+                    entity_id: jsonData.id
+                }
+
+                CreateNotification(notification)
+            })
             return res.status(200).send({message: "Follower created successfully"})
         }
     })

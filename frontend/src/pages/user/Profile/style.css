@@ -1,11 +1,11 @@
 .profile-page{
-    @apply flex flex-col gap-4
+    @apply flex flex-col gap-4 py-4 sm:py-8
 }
 .profile-header{
     @apply flex justify-between items-center
 }
 .profile-menu-icon{
-    @apply bg-subtle px-2 py-4 rounded-lg
+    @apply bg-subtle px-2 py-2 rounded-lg
 }
 .profile-details{
     @apply flex max-sm:flex-col items-center gap-8 text-sm py-2 pb-4

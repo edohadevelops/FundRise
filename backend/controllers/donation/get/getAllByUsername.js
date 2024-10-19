@@ -3,34 +3,55 @@ import models from "../../../services/db/association.js";
 export default (req,res,next) => {
     const { username } = req.params;
 
-    models.Campaign.findAll(
+    models.Donation.findAll(
         {
-            // where: {
-            //     donation_status: "success"
-            // },
             include: [
                 {
                     model: models.User,
                     where: {
                         username
                     },
-                    attributes: [],
-                    required: true
+                    attributes: []
                 },
                 {
-                    model: models.Donation,
-                    where: {
-                        donation_status: "success"
-                    },
-                    required: true,
-                    attributes: [],
-                    // limit: 1
+                    model: models.Campaign,
+                    attributes: ["campaign_img","campaign_id"]
                 }
             ],
-            // attributes: ["campaign_img","campaign_id"],
-            order: [["updatedAt","DESC"]]
+            where: {
+                donation_status: "success"
+            },
+            attributes: []
         }
     )
+    // models.Campaign.findAll(
+    //     {
+    //         // where: {
+    //         //     donation_status: "success"
+    //         // },
+    //         include: [
+    //             {
+    //                 model: models.User,
+    //                 where: {
+    //                     username
+    //                 },
+    //                 attributes: [],
+    //                 required: true
+    //             },
+    //             {
+    //                 model: models.Donation,
+    //                 where: {
+    //                     donation_status: "success"
+    //                 },
+    //                 required: true,
+    //                 attributes: [],
+    //                 // limit: 1
+    //             }
+    //         ],
+    //         // attributes: ["campaign_img","campaign_id"],
+    //         order: [["updatedAt","DESC"]]
+    //     }
+    // )
     .then((data)=>{
         if(!data)
             return res.status(400).send({message: "Unable to find donations for this user"})

@@ -37,6 +37,7 @@ export default (req,res,next) => {
             "callback_url": "http://localhost:7000/verify-donation",
             "metadata": {
                 "donation_id": jsonData.donation_id,
+                "campaign_id": jsonData.campaign_id,
                 "cancel_action": "http://localhost:7000/verify-donation"
             }
         });

@@ -4,7 +4,6 @@ import Card from '../../../components/cards/Card'
 const ForYou = ({campaigns}) => {
   return (
     <>
-        For you
       {
         campaigns?.map((campaign,index)=>(
             <Card details={campaign} index={index} isliked={campaign.hasUserLiked} initialCount={campaign.totalLikes}/>
