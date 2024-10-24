@@ -14,8 +14,6 @@ const validate = (data) => {
 }
 
 const loginController = async(req,res,next) => {
-    if(true)
-        return res.status(200).send({message: "Log in successful"})
     try{
 
         console.log(req.body)
@@ -33,10 +31,14 @@ const loginController = async(req,res,next) => {
             }
         })
 
+        console.log("Existing user is: ",esistingUser)
+
         if(!existingUser)
             return res.status(404).send({message: 'User does not exist'});
 
         const isValidPassword = await bcrypt.compare(req.body.password,existingUser.password);
+
+        console.log("Isvalid Password: ",isValidPassword)
 
         if(!isValidPassword)
             return res.status(400).send({message: 'Invalid username or password'});
@@ -49,6 +51,7 @@ const loginController = async(req,res,next) => {
             process.env.JWT_SECRET,
             {expiresIn: '2d'}
         )
+        console.log("Token acquired")
         return res.status(200).send({
             message: 'Logged in succesfully!',
             token,
