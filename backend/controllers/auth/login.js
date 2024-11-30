@@ -54,6 +54,7 @@ const loginController = async(req,res,next) => {
         });
 
     }catch(err){
+        req.error = err
         return next();
     }
 

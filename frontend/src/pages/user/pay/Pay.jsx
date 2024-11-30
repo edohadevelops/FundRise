@@ -35,7 +35,10 @@ const Pay = () => {
     try{
       const { data } = await axiosQuery.post(`${process.env.BASE_URL}/api/donate`,payload);
       console.log(data);
-      window.location.href = data.auth_url
+      if(data){
+        window.location.href = data.auth_url
+      }
+        
     }catch(err){
       console.log("Error occurred is: ",err)
     }
