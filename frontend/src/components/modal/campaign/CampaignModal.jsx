@@ -75,10 +75,10 @@ const CampaignModal = ({
                   <p>{campaign?.Category?.category_name}</p>
                 </div>
                 <p className="view-campaign-description">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti commodi quia dolores illum debitis vero, impedit quas nulla qui necessitatibus quod eius praesentium accusantium quidem ducimus ut, voluptatum, soluta quis! Reiciendis quos non voluptates. Architecto fugit fuga perspiciatis dolor rem!
+                  
                   {
                     campaign?.description
-                  }
+                  }<br /><br />
                 </p>
                 <div className="view-campaign-insights">
                   <div className="view-campaign-insights-header">

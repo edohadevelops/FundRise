@@ -31,7 +31,7 @@ const loginController = async(req,res,next) => {
             }
         })
 
-        console.log("Existing user is: ",esistingUser)
+        console.log("Existing user is: ",existingUser)
 
         if(!existingUser)
             return res.status(404).send({message: 'User does not exist'});

@@ -67,8 +67,6 @@ const Post = () => {
               <p>{campaign?.Category?.category_name}</p>
             </div>
             <p className="post-description">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum ipsam voluptatum labore veniam deserunt facere adipisci earum expedita quidem ducimus, debitis aliquam magnam eveniet nulla reprehenderit atque nesciunt voluptates distinctio repellendus voluptatibus ipsa est vel. Libero molestias modi suscipit quisquam.<br /><br />
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus itaque eveniet exercitationem odio perspiciatis sunt eum reiciendis earum quia, nemo porro sequi velit iusto fugit reprehenderit ducimus dicta magni harum illum nulla autem illo. Deserunt, impedit provident. Quae, accusantium dignissimos.
               { campaign?.description }
             </p>
             <div className="post-insights">

@@ -37,7 +37,7 @@ connectToDB();
 
 
 app.use(cors({
-    origin: 'https://edoha-fundrise.netlify.app',
+    origin: ['https://edoha-fundrise.netlify.app', 'http://localhost:7000'],
     // methods: ['GET', 'POST', 'PUT', 'DELETE'],
     // allowedHeaders: ['Content-Type', 'Authorization']
 }));

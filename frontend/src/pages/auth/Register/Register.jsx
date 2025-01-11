@@ -80,7 +80,7 @@ const Register = () => {
                                 {
                                     ({input,meta})=>(
                                         <div>
-                                            <input {...input} type='text' placeholder='Enter your username' />
+                                            <input {...input} type='text' placeholder='e.g myusername' />
                                             {
                                                 meta.error && meta.touched &&
                                                 <span className='text-red-500'>{meta.error}</span>
@@ -96,7 +96,7 @@ const Register = () => {
                                 {
                                     ({input,meta})=>(
                                         <div>
-                                            <input {...input} type='text' placeholder='Enter your username' />
+                                            <input {...input} type='text' placeholder='e.g example@mail.com' />
                                             {
                                                 meta.error && meta.touched &&
                                                 <span className='text-red-500'>{meta.error}</span>
@@ -112,7 +112,7 @@ const Register = () => {
                                 {
                                     ({input,meta})=>(
                                         <div>
-                                            <input {...input} type='password' placeholder='Enter your username' />
+                                            <input {...input} type='password'/>
                                             {
                                                 meta.error && meta.touched &&
                                                 <span className='text-red-500'>{meta.error}</span>
